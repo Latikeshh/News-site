@@ -51,7 +51,13 @@ const UserCards = () => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
             {cards.map(card =>
-
+                <div key={card.id} className="bg-white shadow-md rounded-2xl overflow-hiden">
+                    <img src={card.img} alt={card.title} />
+                    <div>
+                        <h2>{card.title}</h2>
+                        <p>{card.description}</p>
+                    </div>
+                </div>
             )}
 
         </div>
