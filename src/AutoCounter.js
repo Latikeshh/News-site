@@ -11,7 +11,7 @@ const AutoCounter = () => {
     }, []);
     return (
         <div>
-            <h2>Auto Count {count}</h2>
+            <h2>Auto Count {count}</h2>``
         </div>
     )
 }
