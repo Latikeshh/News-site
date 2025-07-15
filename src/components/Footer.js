@@ -6,7 +6,6 @@ const Footer = () => {
         <footer className="bg-dark text-light pt-5">
             <div className="container">
                 <div className="row">
-                    {/* News Categories */}
                     <div className="col-md-3 col-6 mb-4">
                         <h6 className="text-uppercase fw-bold mb-3">News Categories</h6>
                         <ul className="list-unstyled">
