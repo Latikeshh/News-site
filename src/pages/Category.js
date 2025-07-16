@@ -1,21 +1,24 @@
 import React from 'react';
 import NewsCard from '../components/NewsCard';
+import img1 from '../pages/img/images(1).jpeg';
+import img2 from '../pages/img/images(2).jpeg';
+import img3 from '../pages/img/images(3).jpeg';
 
 const dummyNews = [
     {
         title: "Sample Headline for Category",
         content: "This is a dummy article for the selected news category.",
-        image: "https://via.placeholder.com/600x300"
+        image: img1
     },
     {
         title: "Another News Title",
         content: "This is some more placeholder content for the news section.",
-        image: "https://via.placeholder.com/600x300"
+        image: img2
     },
     {
         title: "Third Demo News",
         content: "Yet another demo article with fake content to show layout.",
-        image: "https://via.placeholder.com/600x300"
+        image: img3
     }
 ];
 

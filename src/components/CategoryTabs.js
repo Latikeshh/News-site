@@ -1,22 +1,34 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const categories = ["All", "Latest", "Trending", "Politics", "Sports", "Tech", "Entertainment"];
 
-const CategoryTabs = ({ active, onSelect }) => {
+const CategoryTabs = ({ active }) => {
+    const navigate = useNavigate();
+
+    const handleClick = (category) => {
+        const route = category === "All" ? "/" : `/${category.toLowerCase()}`;
+        navigate(route);
+    };
+
     return (
-        <div className="container mt-3">
-            <ul className="nav nav-pills justify-content-center gap-2 flex-wrap">
+        <div className="container my-4">
+            <div className="d-flex flex-wrap justify-content-center gap-2">
                 {categories.map(cat => (
-                    <li className="nav-item" key={cat}>
-                        <button
-                            className={`btn btn-sm ${active === cat ? 'btn-primary' : 'btn-outline-secondary'}`}
-                            onClick={() => onSelect(cat)}
-                        >
-                            {cat}
-                        </button>
-                    </li>
+                    <button
+                        key={cat}
+                        className={`btn px-4 py-2 rounded-pill fw-semibold shadow-sm transition ${active === cat ? 'btn-dark text-white' : 'btn-outline-dark'
+                            }`}
+                        onClick={() => handleClick(cat)}
+                        style={{
+                            transition: 'all 0.2s ease-in-out',
+                            minWidth: '100px',
+                        }}
+                    >
+                        {cat}
+                    </button>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };

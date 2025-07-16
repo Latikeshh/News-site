@@ -25,9 +25,9 @@ const newsItems = [
     image: img3
   },
   {
-    title: "India wins T20 series",
+    title: "India wins T20 Series",
     content: "India defeated Australia 3-2 in a thrilling finish at Mumbai.",
-    image: img2
+    image: img4
   },
   {
     title: "Budget 2025 Highlights",

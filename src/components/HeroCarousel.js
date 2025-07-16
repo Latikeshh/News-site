@@ -59,7 +59,7 @@ const HeroCarousel = () => {
                             src={item.img}
                             className="d-block w-100"
                             alt={item.title}
-                            style={{ height: '400px', objectFit: 'cover' }}
+                            style={{ height: '300px' }}
                             loading="lazy"
                         />
                         <div className="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-3 rounded">

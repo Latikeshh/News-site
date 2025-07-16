@@ -21,7 +21,8 @@ const App = () => {
         <Route path="/business" element={<Category category="Business" />} />
         <Route path="/tech" element={<Category category="Tech" />} />
         <Route path="/entertainment" element={<Category category="Entertainment" />} />
-        <Route path="/health" element={<Category category="Health" />} />
+        <Route path="/latest" element={<Category category="Latest" />} />
+        <Route path="/trending" element={<Category category="Trending" />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

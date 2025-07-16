@@ -12,15 +12,21 @@ const Navbar = () => {
         { name: "Sports", path: "/sports" },
         { name: "Tech", path: "/tech" },
         { name: "Entertainment", path: "/entertainment" },
-        { name: "Health", path: "/health" }
+        { name: "Health", path: "/health" },
     ];
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+        <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top border-bottom">
             <div className="container-fluid px-4">
-                <Link className="navbar-brand fw-bold" to="/">🇮🇳 News24India</Link>
+                {/* Brand */}
+                <Link className="navbar-brand fw-bold text-primary fs-4" to="/">
+                    🇮🇳 News24<span className="text-danger">India</span>
+                </Link>
+
+                {/* Toggler */}
                 <button
                     className="navbar-toggler"
+                    type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#mainNav"
                     aria-controls="mainNav"
@@ -30,14 +36,18 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon" />
                 </button>
 
+                {/* Navigation */}
                 <div className="collapse navbar-collapse" id="mainNav">
-                    {/* Navigation links */}
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
                         {navItems.map(({ name, path }) => (
-                            <li className="nav-item" key={name}>
+                            <li className="nav-item mx-1" key={name}>
                                 <Link
-                                    className={`nav-link ${currentPath === path ? "active fw-bold" : ""}`}
+                                    className={`nav-link px-3 py-2 rounded-pill transition ${currentPath === path
+                                            ? "bg-primary text-white fw-semibold shadow-sm"
+                                            : "text-dark"
+                                        }`}
                                     to={path}
+                                    style={{ transition: 'all 0.2s ease-in-out' }}
                                 >
                                     {name}
                                 </Link>
@@ -45,15 +55,17 @@ const Navbar = () => {
                         ))}
                     </ul>
 
-                    {/* Search bar */}
-                    <form className="d-flex ms-lg-3 mt-2 mt-lg-0">
+                    {/* Search */}
+                    <form className="d-flex ms-lg-3 mt-3 mt-lg-0">
                         <input
-                            className="form-control form-control-sm me-2"
+                            className="form-control form-control-sm rounded-pill px-3 me-2 border"
                             type="search"
                             placeholder="Search news..."
                             aria-label="Search"
                         />
-                        <button className="btn btn-outline-light btn-sm" type="submit">Search</button>
+                        <button className="btn btn-sm btn-outline-primary rounded-pill" type="submit">
+                            🔍
+                        </button>
                     </form>
                 </div>
             </div>
