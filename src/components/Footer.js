@@ -16,8 +16,8 @@ const Footer = () => {
                             <li><Link to="/entertainment" className="text-light text-decoration-none">Entertainment</Link></li>
                         </ul>
                     </div>
-                    {/* Useful Links */}
-                    <div className="col-md-3 col-6 mb-4">
+                    {/* Useful Links hello */}
+                    <div className="col-md-3 col-md-6 mb-4">
                         <h6 className="text-uppercase fw-bold mb-3">Useful Links</h6>
                         <ul className="list-unstyled">
                             <li><Link to="/about" className="text-light text-decoration-none">About Us</Link></li>
