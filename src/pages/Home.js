@@ -3,41 +3,40 @@ import CategoryTabs from '../components/CategoryTabs';
 import NewsCard from '../components/NewsCard';
 import HeroCarousel from '../components/HeroCarousel';
 import Sidebar from '../components/Sidebar';
-import img1 from '../pages/img/images(1).jpeg';
-import img2 from '../pages/img/images(2).jpeg';
-import img3 from '../pages/img/images(3).jpeg';
-import img4 from '../pages/img/images(4).jpeg';
-import img5 from '../pages/img/images(5).jpeg';
+import ch4 from '../components/img/ch4.jpg';
+import budget from '../components/img/budget.jpg';
+import cricket from '../components/img/Cricket.avif';
+
 const newsItems = [
   {
     title: "India wins T20 series",
     content: "India defeated Australia 3-2 in a thrilling finish at Mumbai.",
-    image: img1
+    image: cricket
   },
   {
     title: "Budget 2025 Highlights",
     content: "Govt announces major tax reforms and infrastructure investments.",
-    image: img2
+    image: budget
   },
   {
     title: "ISRO's new moon mission",
     content: "Chandrayaan-4 scheduled for launch in early 2026.",
-    image: img3
+    image: ch4
   },
   {
     title: "India wins T20 Series",
     content: "India defeated Australia 3-2 in a thrilling finish at Mumbai.",
-    image: img4
+    image: cricket
   },
   {
     title: "Budget 2025 Highlights",
     content: "Govt announces major tax reforms and infrastructure investments.",
-    image: img5
+    image: budget
   },
   {
     title: "ISRO's new moon mission",
     content: "Chandrayaan-4 scheduled for launch in early 2026.",
-    image: img1
+    image: ch4
   }
 ];
 
