@@ -30,7 +30,7 @@ const HeroCarousel = () => {
         },
         {
             img: expo,
-            title: "Tech Expo 2025 in Mumbai",
+            title: "Tech Expo 2025 in a Mumbai",
             desc: "India showcases cutting-edge innovations in AI.",
         },
     ];
