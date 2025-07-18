@@ -1,0 +1,26 @@
+.category-heading {
+    font-size: 2.2rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #0077b6, #00b4d8);
+    background-clip: content-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.heading-underline {
+    width: 80px;
+    height: 4px;
+    background-color: #00b4d8;
+    margin: 0 auto;
+    border: none;
+    border-radius: 2px;
+}
+
+.news-card-wrapper {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card-wrapper:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}

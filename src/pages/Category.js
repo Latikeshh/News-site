@@ -3,6 +3,7 @@ import NewsCard from '../components/NewsCard';
 import img1 from '../pages/img/images(1).jpeg';
 import img2 from '../pages/img/images(2).jpeg';
 import img3 from '../pages/img/images(3).jpeg';
+import './Category.css';
 
 const dummyNews = [
     {
@@ -25,13 +26,25 @@ const dummyNews = [
 const Category = ({ category }) => {
     return (
         <div className="container my-5">
-            <h2 className="mb-4">{category} News</h2>
+            <h2 className="category-heading mb-4 text-center">
+                {category} News
+            </h2>
+            <hr className="heading-underline mb-5" />
+
             <div className="row">
-                {dummyNews.map((item, index) => (
-                    <div className="col-md-4 mb-4" key={index}>
-                        <NewsCard title={item.title} content={item.content} image={item.image} />
+                {dummyNews.length > 0 ? (
+                    dummyNews.map((item, index) => (
+                        <div className="col-md-4 mb-4" key={index}>
+                            <div className="news-card-wrapper">
+                                <NewsCard title={item.title} content={item.content} image={item.image} />
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <div className="text-center text-muted">
+                        <p>No news articles available in this category yet.</p>
                     </div>
-                ))}
+                )}
             </div>
         </div>
     );

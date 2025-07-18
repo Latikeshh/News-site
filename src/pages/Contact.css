@@ -1,0 +1,36 @@
+.contact-heading {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #0077b6, #00b4d8);
+    background-clip: content-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.heading-underline {
+    width: 100px;
+    height: 4px;
+    background-color: #00b4d8;
+    margin: 0 auto;
+    border-radius: 2px;
+    border: none;
+}
+
+.info-box {
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.form-control:focus {
+    border-color: #00b4d8;
+    box-shadow: 0 0 0 0.2rem rgba(0, 180, 216, 0.25);
+}
+
+.btn-primary {
+    background-color: #0077b6;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #023e8a;
+}

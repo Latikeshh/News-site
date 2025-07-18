@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+
+.news-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.footer-link {
+  color: #cccccc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-link:hover {
+  color: #ffc107; /* Bootstrap warning color */
+}
+
+.social-icon {
+  font-size: 1.5rem;
+  color: #cccccc;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-icon:hover {
+  color: #ffc107;
+  transform: scale(1.2);
+}

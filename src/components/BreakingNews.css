@@ -1,4 +1,123 @@
-.breaking-news {
-    font-weight: 600;
-    border-bottom: 2px solid #c82333;
+.breaking-news-bar {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #d00000, #ff5e5e);
+    color: white;
+    padding: 16px 24px;
+    font-weight: 500;
+    min-height: 80px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid yellow;
+    position: relative;
+    z-index: 100;
+}
+
+.breaking-label {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    animation: pulse 2s infinite;
+}
+
+.breaking-text {
+    margin-left: 15px;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: yellow;
+    border-radius: 50%;
+    display: inline-block;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.breaking-news-bar {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #d00000, #ff5e5e);
+    color: white;
+    padding: 16px 24px;
+    font-weight: 500;
+    min-height: 80px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid yellow;
+    position: relative;
+    z-index: 100;
+}
+
+.breaking-label {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    animation: pulse 2s infinite;
+}
+
+.breaking-text {
+    margin-left: 15px;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: yellow;
+    border-radius: 50%;
+    display: inline-block;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
