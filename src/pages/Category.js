@@ -1,51 +1,31 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import newsData from '../data/newsData'; // Update the path as needed
 import NewsCard from '../components/NewsCard';
-import img1 from '../pages/img/images(1).jpeg';
-import img2 from '../pages/img/images(2).jpeg';
-import img3 from '../pages/img/images(3).jpeg';
-import './Category.css';
 
-const dummyNews = [
-    {
-        title: "Sample Headline for Category",
-        content: "This is a dummy article for the selected news category.",
-        image: img1
-    },
-    {
-        title: "Another News Title",
-        content: "This is some more placeholder content for the news section.",
-        image: img2
-    },
-    {
-        title: "Third Demo News",
-        content: "Yet another demo article with fake content to show layout.",
-        image: img3
-    }
-];
+const Category = () => {
+    const { category } = useParams();
+    const formattedCategory = category?.toLowerCase();
 
-const Category = ({ category }) => {
+    const filteredNews = newsData.filter(
+        (item) => item.category?.toLowerCase() === category?.toLowerCase()
+    );
     return (
-        <div className="container my-5">
-            <h2 className="category-heading mb-4 text-center">
-                {category} News
+        <div className="container py-4">
+            <h2 className="fw-bold text-capitalize mb-4">
+                {formattedCategory} News
             </h2>
-            <hr className="heading-underline mb-5" />
-
-            <div className="row">
-                {dummyNews.length > 0 ? (
-                    dummyNews.map((item, index) => (
-                        <div className="col-md-4 mb-4" key={index}>
-                            <div className="news-card-wrapper">
-                                <NewsCard title={item.title} content={item.content} image={item.image} />
-                            </div>
+            {filteredNews.length > 0 ? (
+                <div className="row g-6">
+                    {filteredNews.map((news, index) => (
+                        <div className="col-md-6 col-lg-4 mb-4" key={index}>
+                            <NewsCard {...news} />
                         </div>
-                    ))
-                ) : (
-                    <div className="text-center text-muted">
-                        <p>No news articles available in this category yet.</p>
-                    </div>
-                )}
-            </div>
+                    ))}
+                </div>
+            ) : (
+                <p className="text-muted">No news articles available in this category yet.</p>
+            )}
         </div>
     );
 };

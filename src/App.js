@@ -16,13 +16,7 @@ const App = () => {
       <BreakingNews />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/politics" element={<Category category="Politics" />} />
-        <Route path="/sports" element={<Category category="Sports" />} />
-        <Route path="/business" element={<Category category="Business" />} />
-        <Route path="/tech" element={<Category category="Tech" />} />
-        <Route path="/entertainment" element={<Category category="Entertainment" />} />
-        <Route path="/latest" element={<Category category="Latest" />} />
-        <Route path="/trending" element={<Category category="Trending" />} />
+        <Route path="/category/:category" element={<Category />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

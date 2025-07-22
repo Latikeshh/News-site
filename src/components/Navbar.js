@@ -3,16 +3,16 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const location = useLocation();
-    const currentPath = location.pathname;
+    const currentPath = location.pathname.toLowerCase();
 
     const navItems = [
         { name: "Home", path: "/" },
-        { name: "Politics", path: "/politics" },
-        { name: "Business", path: "/business" },
-        { name: "Sports", path: "/sports" },
-        { name: "Tech", path: "/tech" },
-        { name: "Entertainment", path: "/entertainment" },
-        { name: "Health", path: "/health" },
+        { name: "Politics", path: "/category/politics" },
+        { name: "Finance", path: "/category/finance" },
+        { name: "Sports", path: "/category/sports" },
+        { name: "science", path: "/category/science" },
+        { name: "Entertainment", path: "/category/entertainment" },
+        { name: "Health", path: "/category/health" },
     ];
 
     return (
@@ -36,7 +36,7 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon" />
                 </button>
 
-                {/* Navigation */}
+                {/* Navigation Links */}
                 <div className="collapse navbar-collapse" id="mainNav">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
                         {navItems.map(({ name, path }) => (
@@ -55,7 +55,7 @@ const Navbar = () => {
                         ))}
                     </ul>
 
-                    {/* Search */}
+                    {/* Search Form */}
                     <form className="d-flex ms-lg-3 mt-3 mt-lg-0">
                         <input
                             className="form-control form-control-sm rounded-pill px-3 me-2 border"

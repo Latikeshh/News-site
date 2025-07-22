@@ -1,25 +1,34 @@
+// components/NewsCard.js
 import React from 'react';
+import './NewsCard.css';
 
-const NewsCard = ({ title, content, image }) => {
-    return (
-        <div className="card h-100 shadow-sm">
-            {/* Square fixed-size image container */}
-            <div style={{ width: '100%', aspectRatio: '1', overflow: 'hidden' }}>
-                <img
-                    src={image}
-                    alt="news"
-                    className="w-100 h-100"
-                    style={{ objectFit: 'cover' }}
-                />
-            </div>
+const NewsCard = ({ title, content, image, category }) => {
+  return (
+    <div className="card h-100 border-0 shadow-sm news-card rounded-4 overflow-hidden">
+      {/* Image with zoom on hover */}
+      <div className="position-relative news-img-wrapper">
+        <img src={image} className="card-img-top news-image" alt={title} />
+        <span className="badge bg-primary position-absolute top-0 start-0 m-2 text-capitalize">
+          {category}
+        </span>
+      </div>
 
-            {/* Content */}
-            <div className="card-body">
-                <h5 className="card-title">{title}</h5>
-                <p className="card-text text-muted">{content}</p>
-            </div>
+      {/* Card Body */}
+      <div className="card-body d-flex flex-column">
+        <h5 className="card-title fw-semibold text-truncate" title={title}>
+          {title}
+        </h5>
+        <p className="card-text small text-muted">
+          {content.length > 90 ? content.slice(0, 90) + "..." : content}
+        </p>
+        <div className="mt-auto">
+          <a href="#" className="btn btn-sm btn-outline-primary rounded-pill">
+            Read More
+          </a>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default NewsCard;
