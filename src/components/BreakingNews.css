@@ -63,7 +63,7 @@
 .breaking-news-bar {
     display: flex;
     align-items: center;
-    background: linear-gradient(90deg, #d00000, #ff5e5e);
+    background: linear-gradient(90deg, #d00000, #d00000);
     color: white;
     padding: 16px 24px;
     font-weight: 500;

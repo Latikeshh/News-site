@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const About = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div style={{ backgroundColor: '#f4f4f4', padding: '40px 20px' }}>
             <div className="container">
@@ -36,7 +41,7 @@ const About = () => {
                 <hr style={{ borderTop: '2px solid #ccc' }} />
                 <h4 className="mt-5" style={{ color: '#005792' }}>Our Journey</h4>
                 <ul>
-                    <li><strong>2025:</strong> News24India founded in Mumbai</li>
+                    <li><strong>2025:</strong> News24India founded in Nashik</li>
                     <li><strong>2026:</strong> Reached 1M monthly readers</li>
                     <li><strong>2027:</strong> Launched mobile app</li>
                     <li><strong>2028:</strong> Recognized as “Fastest Growing Digital News Platform”</li>
@@ -44,15 +49,11 @@ const About = () => {
 
                 {/* Meet the Team Section */}
                 <hr style={{ borderTop: '2px solid #ccc' }} />
-                <h4 className="mt-5" style={{ color: '#005792' }}>Meet Our Team</h4>
+                <h4 className="mt-5" style={{ color: '#005792' }}></h4>
                 <ul className="list-unstyled">
-                    <li><strong>Latikesh Marathe</strong> - Work in css and Home page</li>
-                    <li><strong>Darshan Shirsath</strong> - Work in Contact us page </li>
-                    <li><strong>Rohit Khairnar</strong> - Work in About us and help in footer</li>
-                    <li><strong>Kalyani Patil</strong> - Work in Admin panel design</li>
                 </ul>
 
-                {/* Testimonials */}
+                {/* Test */}
                 <hr style={{ borderTop: '2px solid #ccc' }} />
                 <h4 className="mt-5" style={{ color: '#005792' }}>What Our Readers Say</h4>
                 <div style={{ backgroundColor: '#ffffff', padding: '15px', borderRadius: '8px', marginBottom: '10px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>

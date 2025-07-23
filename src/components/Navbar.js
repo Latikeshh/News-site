@@ -10,7 +10,7 @@ const Navbar = () => {
         { name: "Politics", path: "/category/politics" },
         { name: "Finance", path: "/category/finance" },
         { name: "Sports", path: "/category/sports" },
-        { name: "science", path: "/category/science" },
+        { name: "Science", path: "/category/science" },
         { name: "Entertainment", path: "/category/entertainment" },
         { name: "Health", path: "/category/health" },
     ];
