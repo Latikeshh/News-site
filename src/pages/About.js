@@ -49,7 +49,7 @@ const About = () => {
 
                 {/* Meet the Team Section */}
                 <hr style={{ borderTop: '2px solid #ccc' }} />
-                <h4 className="mt-5" style={{ color: '#005792' }}></h4>
+                <h4 className="mt-5" style={{ color: '#005792' }}>Top</h4>
                 <ul className="list-unstyled">
                 </ul>
 
