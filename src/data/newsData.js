@@ -1,20 +1,20 @@
 import React from 'react';
 
 import pol1 from '../components/img/pol1.jpg';
-import pol2 from '../components/img/budget.webp';
+import pol2 from '../components/img/pol2.jpg';
 import pol3 from '../components/img/budget.webp';
 
 import sport1 from '../components/img/Cricket.jpg';
-import sport2 from '../components/img/fin2.jpg';
+import sport2 from '../components/img/pol3.jpg';
 import sport3 from '../components/img/rcbwon.jpg';
 
 import sci1 from '../components/img/ch4.webp';
-import sci2 from '../components/img/budget.webp';
-import sci3 from '../components/img/fin3.jpg';
+import sci2 from '../components/img/aditya.jpg';
+import sci3 from '../components/img/quantum.jpg';
 
-import health1 from '../components/img/fin2.jpg';
-import health2 from '../components/img/budget.webp';
-import health3 from '../components/img/fin3.jpg';
+import health1 from '../components/img/heal1.png';
+import health2 from '../components/img/heal2.jpg';
+import health3 from '../components/img/heal3.jpg';
 
 import ent1 from '../components/img/entertainment3.webp';
 import ent2 from '../components/img/censored.jpg';
@@ -90,7 +90,7 @@ const newsItems = [
   {
     id: 8,
     title: "Aditya-L1 Sends First Solar Images",
-    content: "India’s Aditya-L1 solar mission has begun transmitting data. The spacecraft captured high-resolution images of solar flares. Scientists observed a rare X-class solar storm. ISRO says the data will help predict space weather. The mission reached Lagrange Point L1 in January. It is India’s first dedicated solar observatory. Data will be shared with global scientists. Solar activity impacts satellite communication and power grids. Aditya-L1 will operate for at least five years. Global space agencies have praised ISRO's achievement.",
+    content: "India's Aditya-L1 solar mission has begun transmitting data. The spacecraft captured high-resolution images of solar flares. Scientists observed a rare X-class solar storm. ISRO says the data will help predict space weather. The mission reached Lagrange Point L1 in January. It is India’s first dedicated solar observatory. Data will be shared with global scientists. Solar activity impacts satellite communication and power grids. Aditya-L1 will operate for at least five years. Global space agencies have praised ISRO's achievement.",
     image: sci2,
     category: "science",
     featured: false
@@ -98,7 +98,7 @@ const newsItems = [
   {
     id: 9,
     title: "India Develops Indigenous Quantum Computer",
-    content: "IIT Madras unveils India’s first quantum computing prototype. It uses 8 superconducting qubits to perform basic calculations. The project is funded by DST under the National Mission on Quantum Tech. Researchers claim it's 10x faster than classical models. The computer passed all initial tests. It opens new doors in encryption and simulations. India joins US and China in quantum race. PM Modi called it a tech milestone. Students will soon be trained to use it. Startups are being funded for quantum apps.",
+    content: "IIT Madras unveils India's first quantum computing prototype. It uses 8 superconducting qubits to perform basic calculations. The project is funded by DST under the National Mission on Quantum Tech. Researchers claim it's 10x faster than classical models. The computer passed all initial tests. It opens new doors in encryption and simulations. India joins US and China in quantum race. PM Modi called it a tech milestone. Students will soon be trained to use it. Startups are being funded for quantum apps.",
     image: sci3,
     category: "science",
     featured: false
@@ -130,15 +130,15 @@ const newsItems = [
     featured: false
   },
 
-  // ENTERTAINMENT
-  {
-    id: 13,
-    title: "Shah Rukh Khan's 'Raaz 2025' Breaks Records",
-    content: "'Raaz 2025' starring SRK crosses ₹1,000 crore globally. The thriller features AI-driven storyline twists. Fans praised the high-tech VFX and emotional plot. SRK plays a dual role for the first time. Critics call it his best performance in years. The soundtrack topped Spotify charts in India. The movie was released in 10 languages. Directed by S. Shankar, it became a pan-India hit. Hollywood studios praised the film’s visual effects. SRK thanked fans in a viral video message.",
-    image: ent1,
-    category: "entertainment",
-    featured: true
-  },
+  // // ENTERTAINMENT
+  // {
+  //   id: 13,
+  //   title: "Shah Rukh Khan's 'Raaz 2025' Breaks Records",
+  //   content: "'Raaz 2025' starring SRK crosses ₹1,000 crore globally. The thriller features AI-driven storyline twists. Fans praised the high-tech VFX and emotional plot. SRK plays a dual role for the first time. Critics call it his best performance in years. The soundtrack topped Spotify charts in India. The movie was released in 10 languages. Directed by S. Shankar, it became a pan-India hit. Hollywood studios praised the film’s visual effects. SRK thanked fans in a viral video message.",
+  //   image: ent1,
+  //   category: "entertainment",
+  //   featured: true
+  // },
   {
     id: 14,
     title: "OTT Platforms Dominate Indian Entertainment",

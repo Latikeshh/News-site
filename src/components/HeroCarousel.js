@@ -10,7 +10,7 @@ const HeroCarousel = () => {
             id="topNewsCarousel"
             className="carousel slide hero-carousel"
             data-bs-ride="carousel"
-            data-bs-interval="2000" // ← Auto-slide every 2 seconds
+            data-bs-interval="1500" // ← Auto-slide every 
         >
             {/* Indicators */}
             <div className="carousel-indicators">
