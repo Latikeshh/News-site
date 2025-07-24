@@ -1,36 +1,57 @@
-.contact-heading {
-    font-size: 2.2rem;
-    font-weight: 700;
-    background: linear-gradient(to right, #0077b6, #00b4d8);
-    background-clip: content-box;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.contact-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #0d6efd;
+    letter-spacing: 0.5px;
 }
 
-.heading-underline {
-    width: 100px;
+.contact-underline {
+    width: 80px;
     height: 4px;
-    background-color: #00b4d8;
+    background-color: #0d6efd;
     margin: 0 auto;
-    border-radius: 2px;
+    border-radius: 10px;
+}
+
+.contact-info-box {
+    background-color: #f9f9f9;
+    border-left: 4px solid #0d6efd;
+    transition: all 0.3s ease;
+}
+
+.contact-info-box:hover {
+    background-color: #f0f8ff;
+    transform: translateY(-2px);
+}
+
+.contact-form .form-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.contact-form .form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+}
+
+.contact-form .form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.contact-form button {
+    font-weight: 600;
+    padding: 10px 0;
+    border-radius: 8px;
+}
+
+.map-container {
+    height: 250px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
     border: none;
-}
-
-.info-box {
-    font-size: 0.95rem;
-    line-height: 1.7;
-}
-
-.form-control:focus {
-    border-color: #00b4d8;
-    box-shadow: 0 0 0 0.2rem rgba(0, 180, 216, 0.25);
-}
-
-.btn-primary {
-    background-color: #0077b6;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #023e8a;
 }

@@ -1,0 +1,56 @@
+.sidebar-wrapper {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.sidebar-heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.fire-icon {
+    font-size: 1.25rem;
+    color: #0d6efd;
+    margin-right: 0.5rem;
+}
+
+.trending-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0;
+    color: #0d1b2a;
+}
+
+.trending-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.trending-item {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 600;
+    border-left: 4px solid #0d6efd;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #f8f9fa;
+}
+
+.trending-item:hover {
+    background-color: #e9f2ff;
+    color: #0d6efd;
+}
+
+.bullet-icon {
+    color: #0d6efd;
+    margin-right: 0.5rem;
+}

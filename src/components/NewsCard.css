@@ -1,26 +1,70 @@
-/* components/NewsCard.css */
 .news-card {
-    transition: transform 0.3s ease;
-    background-color: #fff;
+    background-color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 1.25rem;
+    /* matches rounded-4 */
 }
 
 .news-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(13, 110, 253, 0.2);
 }
 
+/* Image Wrapper */
 .news-img-wrapper {
-    aspect-ratio: 4 / 3;
     overflow: hidden;
+    aspect-ratio: 16 / 9;
 }
 
+/* News Image */
 .news-image {
-    object-fit: cover;
     width: 100%;
     height: 100%;
+    object-fit: cover;
     transition: transform 0.4s ease;
 }
 
-.news-img-wrapper:hover .news-image {
+.news-card:hover .news-image {
     transform: scale(1.05);
+}
+
+/* Badge Style */
+.news-card .badge {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 0.75rem;
+    background-color: #0d6efd;
+}
+
+/* Card Title */
+.news-card .card-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    color: #0d1b2a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Card Text */
+.news-card .card-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+    line-height: 1.4;
+}
+
+/* Read More Button */
+.news-card .btn {
+    font-weight: 500;
+    font-size: 0.85rem;
+    border: 1px solid #0d6efd;
+    color: #0d6efd;
+    padding: 6px 16px;
+    transition: all 0.3s ease;
+}
+
+.news-card .btn:hover {
+    background-color: #0d6efd;
+    color: white;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
 }
