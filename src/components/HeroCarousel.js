@@ -39,7 +39,7 @@ const HeroCarousel = () => {
                         />
                         <div className="carousel-caption">
                             <h5 className="carousel-title">{item.title}</h5>
-                            <p className="carousel-description">{item.content}</p>
+                            <p></p>
                         </div>
                     </div>
                 ))}

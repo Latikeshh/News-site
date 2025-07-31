@@ -1,13 +1,16 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const currentPath = location.pathname.toLowerCase();
 
-    const navItems = [
-        { name: "Home", path: "/" },
+    const [showCategories, setShowCategories] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState("");
+
+    const categories = [
         { name: "Politics", path: "/category/politics" },
         { name: "Finance", path: "/category/finance" },
         { name: "Sports", path: "/category/sports" },
@@ -16,53 +19,66 @@ const Navbar = () => {
         { name: "Health", path: "/category/health" },
     ];
 
+    const toggleCategories = () => setShowCategories(!showCategories);
+
+    const handleCategoryClick = (name, path) => {
+        setSelectedCategory(name);
+        setShowCategories(false);
+        navigate(path);
+    };
+
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top border-bottom">
-            <div className="container-fluid px-4">
-                <Link className="navbar-brand fw-bold text-primary fs-4" to="/">
-                    🇮🇳 News24<span className="text-danger">India</span>
-                </Link>
+        <div className="nav-wrapper">
+            <nav className="nav-bar nav-neumorphic">
+                <div className="container-fluid d-flex justify-content-between align-items-center">
+                    <Link className="nav-brand" to="/">
+                        🇮🇳 News24<span className="nav-highlight">India</span>
+                    </Link>
 
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#mainNav"
-                    aria-controls="mainNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon" />
-                </button>
+                    <div className="nav-items d-flex align-items-center">
+                        <Link
+                            className={`nav-link ${currentPath === "/" ? "active" : ""}`}
+                            to="/"
+                        >
+                            Home
+                        </Link>
 
-                <div className="collapse navbar-collapse" id="mainNav">
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
-                        {navItems.map(({ name, path }) => (
-                            <li className="nav-item mx-1" key={name}>
-                                <Link
-                                    className={`nav-link-custom ${currentPath === path ? "active" : ""}`}
-                                    to={path}
-                                >
-                                    {name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-
-                    <form className="d-flex ms-lg-3 mt-3 mt-lg-0">
-                        <input
-                            className="form-control form-control-sm rounded-pill px-3 me-2 border"
-                            type="search"
-                            placeholder="Search news..."
-                            aria-label="Search"
-                        />
-                        <button className="btn btn-sm btn-outline-primary rounded-pill" type="submit">
-                            🔍
+                        <button
+                            className="nav-link nav-dropdown-toggle"
+                            onClick={toggleCategories}
+                        >
+                            {selectedCategory ? `Category: ${selectedCategory}` : "Browse Categories ▾"}
                         </button>
-                    </form>
+
+                        <form className="d-flex ms-3">
+                            <input
+                                className="nav-search-input"
+                                type="search"
+                                placeholder="Search news..."
+                                aria-label="Search"
+                            />
+                            <button className="nav-link" type="submit">
+                                🔍
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </nav>
+
+                {showCategories && (
+                    <div className="nav-category-bar">
+                        {categories.map(({ name, path }) => (
+                            <button
+                                className={`nav-category-link ${currentPath === path ? "active" : ""}`}
+                                key={name}
+                                onClick={() => handleCategoryClick(name, path)}
+                            >
+                                {name}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </nav>
+        </div>
     );
 };
 
