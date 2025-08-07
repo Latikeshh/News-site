@@ -9,20 +9,72 @@ import Category from './pages/Category';
 import About from './pages/About';
 import Contact from './pages/Contact';
 
+import AdminLogin from './admin/AdminLogin';
+import AdminApp from './admin/AdminApp';
+import AdminPrivateRoute from './admin/AdminPrivateRoute';
+import { AdminAuthProvider } from './admin/AdminContext';
+
 const App = () => {
   return (
-    <Router>
-      <Navbar />
-      <BreakingNews />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/category/:category" element={<Category />} />
-        <Route path="/news/:id" element={<ViewNews />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <AdminAuthProvider>
+      <Router>
+        <Routes>
+          {/* Public Site */}
+          <Route path="/" element={
+            <>
+              <Navbar />
+              <BreakingNews />
+              <Home />
+              <Footer />
+            </>
+          } />
+
+          <Route path="/category/:category" element={
+            <>
+              <Navbar />
+              <BreakingNews />
+              <Category />
+              <Footer />
+            </>
+          } />
+
+          <Route path="/news/:id" element={
+            <>
+              <Navbar />
+              <BreakingNews />
+              <ViewNews />
+              <Footer />
+            </>
+          } />
+
+          <Route path="/about" element={
+            <>
+              <Navbar />
+              <BreakingNews />
+              <About />
+              <Footer />
+            </>
+          } />
+
+          <Route path="/contact" element={
+            <>
+              <Navbar />
+              <BreakingNews />
+              <Contact />
+              <Footer />
+            </>
+          } />
+
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/*" element={
+            <AdminPrivateRoute>
+              <AdminApp />
+            </AdminPrivateRoute>
+          } />
+        </Routes>
+      </Router>
+    </AdminAuthProvider>
   );
 };
 

@@ -1,56 +1,97 @@
+/* Sidebar.css – Elite Dark Red Sidebar Design */
+
 .sidebar-wrapper {
-    background-color: #ffffff;
-    padding: 1rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e0e0e0;
-    font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  background: #1a0000; /* deep dark red base */
+  color: #fff;
+  padding: 1.5rem 1rem;
+  box-shadow: 4px 0 12px rgba(255, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
 }
 
 .sidebar-heading {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .fire-icon {
-    font-size: 1.25rem;
-    color: #0d6efd;
-    margin-right: 0.5rem;
+  font-size: 1.8rem;
+  color: #ff2e2e;
+  animation: pulseFire 1.5s infinite;
+  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
 }
 
 .trending-title {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin: 0;
-    color: #0d1b2a;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ff4d4d;
+  text-shadow: 0 0 5px #ff4d4d;
 }
 
 .trending-list {
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 4px;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #ff4d4d transparent;
+}
+
+.trending-list::-webkit-scrollbar {
+  width: 4px;
+}
+.trending-list::-webkit-scrollbar-thumb {
+  background: #ff4d4d;
+  border-radius: 10px;
+}
+.trending-list::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .trending-item {
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    color: #555;
-    font-weight: 600;
-    border-left: 4px solid #0d6efd;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background-color: #f8f9fa;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  color: #ffffffcc;
+  position: relative;
+  transition: color 0.3s ease;
+  cursor: pointer;
 }
-
 .trending-item:hover {
-    background-color: #e9f2ff;
-    color: #0d6efd;
+  color: #ff4d4d;
+  text-shadow: 0 0 5px #ff4d4d;
 }
 
 .bullet-icon {
-    color: #0d6efd;
-    margin-right: 0.5rem;
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  color: #ff4d4d;
+  font-size: 0.8rem;
+}
+
+/* Fire icon animation */
+@keyframes pulseFire {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .sidebar-wrapper {
+    height: auto;
+    position: relative;
+  }
 }

@@ -17,13 +17,11 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-wrapper">
-      {/* Heading */}
       <div className="sidebar-heading">
         <span className="fire-icon">🔥</span>
         <h5 className="trending-title">Trending Now</h5>
       </div>
 
-      {/* Scrollable Trending List */}
       <div className="trending-list">
         <ul className="list-unstyled mb-0">
           {trending.map((item, i) => (
