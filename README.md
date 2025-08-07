@@ -1,3 +1,29 @@
+# 📰 Fullstack News Website with Admin Panel
+
+This is a full-stack news website project built with React and Node.js. It includes:
+
+- 🌐 A public-facing **News Website**
+- 🔐 A secure **Admin Panel** (under `/admin`) to manage articles and content
+- 💾 MongoDB for storing news content, user information, and more
+
+---
+
+## 🚀 Features
+
+### 🌍 Main Website
+- Responsive user interface for browsing news
+- Dark mode compatible layout
+- News listing and details pages
+- Smooth navigation and sectioning
+
+### 🔐 Admin Panel
+- Separate route: `/admin`
+- Admin login page
+- Admin dashboard to manage news data (CRUD operations)
+- Protected routes using React Context and custom route protection
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
