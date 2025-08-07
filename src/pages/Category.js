@@ -21,7 +21,6 @@ const Category = () => {
             <h2 className="category-heading text-capitalize">
                 {formattedCategory} News
             </h2>
-
             {filteredNews.length > 0 ? (
                 <div className="row g-6">
                     {filteredNews.map((news, index) => (

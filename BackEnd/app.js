@@ -3,10 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const route = require("./routes/noteRoutes"); // 👈 Rename to ./routes/noteRoutes.js for clarity
-require("dotenv").config(); // 👈 Load .env variables
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = 8000;
 const MONGO_URI = "mongodb://localhost:27017/News";
 
 // -------------------- Middleware --------------------
