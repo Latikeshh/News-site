@@ -16,13 +16,14 @@ import health1 from '../components/img/heal1.png';
 import health2 from '../components/img/heal2.jpg';
 import health3 from '../components/img/heal3.jpg';
 
-import ent1 from '../components/img/entertainment3.webp';
 import ent2 from '../components/img/censored.jpg';
 import ent3 from '../components/img/entertainment3.webp';
 
 import fin1 from '../components/img/budget.webp';
 import fin2 from '../components/img/fin2.jpg';
 import fin3 from '../components/img/fin3.jpg';
+
+import sidebar from '../components/Sidebar'
 
 
 const newsItems = [

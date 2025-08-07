@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import newsData from '../data/newsData';
 import NewsCard from '../components/NewsCard';
-import './Category.css'; // ⬅️ External high-level styling
-
+import './Category.css'; // ⬅️ External high-level styling 
+import Sidebar from '../components/Sidebar'
 const Category = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -33,6 +33,7 @@ const Category = () => {
             ) : (
                 <p className="no-news-msg">No news articles available in this category yet.</p>
             )}
+ <Sidebar/>
         </div>
     );
 };

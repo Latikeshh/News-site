@@ -36,6 +36,7 @@ const NewsCard = ({ id, title, content, image, category }) => {
             Read More
           </button>
         </div>
+
       </div>
     </div>
   );
