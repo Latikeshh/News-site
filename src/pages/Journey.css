@@ -1,0 +1,79 @@
+.journey-container {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 50px 20px;
+  max-width: 900px;
+  margin: auto;
+  background: linear-gradient(to right, #f7fafc, #fff);
+}
+
+.journey-heading {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #2b6cb0;
+}
+
+.timeline {
+  position: relative;
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 4px solid #2b6cb0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+  padding-left: 20px;
+  animation: fadeInUp 0.6s ease;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -12px;
+  top: 5px;
+  width: 18px;
+  height: 18px;
+  background-color: #2b6cb0;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 3px #bee3f8;
+}
+
+.timeline-content h2 {
+  font-size: 20px;
+  color: #2c5282;
+  margin-bottom: 8px;
+}
+
+.timeline-content p {
+  font-size: 16px;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .journey-heading {
+    font-size: 28px;
+  }
+
+  .timeline-content h2 {
+    font-size: 18px;
+  }
+
+  .timeline-content p {
+    font-size: 15px;
+  }
+}

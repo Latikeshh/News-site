@@ -1,78 +1,130 @@
-.about-page {
-    background-color: #f9fafd;
-    padding: 60px 20px;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-    color: #1c1e21;
+.landing-page {
+  justify-content: space-between;
+  padding: 50px;
+  min-height: 50vh;
+  background: transparent;
+  
 }
 
-.about-heading {
-    font-size: 2.5rem;
-    color: #005792;
-    font-weight: 700;
-    margin-bottom: 30px;
+.hero-section {
+background-image: url('../components/img/BGG.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  position: relative;
+  color: white;
 }
 
-.about-lead {
-    font-size: 1.25rem;
-    color: #333;
-    margin-bottom: 20px;
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  text-align: center;
 }
 
-.about-description {
-    color: #444;
-    font-size: 1rem;
-    margin-bottom: 16px;
+
+.overlay h1 {
+  font-size: 48px;
+  font-weight: bold;
 }
 
-.contact-info {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 32px;
-    color: #444;
-    line-height: 1.6;
+.overlay p {
+  max-width: 600px;
+  margin: 20px 0;
 }
 
-.section-title {
-    font-size: 1.4rem;
-    color: #005792;
-    font-weight: 600;
-    margin-top: 40px;
-    margin-bottom: 10px;
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
 }
 
-.about-divider {
-    border: none;
-    border-top: 2px solid #d3dce6;
-    margin: 40px 0;
+.btn {
+  padding: 12px 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.timeline {
-    margin-left: 0;
-    padding-left: 0;
-    list-style-type: none;
-    color: #333;
+.btn.donate {
+  background-color: #FFD700;
+  color: black;
 }
 
-.timeline li {
-    margin-bottom: 10px;
+.btn.learn {
+  background-color: #E91E63;
+  color: white;
 }
 
-.testimonial-card {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0, 87, 146, 0.08);
-    transition: all 0.3s ease;
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: -50px;
+  padding: 50px 20px;
+  background-color: white;
+  z-index: 10;
+  position: relative;
+  flex: 3;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-.testimonial-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 87, 146, 0.15);
+.service-card {
+  width: 250px;
+  margin: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  text-align: center;
+  color: #111; 
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent dark */
+  backdrop-filter: blur(6px);
+  border: solid #fff;
 }
 
-.blockquote-footer {
-    font-size: 0.9rem;
-    color: #666;
-    margin-top: 10px;
+.service-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 25px rgba(255, 255, 255, 0.2);
+  background: rgba(182, 26, 26, 0.15);
+}
+
+.service-card:hover .icon {
+  transform: scale(1.3);
+  transition: 0.3s;
+}
+
+.service-card .icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+
+.service-card h3 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* extra visibility */
+}
+
+.service-card p {
+  color: #ddd;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.darsh{
+  color: red;
+  font-size: 25px;
+  
 }

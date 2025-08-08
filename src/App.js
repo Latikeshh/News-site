@@ -13,6 +13,10 @@ import AdminLogin from './admin/AdminLogin';
 import AdminApp from './admin/AdminApp';
 import AdminPrivateRoute from './admin/AdminPrivateRoute';
 import { AdminAuthProvider } from './admin/AdminContext';
+import Journey from './pages/Journey';
+import Learn from './pages/Learn';
+
+
 
 const App = () => {
   return (
@@ -64,6 +68,33 @@ const App = () => {
               <Footer />
             </>
           } />
+           <Route path="/about" element={
+            <>
+              <Navbar />
+              <BreakingNews />
+              <About/>
+              <Footer />
+            </>
+          } />
+
+          <Route path="/Learn" element={
+            <>
+              <Navbar />
+              <BreakingNews />
+              <Learn/>
+              <Footer />
+            </>
+          } />
+
+          <Route path="/Journey" element={
+            <>
+              <Navbar />
+              <BreakingNews />
+              <Journey/>
+              <Footer />
+            </>
+          } />
+        <Route path="/Journey" element={<Journey />} /> 
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLogin />} />
