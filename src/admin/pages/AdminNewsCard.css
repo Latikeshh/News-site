@@ -1,0 +1,32 @@
+/* src/admin/pages/NewsCard.css */
+
+.news-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #ff3c38;
+  border-radius: 10px;
+  padding: 16px 20px;
+  transition: background-color 0.3s ease;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.news-card:hover {
+  background-color: rgba(255, 60, 56, 0.12);
+}
+
+.news-card-title {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.news-card-summary {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #cccccc;
+  line-height: 1.4;
+}

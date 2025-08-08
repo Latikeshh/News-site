@@ -24,7 +24,7 @@ body, html {
 }
 
 /* Scrollable NewsPage only */
-.main-content-scrollable {
+.main-content-scrolll {
   width: 66.66%;
   height: calc(100vh - 10px); /* Leave space for navbar/footer if needed */
   overflow-y: auto;

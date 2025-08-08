@@ -13,6 +13,7 @@ import AdminLogin from './admin/AdminLogin';
 import AdminApp from './admin/AdminApp';
 import AdminPrivateRoute from './admin/AdminPrivateRoute';
 import { AdminAuthProvider } from './admin/AdminContext';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (

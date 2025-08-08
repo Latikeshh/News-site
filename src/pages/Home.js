@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import NewsPage from '../components/NewsPage';
-import Footer from '../components/Footer'; // Assuming you have a Footer component
 import './Home.css';
 
 const Home = () => {
@@ -12,7 +11,7 @@ const Home = () => {
   return (
     <>
       <div className="home-wrapper">
-        <div className="main-content-scrollable">
+        <div className="main-content-scrolll">
           <NewsPage />
         </div>
         <div className="sidebar-fixed">
