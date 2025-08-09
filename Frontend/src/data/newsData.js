@@ -23,7 +23,6 @@ import fin1 from '../components/img/budget.webp';
 import fin2 from '../components/img/fin2.jpg';
 import fin3 from '../components/img/fin3.jpg';
 
-import sidebar from '../components/Sidebar'
 
 
 const newsItems = [
@@ -181,7 +180,44 @@ const newsItems = [
     image: fin3,
     category: "finance",
     featured: false
-  }
+  },
+
+  {
+    id: 19,
+    title: "Sensex Hits Record 85,000 Points",
+    content: "BSE Sensex crossed 85,000 mark for the first time. IT, banking, and auto stocks led the rally. Foreign investments hit a new quarterly high. Rupee stayed stable against the dollar. Investor sentiment improved post-Budget 2025. FIIs pumped over $10B in 3 months. Retail participation rose with SIP surges. Experts warn of short-term volatility. RBI may review rates to control inflation. Markets show optimism about long-term Indian growth.",
+    image: fin3,
+    category: "World",
+    featured: false
+  },
+
+  // WORLD
+{
+  id: 20,
+  title: "UN Climate Summit 2025 Concludes in New York",
+  content: "The UN Climate Summit 2025 wrapped up with landmark agreements on carbon reduction targets. Over 190 countries pledged to cut emissions by 60% by 2040. A $200 billion climate fund will support developing nations in transitioning to green energy. Activists welcomed the commitment but urged faster action. The agreement also includes a ban on new coal plants after 2030. Renewable energy projects will receive unprecedented investment. Experts say this could mark a turning point in the fight against global warming.",
+  image: pol1,
+  category: "world",
+  featured: true
+},
+{
+  id: 21,
+  title: "Global Markets Rally as Inflation Eases",
+  content: "Global stock markets surged after data showed inflation easing in the US and Europe. The Dow Jones, FTSE, and Nikkei all posted significant gains. Economists believe this could signal the end of aggressive interest rate hikes. Emerging markets also benefited from renewed investor confidence. Gold prices dipped slightly, while oil prices stabilized. Analysts say the next quarter will be critical in determining sustained growth. Central banks are cautiously optimistic but warn of possible geopolitical risks.",
+  image: pol1,
+  category: "world",
+  featured: false
+},
+{
+  id: 22,
+  title: "Historic Peace Accord Signed Between Two Rival Nations",
+  content: "A historic peace agreement was signed between two nations locked in decades-long conflict. Mediated by the UN, the treaty includes demilitarized zones, cultural exchange programs, and trade cooperation. Leaders from both sides expressed hope for a prosperous future. The accord has been hailed as a diplomatic triumph. International observers believe this could bring stability to the entire region. Human rights groups welcomed the move, calling it a victory for dialogue over war.",
+  image: pol1,
+  category: "world",
+  featured: false
+},
+
+  
 ];
 
 export default newsItems;

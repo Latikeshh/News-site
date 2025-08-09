@@ -10,7 +10,7 @@ const AboutUs = () => {
       <section className="card">
         <h2 className="heading-section">Who We Are</h2>
         <p>
-          <strong>[Tumcha Website Name]</strong> is an independent digital news platform committed to delivering reliable, fast, and responsible journalism.
+          <strong>News Website</strong> is an independent digital news platform committed to delivering reliable, fast, and responsible journalism.
           We bring you stories that inform, inspire, and impact — across categories like Politics, Bollywood, Science, Technology, Breaking News, and More.
         </p>
         <p>

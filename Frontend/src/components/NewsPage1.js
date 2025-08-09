@@ -1,5 +1,5 @@
 import React from 'react';
-import newsItems from '../data/newsData1';
+import newsItems from '../data/newsData';
 import '../pages/Home.css'; // Or keep using Home.css if combined
 
 const NewsPage = () => {
