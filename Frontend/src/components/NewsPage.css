@@ -1,18 +1,18 @@
-/* NewsPage.css – High-level design with scroll area matching Sidebar */
+/* NewsPage.css – High-level design with scroll area matching Sidebar
 
 .news-scroll-area {
   height: 100vh;
   overflow-y: auto;
-  background-color: #0d0d0d; /* Dark elite background */
+  background-color: #0d0d0d; 
   padding: 2rem;
   box-sizing: border-box;
   color: #fff;
   scroll-behavior: smooth;
   position: relative;
-}
+} */
 
 /* Hide scrollbar but allow scroll */
-.news-scroll-area::-webkit-scrollbar {
+/* .news-scroll-area::-webkit-scrollbar {
   width: 5px;
 }
 .news-scroll-area::-webkit-scrollbar-thumb {
@@ -45,6 +45,7 @@
 
 .news-row {
   display: flex;
+  height: 100;
   background: #1a1a1a;
   border-left: 4px solid #ff4d4d;
   border-radius: 12px;
@@ -75,21 +76,14 @@
   color: #fff;
   margin-bottom: 0.5rem;
 }
-
-.news-meta {
-  font-size: 0.9rem;
-  color: #ff9999;
-  margin-bottom: 0.5rem;
-}
-
 .news-snippet {
   font-size: 1rem;
   color: #cccccc;
   line-height: 1.5;
-}
+} */
 
 /* Responsive */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .news-row {
     flex-direction: column;
   }
@@ -100,3 +94,20 @@
     margin-bottom: 1rem;
   }
 }
+
+.news-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.news-snippet {
+  font-size: 1rem;
+  color: #cccccc;
+  line-height: 1.5;
+} 
+.news-meta {
+  font-size: 0.9rem;
+  color: #ff9999;
+  margin-bottom: 0.5rem;
+} */

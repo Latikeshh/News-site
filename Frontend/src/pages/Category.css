@@ -2,7 +2,7 @@
 .category-layout {
   display: flex;
   background-color: #0f0f0f; /* Match admin dark */
-  color: #eaeaea;
+  color: #bd1818;
   min-height: 100vh;
 }
 
@@ -31,8 +31,8 @@
 /* Horizontal card style for NewsCard */
 .news-card {
   display: flex;
-  align-items: center;
   background-color: #1a1a1a;
+  align-items: center;
   border-radius: 8px;
   overflow: hidden;
   height: 140px; /* Shorter cards */

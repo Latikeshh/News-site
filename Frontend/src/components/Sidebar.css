@@ -38,6 +38,7 @@
   border-left: 4px solid #ff3c38;
   border-radius: 8px;
   transition: transform 0.2s ease;
+  color: white;
 }
 
 .scrollable-news .news-item:hover {
