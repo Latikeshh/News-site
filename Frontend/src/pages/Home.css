@@ -53,6 +53,7 @@
 .news-row {
   display: flex;
   gap: 1.2rem;
+  height: 150px;
   padding: 1.2rem;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
@@ -81,13 +82,14 @@
 
 .news-content {
   flex: 1;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   justify-content: space-between;
   padding: 50px;
   min-height: 50vh;
   background: transparent;
 }
+
 
 .main-news {
   flex: 3;
