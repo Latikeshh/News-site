@@ -1,54 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './ArticlesPage.css'; // Reuse same theme
 
-const AddArticlePage = ({ onAddArticle }) => {
+const AddArticlePage = () => {
   const navigate = useNavigate();
-  const [newArticle, setNewArticle] = useState({
+  const [form, setForm] = useState({
     title: '',
     author: '',
     category: ''
   });
 
   const handleChange = (e) => {
-    setNewArticle({ ...newArticle, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onAddArticle) {
-      onAddArticle(newArticle);
-    }
-    navigate('/admin/articles'); // Go back to articles list
+    // In real app, send to backend
+    console.log('Article added:', form);
+    navigate('/admin/articles');
   };
 
   return (
     <div className="admin-container">
-      <div className="admin-header">
-        <h1>Add New Article</h1>
-        <button className="btn btn-secondary" onClick={() => navigate('/admin/articles')}>Back</button>
-      </div>
-
-      <div className="admin-form">
-        <form onSubmit={handleSubmit} className="modal-form">
-          <label>
-            Title:
-            <input type="text" name="title" value={newArticle.title} onChange={handleChange} required />
-          </label>
-          <label>
-            Author:
-            <input type="text" name="author" value={newArticle.author} onChange={handleChange} required />
-          </label>
-          <label>
-            Category:
-            <input type="text" name="category" value={newArticle.category} onChange={handleChange} required />
-          </label>
-
-          <div className="modal-footer">
-            <button type="submit" className="btn btn-danger">Add Article</button>
-          </div>
-        </form>
-      </div>
+      <h1>Add Article</h1>
+      <form onSubmit={handleSubmit} className="modal-form">
+        <label>Title:
+          <input type="text" name="title" value={form.title} onChange={handleChange} />
+        </label>
+        <label>Author:
+          <input type="text" name="author" value={form.author} onChange={handleChange} />
+        </label>
+        <label>Category:
+          <input type="text" name="category" value={form.category} onChange={handleChange} />
+        </label>
+        <button className="btn btn-danger" type="submit">Add Article</button>
+      </form>
     </div>
   );
 };

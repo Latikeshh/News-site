@@ -1,21 +1,21 @@
+// src/admin/components/Sidebar.jsx
 import React from 'react';
-import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './Sidebar.css'; // Link to external CSS
 
 const Sidebar = () => (
-  <div className="bg-dark text-white p-3 vh-100 position-fixed" style={{ width: '220px' }}>
-    <h4 className="mb-4">News Admin</h4>
-    <Nav defaultActiveKey="/dashboard" className="flex-column">
-      <Nav.Link as={Link} to="/dashboard" className="text-white">Dashboard</Nav.Link>
-      <Nav.Link as={Link} to="/categories" className="text-white">Categories</Nav.Link>
-      <Nav.Link as={Link} to="/articles" className="text-white">Articles</Nav.Link>
-      <Nav.Link as={Link} to="/users" className="text-white">Users</Nav.Link>
-      {/*<Nav.Link as={Link} to="/media" className="text-white">Media</Nav.Link>*/}
-      <Nav.Link as={Link} to="/comments" className="text-white">Comments</Nav.Link>
-      <Nav.Link as={Link} to="/notifications" className="text-white">Notifications</Nav.Link>
-      <Nav.Link as={Link} to="/settings" className="text-white">Settings</Nav.Link>
-      <Nav.Link as={Link} to="/information" className="text-white">Information</Nav.Link>
-    </Nav>
+  <div className="sidebar">
+    <h4 className="sidebar-title">📰 News Admin</h4>
+    <nav className="sidebar-nav">
+      <Link to="/admin/dashboard" className="sidebar-link">Dashboard</Link>
+      <Link to="/admin/categories" className="sidebar-link">Categories</Link>
+      <Link to="/admin/articles" className="sidebar-link">Articles</Link>
+      <Link to="/admin/users" className="sidebar-link">Users</Link>
+      <Link to="/admin/comments" className="sidebar-link">Comments</Link>
+      <Link to="/admin/notifications" className="sidebar-link">Notifications</Link>
+      <Link to="/admin/settings" className="sidebar-link">Settings</Link>
+      <Link to="/admin/information" className="sidebar-link">Information</Link>
+    </nav>
   </div>
 );
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import NewsCard from './AdminNewsCard';
 import './AdminDashboard.css';
+import Sidebar from './Sidebar';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -27,31 +28,34 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="dashboard-container">
-      <h2>Dashboard Overview</h2>
+    <div className="admin-dashboard-layout">
+      <Sidebar />
+      <div className="dashboard-container">
+        <h2>Dashboard Overview</h2>
 
-      <div className="cards-grid">
-        {cardData.map((card, idx) => (
-          <div
-            key={idx}
-            className="dashboard-card"
-            onClick={() => handleCardClick(card.type)}
-          >
-            <h3>{card.title}</h3>
-            <p>{card.text}</p>
-          </div>
-        ))}
-      </div>
+        <div className="cards-grid">
+          {cardData.map((card, idx) => (
+            <div
+              key={idx}
+              className="dashboard-card"
+              onClick={() => handleCardClick(card.type)}
+            >
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </div>
+          ))}
+        </div>
 
-      <h3>Latest Articles</h3>
-      <div className="articles-grid">
-        {articles.map((article, idx) => (
-          <NewsCard
-            key={idx}
-            title={article.title}
-            summary={article.summary}
-          />
-        ))}
+        <h3>Latest Articles</h3>
+        <div className="articles-grid">
+          {articles.map((article, idx) => (
+            <NewsCard
+              key={idx}
+              title={article.title}
+              summary={article.summary}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
