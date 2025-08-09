@@ -1,10 +1,37 @@
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import NewsCard from './NewsCard';
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Card, Spinner, Button } from 'react-bootstrap';
+import NewsCard from './NewsCard'; // Your NewsCard component
 import { useNavigate } from 'react-router-dom';
+import './Dashboard.css'; // We'll create this file for dark + red styling
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState({ total: 0, page: 1, limit: 10 });
+  const [error, setError] = useState(null);
+
+  // Fetch articles with pagination
+  const fetchArticles = async (page = 1, limit = 10) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`/news?page=${page}&limit=${limit}`);
+      if (!res.ok) throw new Error('Failed to fetch articles');
+      const data = await res.json();
+      setArticles(data.data || []);
+      setPagination(data.pagination || { total: 0, page: 1, limit: 10 });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchArticles(pagination.page, pagination.limit);
+    // eslint-disable-next-line
+  }, []);
 
   const handleCardClick = (type) => {
     switch (type) {
@@ -37,27 +64,30 @@ const Dashboard = () => {
     }
   };
 
-  const articles = [
-    { title: 'Breaking News: AI Advances', summary: 'AI is transforming industries rapidly.' },
-    { title: 'Elections 2025 Updates', summary: 'Latest results from national polls.' },
-    { title: 'Market Watch', summary: 'Stock markets are reacting positively to tech growth.' },
-    { title: 'Climate Report', summary: 'Global warming impact intensifies in 2025.' },
-  ];
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || newPage > Math.ceil(pagination.total / pagination.limit)) return;
+    fetchArticles(newPage, pagination.limit);
+  };
 
   const cardData = [
-    { title: 'Total Articles', text: '120', bg: 'primary', type: 'articles' },
+    { title: 'Total Articles', text: pagination.total.toString(), bg: 'primary', type: 'articles' },
     { title: 'Categories', text: '8', bg: 'success', type: 'categories' },
-    { title: 'Active Users', text: '54', bg: 'info', type: 'users' },
-    { title: 'Media Files', text: '45', bg: 'warning', type: 'media' },
-    { title: 'Comments', text: '230', bg: 'danger', type: 'comments' },
-    { title: 'Notifications', text: '12', bg: 'secondary', type: 'notifications' },
     { title: 'Information', text: 'About Site', bg: 'dark', type: 'information' },
     { title: 'Settings', text: 'Admin Settings', bg: 'light', type: 'settings', textColor: 'text-dark' },
   ];
 
   return (
-    <div style={{ marginLeft: '220px', padding: '1rem' }}>
-      <h2 className="mb-4">Dashboard Overview</h2>
+    <div className="dashboard-container">
+      <div className="dashboard-header">
+        <h2>Dashboard Overview</h2>
+        <Button
+          className="add-news-btn"
+          onClick={() => navigate('/create-news')}
+          variant="danger"
+        >
+          + Add News
+        </Button>
+      </div>
 
       <Row className="mb-4">
         {cardData.map((card, idx) => (
@@ -77,13 +107,47 @@ const Dashboard = () => {
       </Row>
 
       <h4 className="mb-3">Latest Articles</h4>
-      <Row>
-        {articles.map((article, idx) => (
-          <Col md={6} key={idx} className="mb-3">
-            <NewsCard title={article.title} summary={article.summary} />
-          </Col>
-        ))}
-      </Row>
+      {loading ? (
+        <div className="text-center">
+          <Spinner animation="border" role="status" />
+        </div>
+      ) : error ? (
+        <p className="text-danger">Error: {error}</p>
+      ) : articles.length === 0 ? (
+        <p>No articles found.</p>
+      ) : (
+        <>
+          <Row>
+            {articles.map((article) => (
+              <Col md={6} key={article._id} className="mb-3">
+                <NewsCard
+                  title={article.title}
+                  summary={article.content.substring(0, 100) + '...'}
+                />
+              </Col>
+            ))}
+          </Row>
+          <div className="d-flex justify-content-between align-items-center mt-3">
+            <Button
+              variant="secondary"
+              disabled={pagination.page === 1}
+              onClick={() => handlePageChange(pagination.page - 1)}
+            >
+              Previous
+            </Button>
+            <span>
+              Page {pagination.page} of {Math.ceil(pagination.total / pagination.limit)}
+            </span>
+            <Button
+              variant="secondary"
+              disabled={pagination.page === Math.ceil(pagination.total / pagination.limit)}
+              onClick={() => handlePageChange(pagination.page + 1)}
+            >
+              Next
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

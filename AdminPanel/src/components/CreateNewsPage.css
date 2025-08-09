@@ -1,0 +1,50 @@
+/* CreateNewsPage.css */
+
+.create-news-container {
+    margin-left: 220px;
+    padding: 2rem;
+    background-color: #121212;
+    min-height: 100vh;
+    color: #eee;
+    font-family: Arial, sans-serif;
+}
+
+.create-news-title {
+    color: #ff4d4f;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.form-label {
+    color: #ff4d4f !important;
+    font-weight: 600;
+}
+
+.form-control-dark {
+    background-color: #1e1e1e !important;
+    color: #eee !important;
+    border-color: #ff4d4f !important;
+}
+
+.form-control-dark::placeholder {
+    color: #bbb !important;
+}
+
+.btn-danger-custom {
+    background-color: #ff4d4f;
+    border-color: #ff4d4f;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger-custom:hover,
+.btn-danger-custom:focus {
+    background-color: #d9363e;
+    border-color: #d9363e;
+}
+
+.alert-danger,
+.alert-success {
+    font-weight: 600;
+}

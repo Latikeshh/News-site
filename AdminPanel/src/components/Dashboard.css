@@ -1,0 +1,54 @@
+/* Dashboard.css */
+
+.dashboard-container {
+  margin-left: 220px;
+  padding: 1rem;
+  background-color: #121212;
+  min-height: 100vh;
+  color: #eee;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-header h2 {
+  color: #ff4d4f;
+  margin: 0;
+}
+
+.add-news-btn {
+  background-color: #ff4d4f !important;
+  border-color: #ff4d4f !important;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.add-news-btn:hover,
+.add-news-btn:focus {
+  background-color: #d9363e !important;
+  border-color: #d9363e !important;
+}
+
+.clickable-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.clickable-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(255, 77, 79, 0.4);
+}
+
+/* Override Bootstrap card text colors in dark backgrounds */
+.bg-primary, .bg-success, .bg-danger, .bg-warning, .bg-secondary, .bg-dark, .bg-light {
+  color: #fff !important;
+}
+
+.bg-light.text-dark {
+  color: #121212 !important;
+}
