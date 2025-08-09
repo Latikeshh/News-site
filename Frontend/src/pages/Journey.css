@@ -1,0 +1,90 @@
+/* src/components/Journey.css */
+
+/* Container */
+.journey-container {
+  background-color: #121212;
+  padding: 3rem 2rem;
+  color: #fff;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Heading */
+.journey-heading {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  color: #ff3c38;
+  letter-spacing: 1px;
+}
+
+/* Timeline Container */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: auto;
+  padding-left: 20px;
+  border-left: 3px solid #ff3c38;
+}
+
+/* Timeline Items */
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item:hover {
+  transform: translateX(5px);
+}
+
+/* Dot */
+.timeline-dot {
+  position: absolute;
+  left: -11px;
+  top: 10px;
+  width: 16px;
+  height: 16px;
+  background-color: #ff3c38;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 8px rgba(255, 60, 56, 0.8);
+}
+
+/* Content Box */
+.timeline-content {
+  background-color: #1e1e1e;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  transition: background-color 0.3s ease;
+}
+
+.timeline-content:hover {
+  background-color: #292929;
+}
+
+/* Title */
+.timeline-content h3 {
+  margin: 0 0 0.5rem;
+  color: #ff3c38;
+  font-size: 1.25rem;
+}
+
+/* Year */
+.timeline-content span {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-bottom: 0.5rem;
+}
+
+/* Description */
+.timeline-content p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ddd;
+}

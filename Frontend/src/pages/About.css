@@ -1,0 +1,130 @@
+.landing-page {
+  justify-content: space-between;
+  padding: 50px;
+  min-height: 50vh;
+  background: transparent;
+  
+}
+
+.hero-section {
+background-image: url('../components/img/BGG.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  position: relative;
+  color: white;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  text-align: center;
+}
+
+
+.overlay h1 {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.overlay p {
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn.donate {
+  background-color: #FFD700;
+  color: black;
+}
+
+.btn.learn {
+  background-color: #E91E63;
+  color: white;
+}
+
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: -50px;
+  padding: 50px 20px;
+  background-color: white;
+  z-index: 10;
+  position: relative;
+  flex: 3;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.service-card {
+  width: 250px;
+  margin: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  text-align: center;
+  color: #111; 
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent dark */
+  backdrop-filter: blur(6px);
+  border: solid #fff;
+}
+
+.service-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 25px rgba(255, 255, 255, 0.2);
+  background: rgba(182, 26, 26, 0.15);
+}
+
+.service-card:hover .icon {
+  transform: scale(1.3);
+  transition: 0.3s;
+}
+
+.service-card .icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+
+.service-card h3 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* extra visibility */
+}
+
+.service-card p {
+  color: #ddd;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.darsh{
+  color: red;
+  font-size: 25px;
+  
+}

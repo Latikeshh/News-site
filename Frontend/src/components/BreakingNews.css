@@ -1,0 +1,44 @@
+.breaking-news-bar {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #ff0000, #b30000);
+  color: white;
+  padding: 20px 15px;
+  position: relative;
+  overflow: hidden;
+  animation: pulseBg 2s infinite alternate;
+}
+
+@keyframes pulseBg {
+  0% { background-color: #cc0000; }
+  100% { background-color: #ff1a1a; }
+}
+
+.breaking-label {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  font-size: 30px;
+}
+
+.breaking-label .dot {
+  height: 10px;
+  width: 10px;
+  background-color: yellow;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.breaking-text {
+  flex-grow: 1;
+  font-weight: bold;
+  font-size: 20px;
+  white-space: nowrap;
+}
+

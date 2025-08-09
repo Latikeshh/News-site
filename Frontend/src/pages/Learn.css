@@ -1,0 +1,76 @@
+.aboutus-container {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #080809, #121111);
+  color: #333;
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.heading-main {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 50px;
+  color: #2b6cb0;
+  text-shadow: 1px 1px 2px #ccc;
+}
+
+.card {
+  background: #fff;
+  padding: 25px 30px;
+  margin-bottom: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.heading-section {
+  font-size: 24px;
+  color: #2c5282;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.card ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.card li {
+  margin-bottom: 8px;
+}
+
+.values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.values span {
+  background: #edf2f7;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.mission {
+  background-color: #ebf8ff;
+}
+
+.highlight {
+  background-color: #fefcbf;
+}
+
+.contact {
+  background: linear-gradient(to right, #2b6cb0, #2c5282);
+  color: #fff;
+  text-align: center;
+}

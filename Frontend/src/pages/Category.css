@@ -1,0 +1,102 @@
+/* Layout wrapper */
+.category-layout {
+  display: flex;
+  background-color: #0f0f0f; /* Match admin dark */
+  color: #eaeaea;
+  min-height: 100vh;
+}
+
+/* Main content area */
+.category-main {
+  flex: 3;
+  padding: 1.5rem;
+}
+
+/* Heading */
+.category-heading {
+  color: #ff3c38;
+  font-weight: bold;
+  border-bottom: 2px solid #ff3c38;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* News list container */
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Horizontal card style for NewsCard */
+.news-card {
+  display: flex;
+  align-items: center;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 140px; /* Shorter cards */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Image on the left */
+.news-card img {
+  width: 160px;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Text content */
+.news-card-content {
+  padding: 0.8rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.news-card-content h3 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.news-card-content h3:hover {
+  color: #ff3c38;
+}
+
+.news-card-content p {
+  color: #bbb;
+  font-size: 0.85rem;
+  line-height: 1.2;
+}
+
+/* No news message */
+.no-news-msg {
+  color: #bbb;
+  font-style: italic;
+}
+
+/* Sidebar */
+.category-sidebar {
+  flex: 1;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-left: 2px solid #ff3c38; /* touch main content */
+  height: 100vh; /* full height sticky */
+  box-shadow: -2px 0 6px rgba(0,0,0,0.5);
+}
+
+.category-sidebar h3 {
+  color: #ff3c38;
+  margin-bottom: 1rem;
+}
