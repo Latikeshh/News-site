@@ -2,7 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const route = require("./routes/noteRoutes"); // 👈 Rename to ./routes/noteRoutes.js for clarity
+const route = require("./routes/newsRoutes"); // 👈 Rename to ./routes/noteRoutes.js for clarity
 
 const app = express();
 const PORT = 8000;
