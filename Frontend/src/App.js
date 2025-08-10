@@ -8,6 +8,9 @@ import Home from './pages/Home';
 import Category from './pages/Category';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Help from './pages/Help';
+import World from './pages/World';
+
 
 // import AdminLogin from './admin/AdminLogin';
 // import AdminApp from './admin/AdminApp';
@@ -48,16 +51,7 @@ const App = () => {
           </>
         } />
 
-        <Route path="/about" element={
-          <>
-            <Navbar />
-            <BreakingNews />
-            <About />
-            <Footer />
-          </>
-        } />
-
-        <Route path="/contact" element={
+        <Route path="/Contact" element={
           <>
             <Navbar />
             <BreakingNews />
@@ -91,7 +85,24 @@ const App = () => {
             <Footer />
           </>
         } />
-        <Route path="/Journey" element={<Journey />} />
+
+        <Route path="/Help" element={
+          <>
+            <Navbar />
+            <BreakingNews />
+            <Help />
+            <Footer />
+          </>
+        } />
+
+        <Route path="/World" element={
+          <>
+            <Navbar />
+            <BreakingNews />
+            <World />
+            <Footer />
+          </>
+        } />
       </Routes>
     </Router>
 
