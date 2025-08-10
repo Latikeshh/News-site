@@ -10,12 +10,6 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Help from './pages/Help';
 import World from './pages/World';
-
-
-// import AdminLogin from './admin/AdminLogin';
-// import AdminApp from './admin/AdminApp';
-// import AdminPrivateRoute from './admin/AdminPrivateRoute';
-// import { AdminAuthProvider } from './admin/AdminContext';
 import Journey from './pages/Journey';
 import Learn from './pages/Learn';
 

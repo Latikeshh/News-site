@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import videoFile from './vid/News_intro.mp4';
 import './Sidebar.css'; 
+import newsItems from '../data/newsData';
 
 const Sidebar = () => {
   const scrollRef = useRef(null);
@@ -38,8 +39,7 @@ const Sidebar = () => {
     };
   }, []);
 
-  return (
-    <div>
+return (
     <aside className="side-news">
       <div className="fixed-video">
         <video autoPlay loop muted playsInline>
@@ -49,28 +49,14 @@ const Sidebar = () => {
       </div>
 
       <div className="scrollable-news" ref={scrollRef}>
-                <div className="news-item"><h5><strong>Delhi faces record-breaking monsoon rains this July</strong></h5><span>1h ago</span></div>
-                <div className="news-item"><h5><strong>Indian Navy rescues 25 fishermen stranded in Arabian Sea</strong></h5><span>4h ago</span></div>
-                <div className="news-item"><h5><strong>India becomes world's 3rd largest startup ecosystem</strong></h5><span>7h ago</span></div>
-                <div className="news-item"><h5><strong>Government launches Digital India Internship 2025 for students</strong></h5><span>8h ago</span></div>
-                <div className="news-item"><h5><strong>Supreme Court to hear Article 370 case next week</strong></h5><span>10h ago</span></div>
-                <div className="news-item"><h5><strong>India to host G20 Education Ministers' Summit</strong></h5><span>12h ago</span></div>
-                <div className="news-item"><h5><strong>IRCTC launches new AI-powered ticket booking system</strong></h5><span>14h ago</span></div>
-                <div className="news-item"><h5><strong>Mumbai local train services get digital upgrade</strong></h5><span>15h ago</span></div>
-                <div className="news-item"><h5><strong>IIT Bombay ranks in top 100 global universities</strong></h5><span>17h ago</span></div>
-                <div className="news-item"><h5><strong>ISRO's Aditya-L1 sends first solar flare images</strong></h5><span>20h ago</span></div>
-                <div className="news-item"><h5><strong>India's forex reserves touch record high of $650 billion</strong></h5><span>1d ago</span></div>
-                <div className="news-item"><h5><strong>Kerala tops in education index again</strong></h5><span>1d ago</span></div>
-                <div className="news-item"><h5><strong>Delhi Metro to operate 24/7 on Independence Day</strong></h5><span>1d ago</span></div>
-                <div className="news-item"><h5><strong>Startup from Pune creates AI-powered farming drone</strong></h5><span>1d ago</span></div>
-                <div className="news-item"><h5><strong>India and Japan sign space collaboration agreement</strong></h5><span>2d ago</span></div>
-                <div className="news-item"><h5><strong>Goa to host International Film Festival 2025</strong></h5><span>2d ago</span></div>
-                <div className="news-item"><h5><strong>Bangalore becomes India's most liveable city 2025</strong></h5><span>2d ago</span></div>
-                <div className="news-item"><h5><strong>Chennai airport adds facial recognition entry</strong></h5><span>2d ago</span></div>
-                <div className="news-item"><h5><strong>India to build world's largest solar park in Rajasthan</strong></h5><span>2d ago</span></div>
+        {newsItems.map((item, i) => (
+          <div className="news-item" key={i}>
+            <h5><strong>{item.title}</strong></h5>
+            <span>{item.time}</span>
+          </div>
+        ))}
       </div>
     </aside>
-    </div>
   );
 };
 
