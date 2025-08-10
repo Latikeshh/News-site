@@ -1,29 +1,45 @@
-const NoteModel = require('./modal');
+const NewsModel = require('./modal');
 
-// ✅ Create a new note
-const createNote = async (req, res) => {
-    const { name, message } = req.body;
-
+const createNews = async (req, res) => {
     try {
-        const note = new NoteModel({
-            name,
-            message,
-            email: '',
-            password: '',
-            address: '',
-            isDelete: false
+        const {
+            title,
+            slug,
+            content,
+            author,
+            category,
+            tags,
+            publishedAt
+        } = req.body;
+
+        // Basic validation
+        if (!title || !content) {
+            return res.status(400).send({ error: "Title and content are required" });
+        }
+
+        const news = new NewsModel({
+            title,
+            slug: slug || title.toLowerCase().replace(/\s+/g, '-'),
+            content,
+            author: author || 'Anonymous',
+            category: category || 'General',
+            tags: Array.isArray(tags) ? tags : [],
+            publishedAt: publishedAt || new Date()
         });
-        await note.save();
-        res.status(200).send({ message: 'Note created successfully' });
+
+        await news.save();
+        res.status(201).send({ message: 'News created successfully', data: news });
+
     } catch (err) {
+        console.error(err);
         res.status(400).send({ error: err.message });
     }
 };
 
 // ✅ Get all notes (excluding soft-deleted)
-const getNotes = async (req, res) => {
+const getNews = async (req, res) => {
     try {
-        const notes = await NoteModel.find({ isDelete: { $ne: true } });
+        const notes = await NewsModel.find({ isDelete: { $ne: true } });
         res.status(200).send({ data: notes });
     } catch (err) {
         res.status(400).send({ error: err.message });
@@ -31,12 +47,12 @@ const getNotes = async (req, res) => {
 };
 
 // ✅ Update a note
-const updateNote = async (req, res) => {
+const updateNews = async (req, res) => {
     const { name, message } = req.body;
     const { _id } = req.params;
 
     try {
-        const result = await NoteModel.updateOne(
+        const result = await NewsModel.updateOne(
             { _id },
             { $set: { name, message } }
         );
@@ -57,11 +73,11 @@ const updateNote = async (req, res) => {
 };
 
 // ✅ Soft delete (mark isDelete = true)
-const softDeleteNote = async (req, res) => {
+const softDeleteNews = async (req, res) => {
     const { _id } = req.params;
 
     try {
-        const result = await NoteModel.updateOne(
+        const result = await NewsModel.updateOne(
             { _id },
             { $set: { isDelete: true } }
         );
@@ -77,11 +93,11 @@ const softDeleteNote = async (req, res) => {
 };
 
 // ✅ Get a single note by ID
-const getNoteById = async (req, res) => {
+const getNewsById = async (req, res) => {
     const { _id } = req.params;
 
     try {
-        const note = await NoteModel.findById(_id);
+        const note = await NewsModel.findById(_id);
 
         if (!note || note.isDelete) {
             return res.status(404).send({ message: "Note not found" });
@@ -94,9 +110,9 @@ const getNoteById = async (req, res) => {
 };
 
 // ✅ Hard delete (optional — if you want to remove completely)
-const deleteNote = async (req, res) => {
+const deleteNews = async (req, res) => {
     try {
-        const result = await NoteModel.deleteOne({ _id: req.params._id });
+        const result = await NewsModel.deleteOne({ _id: req.params._id });
         if (result.deletedCount > 0) {
             res.status(200).send({ message: "Note deleted permanently" });
         } else {
@@ -108,10 +124,10 @@ const deleteNote = async (req, res) => {
 };
 
 module.exports = {
-    createNote,
-    getNotes,
-    updateNote,
-    softDeleteNote,
-    deleteNote,
-    getNoteById  // 👈 Add this
+    createNews,
+    getNews,
+    updateNews,
+    softDeleteNews,
+    deleteNews,
+    getNewsById  // 👈 Add this
 };

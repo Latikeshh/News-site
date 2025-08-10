@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import TopNavbar from './components/Navbar';
-import Dashboard from './components/Dashboard';
+import Dashboard1 from './Pages/Dashboard1';
 import ArticlesPage from './components/ArticlesPage';
 import CategoriesPage from './components/CategoriesPage';
 import UsersPage from './components/UsersPage';
-// import MediaPage from './components/MediaPage';
-import CommentsPage from './components/CommentsPage';
 import NotificationsPage from './components/NotificationsPage';
 import SettingsPage from './components/SettingsPage';
 import InformationPage from './components/InformationPage';
 import Login from './components/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CreateNewsPage from './components/CreateNewsPage';
+import AddNews from './Pages/AddNews';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -57,7 +56,7 @@ function App() {
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <Dashboard1 />
             </PrivateRoute>
           }
         />
@@ -81,24 +80,14 @@ function App() {
         />
 
         <Route
-          path="/users"
+          path="/addNews"
           element={
             <PrivateRoute>
-              <UsersPage />
+              <AddNews />
             </PrivateRoute>
           }
         />
-
         {/* Add other protected routes similarly */}
-
-        <Route
-          path="/comments"
-          element={
-            <PrivateRoute>
-              <CommentsPage />
-            </PrivateRoute>
-          }
-        />
 
         <Route
           path="/notifications"
@@ -117,15 +106,6 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/create-news"
-          element={
-            <PrivateRoute>
-              <CreateNewsPage />
-            </PrivateRoute>
-          }
-        />
-
         <Route
           path="/information"
           element={

@@ -3,21 +3,21 @@ const router = express.Router();
 const Controller = require('./Controller');
 
 // Create a new note
-router.post('/createnote', Controller.createNote);
+router.post('/createNews', Controller.createNews);
 
 // Get all notes
-router.get('/getnotes', Controller.getNotes);
+router.get('/getNews', Controller.getNews);
 
 // ✅ FIXED: Use GET for fetching a single note
-router.get('/getnote/:_id', Controller.getNoteById);
+router.get('/getNewss/:_id', Controller.getNewsById);
 
 // Update a note
-router.put('/updatenote/:_id', Controller.updateNote);
+router.put('/updateNews/:_id', Controller.updateNews);
 
 // Soft delete (mark as deleted)
-router.put('/deletenote/:_id', Controller.softDeleteNote);
+router.put('/deleteNews/:_id', Controller.softDeleteNews);
 
 // Hard delete (permanently remove)
-router.delete('/harddelete/:_id', Controller.deleteNote);
+router.delete('/harddeleteNews/:_id', Controller.deleteNews);
 
 module.exports = router;

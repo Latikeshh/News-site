@@ -4,7 +4,6 @@ const newsSchema = new mongoose.Schema({
   // _id generated automatically by MongoDB
   title: { type: String, required: true, maxlength: 200 },
   slug: { type: String, unique: true, index: true },
-  summary: { type: String, maxlength: 500 },
   content: { type: String, required: true },
   author: { type: String, default: 'Anonymous' },
   category: { type: String, default: 'General', index: true },

@@ -1,7 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import './Home.css';
-import mainImage from '../components/img/cosmonaut-5142852.jpg';
-import mainImage1 from '../components/img/cosmonaut-5142852.jpg';
 import Sidebar from '../components/Sidebar';
 import NewsPage1 from '../components/NewsPage1';
 

@@ -1,0 +1,109 @@
+body {
+    background-color: #121212;
+    color: #f0f0f0;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.dash-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #333;
+}
+
+.dash-header h2 {
+    font-size: 2rem;
+    color: #f0f0f0;
+}
+
+.dash-add-btn {
+    background-color: #1e88e5;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.dash-add-btn:hover {
+    background-color: #1565c0;
+}
+
+.dash-notes-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.dash-note-card {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+    transition: transform 0.2s ease;
+}
+
+.dash-note-card:hover {
+    transform: translateY(-5px);
+}
+
+.dash-note-card h3 {
+    margin-top: 0;
+    color: #90caf9;
+}
+
+.dash-note-card p {
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    margin: 10px 0;
+}
+
+.dash-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.dash-edit-btn,
+.dash-delete-btn {
+    background-color: transparent;
+    border: 1px solid #555;
+    color: #bbb;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.dash-edit-btn:hover {
+    border-color: #4caf50;
+    color: #4caf50;
+}
+
+.dash-delete-btn:hover {
+    border-color: #f44336;
+    color: #f44336;
+}
+
+.dash-empty-message {
+    color: #999;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.dash-container, .notepad-container {
+    background-color: #121212;
+    color: #f0f0f0;
+    min-height: 100vh;
+}

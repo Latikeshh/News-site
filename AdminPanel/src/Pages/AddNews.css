@@ -1,0 +1,96 @@
+/* Page wrapper */
+.addnews-container {
+  background-color: #121212; /* Deep dark */
+  color: #e0e0e0;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+.addnews-header {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #b71c1c; /* Red accent */
+  padding-bottom: 0.5rem;
+}
+
+.addnews-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ff4c4c; /* Bright red title */
+}
+
+/* Card */
+.addnews-card {
+  background-color: #1e1e1e; /* Slightly lighter dark */
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Inputs */
+.addnews-card input,
+.addnews-card textarea {
+  width: 100%;
+  background-color: #2a2a2a;
+  border: 1px solid #b71c1c; /* Red border */
+  color: #e0e0e0;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.addnews-card input:focus,
+.addnews-card textarea:focus {
+  border-color: #ff4c4c;
+  background-color: #333;
+}
+
+/* Buttons container */
+.addnews-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Buttons */
+.addnews-actions button {
+  background-color: #b71c1c;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.addnews-actions button:hover {
+  background-color: #ff4c4c;
+  transform: translateY(-2px);
+}
+
+.addnews-actions button:active {
+  transform: translateY(0);
+}
+
+/* Cancel button style */
+.addnews-actions button:nth-child(2) {
+  background-color: #444;
+}
+
+.addnews-actions button:nth-child(2):hover {
+  background-color: #666;
+}
