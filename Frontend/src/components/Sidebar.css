@@ -12,6 +12,12 @@
   flex-direction: column;
   gap: 10px;
 }
+.news-date {
+  font-size: 0.8rem; /* Smaller size */
+  opacity: 0.85;     /* Slightly lighter look */
+  display: block;
+  margin-top: 4px;
+}
 
 .fixed-video video {
   width: 100%;
