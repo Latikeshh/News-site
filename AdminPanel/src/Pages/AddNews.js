@@ -30,7 +30,7 @@ const AddNews = () => {
 
         try {
             await axios.post('http://localhost:8000/createNews', newNews);
-            alert('News article saved!');
+            alert('✅ New article saved successfully!');
             navigate('/admin/news'); // Redirect to news list in admin
         } catch (err) {
             console.error(err);

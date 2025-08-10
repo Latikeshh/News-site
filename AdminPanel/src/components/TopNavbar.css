@@ -1,0 +1,34 @@
+.top-navbar {
+ margin-left: 220px; /* Matches sidebar width */
+  height: 60px;
+  background-color: #1e1e1e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 2px solid #e50914;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: 1px solid #e50914;
+  color: #fff;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #e50914;
+  color: #fff;
+}

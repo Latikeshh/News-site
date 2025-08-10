@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Card, Spinner, Button } from 'react-bootstrap';
 import NewsCard from './NewsCard'; // Your NewsCard component
 import { useNavigate } from 'react-router-dom';
-import './Dashboard.css'; // We'll create this file for dark + red styling
+import './Dashboard.css'; // Dark + red styling
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -11,7 +10,6 @@ const Dashboard = () => {
   const [pagination, setPagination] = useState({ total: 0, page: 1, limit: 10 });
   const [error, setError] = useState(null);
 
-  // Fetch articles with pagination
   const fetchArticles = async (page = 1, limit = 10) => {
     setLoading(true);
     setError(null);
@@ -34,34 +32,17 @@ const Dashboard = () => {
   }, []);
 
   const handleCardClick = (type) => {
-    switch (type) {
-      case 'articles':
-        navigate('/articles');
-        break;
-      case 'categories':
-        navigate('/categories');
-        break;
-      case 'users':
-        navigate('/users');
-        break;
-      case 'media':
-        navigate('/media');
-        break;
-      case 'comments':
-        navigate('/comments');
-        break;
-      case 'notifications':
-        navigate('/notifications');
-        break;
-      case 'information':
-        navigate('/information');
-        break;
-      case 'settings':
-        navigate('/settings');
-        break;
-      default:
-        break;
-    }
+    const routes = {
+      articles: '/articles',
+      categories: '/categories',
+      users: '/users',
+      media: '/media',
+      comments: '/comments',
+      notifications: '/notifications',
+      information: '/information',
+      settings: '/settings'
+    };
+    if (routes[type]) navigate(routes[type]);
   };
 
   const handlePageChange = (newPage) => {
@@ -70,81 +51,74 @@ const Dashboard = () => {
   };
 
   const cardData = [
-    { title: 'Total Articles', text: pagination.total.toString(), bg: 'primary', type: 'articles' },
-    { title: 'Categories', text: '8', bg: 'success', type: 'categories' },
-    { title: 'Information', text: 'About Site', bg: 'dark', type: 'information' },
-    { title: 'Settings', text: 'Admin Settings', bg: 'light', type: 'settings', textColor: 'text-dark' },
+    { title: 'Total Articles', text: pagination.total.toString(), type: 'articles' },
+    { title: 'Categories', text: '8', type: 'categories' },
+    { title: 'Information', text: 'About Site', type: 'information' },
+    { title: 'Settings', text: 'Admin Settings', type: 'settings' },
   ];
 
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
         <h2>Dashboard Overview</h2>
-        <Button
+        <button
           className="add-news-btn"
           onClick={() => navigate('/create-news')}
-          variant="danger"
         >
           + Add News
-        </Button>
+        </button>
       </div>
 
-      <Row className="mb-4">
+      <div className="card-grid">
         {cardData.map((card, idx) => (
-          <Col md={3} className="mb-3" key={idx}>
-            <Card
-              className={`text-center shadow-sm clickable-card bg-${card.bg} ${card.textColor || 'text-white'}`}
-              style={{ cursor: 'pointer' }}
-              onClick={() => handleCardClick(card.type)}
-            >
-              <Card.Body>
-                <Card.Title>{card.title}</Card.Title>
-                <Card.Text>{card.text}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
+          <div
+            key={idx}
+            className="dashboard-card"
+            onClick={() => handleCardClick(card.type)}
+          >
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+          </div>
         ))}
-      </Row>
+      </div>
 
-      <h4 className="mb-3">Latest Articles</h4>
+      <h4 className="section-title">Latest Articles</h4>
       {loading ? (
-        <div className="text-center">
-          <Spinner animation="border" role="status" />
-        </div>
+        <div className="loading">Loading...</div>
       ) : error ? (
-        <p className="text-danger">Error: {error}</p>
+        <p className="error-message">Error: {error}</p>
       ) : articles.length === 0 ? (
-        <p>No articles found.</p>
+        <p className="no-data">No articles found.</p>
       ) : (
         <>
-          <Row>
+          <div className="articles-grid">
             {articles.map((article) => (
-              <Col md={6} key={article._id} className="mb-3">
+              <div key={article._id} className="article-card">
                 <NewsCard
                   title={article.title}
                   summary={article.content.substring(0, 100) + '...'}
                 />
-              </Col>
+              </div>
             ))}
-          </Row>
-          <div className="d-flex justify-content-between align-items-center mt-3">
-            <Button
-              variant="secondary"
+          </div>
+          <div className="pagination-controls">
+            <button
+              className="pagination-btn"
               disabled={pagination.page === 1}
               onClick={() => handlePageChange(pagination.page - 1)}
             >
               Previous
-            </Button>
+            </button>
             <span>
               Page {pagination.page} of {Math.ceil(pagination.total / pagination.limit)}
             </span>
-            <Button
-              variant="secondary"
+            <button
+              className="pagination-btn"
               disabled={pagination.page === Math.ceil(pagination.total / pagination.limit)}
               onClick={() => handlePageChange(pagination.page + 1)}
             >
               Next
-            </Button>
+            </button>
           </div>
         </>
       )}

@@ -1,15 +1,18 @@
-body {
+body { 
     background-color: #121212;
     color: #f0f0f0;
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .dash-container {
     padding: 20px;
-    max-width: 900px;
-    margin: auto;
+    margin-left: 220px; /* match sidebar width */
+    width: calc(100% - 220px); /* keep full view without overflow */
+    box-sizing: border-box;
 }
 
 .dash-header {
