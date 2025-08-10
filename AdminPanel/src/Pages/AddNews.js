@@ -10,6 +10,7 @@ const AddNews = () => {
     const [author, setAuthor] = useState('');
     const [category, setCategory] = useState('General');
     const [tags, setTags] = useState('');
+    const [image, setImage] = useState(null);
     const navigate = useNavigate();
 
     const saveNews = async () => {

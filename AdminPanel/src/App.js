@@ -11,7 +11,7 @@ import SettingsPage from './components/SettingsPage';
 import InformationPage from './components/InformationPage';
 import Login from './components/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CreateNewsPage from './components/CreateNewsPage';
+import NewsDetailPage from './components/NewsDetailsPage';
 import AddNews from './Pages/AddNews';
 
 function App() {
@@ -34,7 +34,6 @@ function App() {
     setIsLoggedIn(false);
   };
 
-  // Protected Route component
   const PrivateRoute = ({ children }) => {
     return isLoggedIn ? children : <Navigate to="/login" />;
   };
@@ -45,6 +44,7 @@ function App() {
       {isLoggedIn && <TopNavbar onLogout={handleLogout} />}
 
       <Routes>
+        {/* Public login route */}
         <Route
           path="/login"
           element={
@@ -52,6 +52,7 @@ function App() {
           }
         />
 
+        {/* Dashboard */}
         <Route
           path="/dashboard"
           element={
@@ -61,6 +62,7 @@ function App() {
           }
         />
 
+        {/* Articles list */}
         <Route
           path="/articles"
           element={
@@ -70,15 +72,17 @@ function App() {
           }
         />
 
+        {/* Single article view/edit (from ArticlesPage) */}
         <Route
-          path="/categories"
+          path="/articles/:id"
           element={
             <PrivateRoute>
-              <CategoriesPage />
+              <NewsDetailPage />
             </PrivateRoute>
           }
         />
 
+        {/* Add news */}
         <Route
           path="/addNews"
           element={
@@ -87,8 +91,24 @@ function App() {
             </PrivateRoute>
           }
         />
-        {/* Add other protected routes similarly */}
 
+        {/* Other pages */}
+        <Route
+          path="/categories"
+          element={
+            <PrivateRoute>
+              <CategoriesPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <PrivateRoute>
+              <UsersPage />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/notifications"
           element={
@@ -97,7 +117,6 @@ function App() {
             </PrivateRoute>
           }
         />
-
         <Route
           path="/settings"
           element={
@@ -115,7 +134,7 @@ function App() {
           }
         />
 
-        {/* Redirect unknown routes to dashboard or login  */}
+        {/* Fallback */}
         <Route path="*" element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} />} />
       </Routes>
     </Router>
