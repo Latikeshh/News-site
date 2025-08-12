@@ -11,8 +11,9 @@ import SettingsPage from './components/SettingsPage';
 import InformationPage from './components/InformationPage';
 import Login from './components/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NewsDetailPage from './components/NewsDetailsPage';
-import AddNews from './Pages/AddNews';
+import View from './Pages/View';
+import NewsForm from './Pages/NewsForm';
+import Update from './Pages/Update';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -67,17 +68,17 @@ function App() {
           path="/articles"
           element={
             <PrivateRoute>
-              <ArticlesPage />
+              <View />
             </PrivateRoute>
           }
         />
 
         {/* Single article view/edit (from ArticlesPage) */}
         <Route
-          path="/articles/:id"
+          path="/update/:_id"
           element={
             <PrivateRoute>
-              <NewsDetailPage />
+              <Update />
             </PrivateRoute>
           }
         />
@@ -87,7 +88,7 @@ function App() {
           path="/addNews"
           element={
             <PrivateRoute>
-              <AddNews />
+              <NewsForm />
             </PrivateRoute>
           }
         />

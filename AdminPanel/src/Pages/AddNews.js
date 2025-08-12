@@ -1,95 +1,195 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './AddNews.css'; // Style with your admin dark theme
+import React, { useState } from "react";
+import Container from "react-bootstrap/Container";
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import { Card } from "react-bootstrap";
+import axios from "axios";
 
 const AddNews = () => {
-    const [title, setTitle] = useState('');
-    const [slug, setSlug] = useState('');
-    const [content, setContent] = useState('');
-    const [author, setAuthor] = useState('');
-    const [category, setCategory] = useState('General');
-    const [tags, setTags] = useState('');
-    const [image, setImage] = useState(null);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const saveNews = async () => {
-        if (!title.trim() || !content.trim()) {
-            alert("Title and content are required");
-            return;
-        }
+  const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
+  const [content, setContent] = useState("");
+  const [author, setAuthor] = useState("");
+  const [category, setCategory] = useState("");
+  const [tags, setTags] = useState(""); // comma separated string
+  const [publishedAt, setPublishedAt] = useState("");
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-        const newNews = {
-            title,
-            slug: slug || title.toLowerCase().replace(/\s+/g, '-'),
-            content,
-            author: author || 'Anonymous',
-            category,
-            tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
-            publishedAt: new Date()
-        };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-        try {
-            await axios.post('http://localhost:8000/createNews', newNews);
-            alert('✅ New article saved successfully!');
-            navigate('/admin/news'); // Redirect to news list in admin
-        } catch (err) {
-            console.error(err);
-            alert('Error ' + err.message);
-        }
-    };
+    try {
+      const formData = new FormData();
+      formData.append("title", title);
+      if (slug) formData.append("slug", slug);
+      formData.append("content", content);
+      if (author) formData.append("author", author);
+      if (category) formData.append("category", category);
 
-    return (
-        <div className="addnews-container">
-            <header className="addnews-header">
-                <h2>📰 Add News</h2>
-            </header>
+      // Convert tags string to array and append each tag separately
+      if (tags.trim()) {
+        const tagsArray = tags.split(",").map((tag) => tag.trim());
+        tagsArray.forEach((tag) => formData.append("tags", tag));
+      }
 
-            <div className="addnews-card">
-                <input
-                    type="text"
-                    placeholder="Title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Slug (optional, auto-generated from title)"
-                    value={slug}
-                    onChange={(e) => setSlug(e.target.value)}
-                />
-                <textarea
-                    placeholder="Content"
+      if (publishedAt) formData.append("publishedAt", publishedAt);
+      if (image) formData.append("image", image);
+
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const response = await axios.post(
+        "http://localhost:8000/addnews",
+        formData,
+        config
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        alert("News added successfully!");
+        resetForm();
+        navigate("/news-list");  // change as per your route
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error while submitting the form:", error);
+      alert("Error " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const resetForm = () => {
+    setTitle("");
+    setSlug("");
+    setContent("");
+    setAuthor("");
+    setCategory("");
+    setTags("");
+    setPublishedAt("");
+    setImage(null);
+  };
+
+  return (
+    <Container>
+      <Row className="vh-100 d-flex justify-content-center align-items-center">
+        <Col md={10} lg={8} xs={12}>
+          <div className="border rounded-3 border-3 border-primary"></div>
+          <Card className="shadow border-0">
+            <Card.Body>
+              <h2 className="fw-bold mb-2 text-uppercase">Add News</h2>
+              <p className="mb-5">Fill in the news details below:</p>
+              <Form onSubmit={handleSubmit}>
+                <Row className="mb-3">
+                  <Form.Group as={Col} controlId="title">
+                    <Form.Label>Title <span className="text-danger">*</span></Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter title"
+                      value={title}
+                      required
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group as={Col} controlId="slug">
+                    <Form.Label>Slug (optional)</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter slug"
+                      value={slug}
+                      onChange={(e) => setSlug(e.target.value)}
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Form.Group className="mb-3" controlId="content">
+                  <Form.Label>Content <span className="text-danger">*</span></Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={5}
+                    placeholder="Enter content"
                     value={content}
+                    required
                     onChange={(e) => setContent(e.target.value)}
-                    rows={8}
-                />
-                <input
-                    type="text"
-                    placeholder="Author (default: Anonymous)"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Tags (comma-separated)"
-                    value={tags}
-                    onChange={(e) => setTags(e.target.value)}
-                />
+                  />
+                </Form.Group>
 
-                <div className="addnews-actions">
-                    <button onClick={saveNews}>💾 Save</button>
-                    <button onClick={() => navigate('/admin/news')}>🔙 Cancel</button>
+                <Row className="mb-3">
+                  <Form.Group as={Col} controlId="author">
+                    <Form.Label>Author</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter author name"
+                      value={author}
+                      onChange={(e) => setAuthor(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group as={Col} controlId="category">
+                    <Form.Label>Category</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter category"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Row className="mb-3">
+                  <Form.Group as={Col} controlId="tags">
+                    <Form.Label>Tags (comma separated)</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="e.g. politics, sports, entertainment"
+                      value={tags}
+                      onChange={(e) => setTags(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group as={Col} controlId="publishedAt">
+                    <Form.Label>Published At</Form.Label>
+                    <Form.Control
+                      type="date"
+                      value={publishedAt}
+                      onChange={(e) => setPublishedAt(e.target.value)}
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Form.Group className="mb-3" controlId="image">
+                  <Form.Label>Image <span className="text-danger">*</span></Form.Label>
+                  <Form.Control
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setImage(e.target.files[0])}
+                    required
+                  />
+                </Form.Group>
+
+                <div className="d-grid mt-3">
+                  <Button variant="primary" type="submit" disabled={loading}>
+                    {loading ? "Submitting..." : "Submit"}
+                  </Button>
                 </div>
-            </div>
-        </div>
-    );
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default AddNews;

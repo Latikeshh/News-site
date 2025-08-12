@@ -4,6 +4,7 @@
     "express": "^5.1.0",
     "modal": "^0.3.14",
     "mongoose": "^8.17.1",
+    "multer": "^2.0.2",
     "route": "^0.2.5"
   },
   "name": "newss",

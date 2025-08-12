@@ -1,0 +1,101 @@
+const usermodal = require('../Model/modal')
+
+const adduser = async (req, res) => {
+    const { title, slug, content, author, category, tags, publishedAt, isDeleted, image } = req.body
+
+    try {
+        const data = new usermodal({
+            title,
+            slug,
+            content,
+            author,
+            category,
+            tags,
+            publishedAt,
+            isDeleted: isDeleted || false, // default to false
+            image: req.file?.filename || null,
+        })
+        await data.save()
+        res.send({ message: 'User Registered Successfully', data });
+    }
+    catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+}
+
+const getuser = async (req, res) => {
+    try {
+        const data = await usermodal.find({ isDeleted: false }) // exclude deleted
+        res.status(200).send({ data })
+    }
+    catch (err) {
+        res.status(400).send({ error: err.message })
+    }
+}
+
+const updateuser = async (req, res) => {
+    const { title, slug, content, author, category, tags, publishedAt, isDeleted, image } = req.body
+
+    const updateData = {
+        title,
+        slug,
+        content,
+        author,
+        category,
+        tags,
+        publishedAt,
+        isDeleted: isDeleted || false,
+    };
+
+    if (req.file && req.file.filename) {
+        updateData.image = req.file.filename;
+    } else if (image) {
+        updateData.image = image;
+    }
+
+    try {
+        const data = await usermodal.updateOne(
+            { _id: req.params._id },
+            { $set: updateData }
+        );
+
+        if (data.modifiedCount > 0) {
+            res.status(200).send({ message: "User Update successfully" });
+        } else {
+            res.status(200).send({ message: "No changes made or record not found" });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(400).send({ error: err.message });
+    }
+};
+
+const deleteuser = async (req, res) => {
+    try {
+        const data = await usermodal.updateOne(
+            { _id: req.params._id },
+            { $set: { isDeleted: true } } // soft delete
+        );
+
+        if (data.modifiedCount > 0) {
+            res.status(200).send({ message: "User soft deleted successfully" });
+        } else {
+            res.status(404).send({ message: "User not found or already deleted" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(400).send({ error: error.message });
+    }
+};
+
+const getdataOnebyid = async (req, res) => {
+    try {
+        const userData = await usermodal.findOne({ _id: req.params._id, isDeleted: false })
+        res.status(200).send({ userData })
+    } catch (err) {
+        res.status(400).send(err)
+    }
+}
+
+module.exports = { adduser, getuser, updateuser, deleteuser, getdataOnebyid }

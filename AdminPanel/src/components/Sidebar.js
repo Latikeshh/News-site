@@ -10,9 +10,6 @@ const Sidebar = () => (
       <Nav.Link as={Link} to="/categories" className="text-white">Categories</Nav.Link>
       <Nav.Link as={Link} to="/articles" className="text-white">Articles</Nav.Link>
       <Nav.Link as={Link} to="/users" className="text-white">Users</Nav.Link>
-      {/*<Nav.Link as={Link} to="/media" className="text-white">Media</Nav.Link>*/}
-      <Nav.Link as={Link} to="/comments" className="text-white">Comments</Nav.Link>
-      <Nav.Link as={Link} to="/notifications" className="text-white">Notifications</Nav.Link>
       <Nav.Link as={Link} to="/settings" className="text-white">Settings</Nav.Link>
       <Nav.Link as={Link} to="/information" className="text-white">Information</Nav.Link>
     </Nav>
