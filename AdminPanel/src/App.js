@@ -72,7 +72,6 @@ function App() {
             </PrivateRoute>
           }
         />
-
         {/* Single article view/edit (from ArticlesPage) */}
         <Route
           path="/update/:_id"

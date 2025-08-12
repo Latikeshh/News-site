@@ -11,7 +11,7 @@ const Sidebar = () => {
   // Fetch news from backend
   useEffect(() => {
     let mounted = true;
-    axios.get('http://localhost:8000/getNews')
+    axios.get('http://localhost:8000/findnews')
       .then(res => {
         if (!mounted) return;
         const items = res.data?.data || [];
@@ -40,7 +40,7 @@ const Sidebar = () => {
         displayNews.length === news.length &&
         news.length > 0
       ) {
-        setDisplayNews(prev => [...prev, ...prev]); // duplicate items once
+        setDisplayNews(prev => [...prev]); // duplicate items once
         return; // effect will re-run because displayNews changed
       }
 

@@ -36,7 +36,7 @@ const App = () => {
           </>
         } />
 
-        <Route path="/news/:id" element={
+        <Route path="/news/:_id" element={
           <>
             <Navbar />
             <BreakingNews />
