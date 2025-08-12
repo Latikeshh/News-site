@@ -1,35 +1,72 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import { Card } from 'react-bootstrap';
 import axios from 'axios';
-import './ViewNews.css'; // External CSS file
+import './ViewNews.css'; // external CSS file
 
 const ViewNews = () => {
   const { _id } = useParams();
-  const [news, setNews] = useState(null);
+
+  const [newsData, setNewsData] = useState({
+    title: '',
+    slug: '',
+    content: '',
+    author: '',
+    category: '',
+    tags: '',
+    publishedAt: '',
+    image: null
+  });
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/get/${_id}`)
-      .then((res) => setNews(res.data))
-      .catch((err) => console.error('Error fetching news:', err));
-  }, [_id]);
+    fetchData();
+  }, []);
 
-  if (!news) {
-    return <p className="loading">Loading news...</p>;
-  }
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/get/${_id}`);
+      const userData = response.data.userData || {};
+      setNewsData(userData);
+    } catch (err) {
+      console.error('Error fetching data:', err);
+    }
+  };
 
   return (
-    <div className="view-news-container">
-      <h1 className="news-title">{news.title}</h1>
-      <p className="news-date">{news.date}</p>
-      {news.image && (
-        <img
-          src={`http://localhost:5000/uploads/${news.image}`}
-          alt={news.title}
-          className="news-image"
-        />
-      )}
-      <p className="news-content">{news.content}</p>
-    </div>
+    <Container>
+      <Row className="vh-100 d-flex justify-content-center align-items-center">
+        <Col md={10} lg={8} xs={12}>
+          <Card className="shadow view-news-card">
+            {newsData.image && (
+              <div className="view-news-image-wrapper">
+                <img
+                  src={`http://localhost:8000/${newsData.image}`}
+                  alt="News"
+                  className="view-news-image"
+                />
+              </div>
+            )}
+            <Card.Body>
+              <h2 className="fw-bold mb-4 text-uppercase">View News</h2>
+
+              <p><strong>Title:</strong> {newsData.title}</p>
+              <p><strong>Slug:</strong> {newsData.slug}</p>
+              <p><strong>Content:</strong> {newsData.content}</p>
+              <p><strong>Author:</strong> {newsData.author}</p>
+              <p><strong>Category:</strong> {newsData.category}</p>
+              <p><strong>Tags:</strong> {newsData.tags}</p>
+              <p><strong>Published At:</strong> {newsData.publishedAt
+                ? new Date(newsData.publishedAt).toLocaleDateString('en-GB')
+                : 'Not available'}
+              </p>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
