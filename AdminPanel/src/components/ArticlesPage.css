@@ -56,11 +56,30 @@
   border-radius: 6px;
 }
 
-.btn-primary { background-color: #ff4d4d; color: #fff; }
-.btn-secondary { background-color: #555; color: #fff; }
-.btn-info { background-color: #3498db; color: #fff; }
-.btn-warning { background-color: #f39c12; color: #fff; }
-.btn-danger { background-color: #e74c3c; color: #fff; }
+.btn-primary {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #555;
+  color: #fff;
+}
+
+.btn-info {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.btn-warning {
+  background-color: #f39c12;
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: #fff;
+}
 
 .modal-overlay {
   position: fixed;
@@ -68,7 +87,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
