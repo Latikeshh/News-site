@@ -7,16 +7,11 @@ const Navbar = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [categories, setCategories] = useState([]);
 
-  // Fetch categories from backend
   useEffect(() => {
     axios
-      .get('http://localhost:8000/category') // Backend URL for categories
-      .then((res) => {
-        setCategories(res.data);
-      })
-      .catch((err) => {
-        console.error('Error fetching categories:', err);
-      });
+      .get('http://localhost:8000/category')
+      .then((res) => setCategories(res.data))
+      .catch((err) => console.error('Error fetching categories:', err));
   }, []);
 
   const handleDateChange = (e) => {
@@ -26,12 +21,14 @@ const Navbar = () => {
 
   return (
     <header className="header">
+      {/* Logo */}
       <div className="logo">
         <span role="img" aria-label="news">📰</span>
         <span className="logo-text">Talk Bharat</span>
       </div>
 
-      <nav className="nav-links">
+      {/* Scrollable nav items in same line */}
+      <nav className="nav-links category-scroll">
         <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>Home</NavLink>
         {categories.map((cat) => (
           <NavLink
@@ -46,6 +43,7 @@ const Navbar = () => {
         <NavLink to="/contact" className={({ isActive }) => isActive ? "active-link" : ""}>Contact</NavLink>
       </nav>
 
+      {/* Right side tools */}
       <div className="header-right">
         <div className="search-bar">
           <input type="text" placeholder="Search news..." />

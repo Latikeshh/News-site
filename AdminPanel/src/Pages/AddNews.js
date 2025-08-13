@@ -1,25 +1,29 @@
-import React, { useState } from "react";
-import Container from "react-bootstrap/Container";
-import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import { Card } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "./AddNews.css"; // your external CSS
 
 const AddNews = () => {
   const navigate = useNavigate();
-const baseUrl = "http://localhost:8000/registeration";
+
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState("");
-  const [tags, setTags] = useState(""); // comma separated string
+  const [tags, setTags] = useState("");
   const [publishedAt, setPublishedAt] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const [categoriesList, setCategoriesList] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/category")
+      .then((res) => setCategoriesList(res.data))
+      .catch((err) => console.error("Error fetching categories:", err));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,20 +37,14 @@ const baseUrl = "http://localhost:8000/registeration";
       if (author) formData.append("author", author);
       if (category) formData.append("category", category);
 
-      // Convert tags string to array and append each tag separately
       if (tags.trim()) {
-        const tagsArray = tags.split(",").map((tag) => tag.trim());
-        tagsArray.forEach((tag) => formData.append("tags", tag));
+        tags.split(",").map((tag) => formData.append("tags", tag.trim()));
       }
 
       if (publishedAt) formData.append("publishedAt", publishedAt);
       if (image) formData.append("image", image);
 
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
+      const config = { headers: { "Content-Type": "multipart/form-data" } };
 
       const response = await axios.post(
         "http://localhost:8000/addnews",
@@ -57,7 +55,7 @@ const baseUrl = "http://localhost:8000/registeration";
       if (response.status === 200 || response.status === 201) {
         alert("News added successfully!");
         resetForm();
-        navigate("/news-list");  // change as per your route
+        navigate("/news-list");
       } else {
         alert("Something went wrong. Please try again.");
       }
@@ -81,114 +79,136 @@ const baseUrl = "http://localhost:8000/registeration";
   };
 
   return (
-    <Container>
-      <Row className="vh-100 d-flex justify-content-center align-items-center">
-        <Col md={10} lg={8} xs={12}>
-          <div className="border rounded-3 border-3 border-primary"></div>
-          <Card className="shadow border-0">
-            <Card.Body>
+    <div className="container">
+      <div className="row vh-100 justify-content-center align-items-center">
+        <div className="col-md-10 col-lg-8 col-12">
+          <div className="card shadow border-0">
+            <div className="card-body">
               <h2 className="fw-bold mb-2 text-uppercase">Add News</h2>
-              <p className="mb-5">Fill in the news details below:</p>
-              <Form onSubmit={handleSubmit}>
-                <Row className="mb-3">
-                  <Form.Group as={Col} controlId="title">
-                    <Form.Label>Title <span className="text-danger">*</span></Form.Label>
-                    <Form.Control
+              <p className="mb-4">Fill in the news details below:</p>
+
+              <form onSubmit={handleSubmit}>
+                <div className="row mb-3">
+                  <div className="col">
+                    <label className="form-label">
+                      Title <span className="text-danger">*</span>
+                    </label>
+                    <input
                       type="text"
+                      className="form-control"
                       placeholder="Enter title"
                       value={title}
                       required
                       onChange={(e) => setTitle(e.target.value)}
                     />
-                  </Form.Group>
-
-                  <Form.Group as={Col} controlId="slug">
-                    <Form.Label>Slug (optional)</Form.Label>
-                    <Form.Control
+                  </div>
+                  <div className="col">
+                    <label className="form-label">Slug (optional)</label>
+                    <input
                       type="text"
+                      className="form-control"
                       placeholder="Enter slug"
                       value={slug}
                       onChange={(e) => setSlug(e.target.value)}
                     />
-                  </Form.Group>
-                </Row>
+                  </div>
+                </div>
 
-                <Form.Group className="mb-3" controlId="content">
-                  <Form.Label>Content <span className="text-danger">*</span></Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={5}
+                <div className="mb-3">
+                  <label className="form-label">
+                    Content <span className="text-danger">*</span>
+                  </label>
+                  <textarea
+                    className="form-control"
+                    rows="5"
                     placeholder="Enter content"
                     value={content}
                     required
                     onChange={(e) => setContent(e.target.value)}
-                  />
-                </Form.Group>
+                  ></textarea>
+                </div>
 
-                <Row className="mb-3">
-                  <Form.Group as={Col} controlId="author">
-                    <Form.Label>Author</Form.Label>
-                    <Form.Control
+                <div className="row mb-3">
+                  <div className="col">
+                    <label className="form-label">Author</label>
+                    <input
                       type="text"
+                      className="form-control"
                       placeholder="Enter author name"
                       value={author}
                       onChange={(e) => setAuthor(e.target.value)}
                     />
-                  </Form.Group>
-
-                  <Form.Group as={Col} controlId="category">
-                    <Form.Label>Category</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter category"
+                  </div>
+                  <div className="col">
+                    <label className="form-label">
+                      Category <span className="text-danger">*</span>
+                    </label>
+                    <select
+                      className="form-select"
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
-                    />
-                  </Form.Group>
-                </Row>
+                      required
+                    >
+                      <option value="">Select category</option>
+                      {categoriesList.map((cat) => (
+                        <option key={cat._id} value={cat.name}>
+                          {cat.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
 
-                <Row className="mb-3">
-                  <Form.Group as={Col} controlId="tags">
-                    <Form.Label>Tags (comma separated)</Form.Label>
-                    <Form.Control
+                <div className="row mb-3">
+                  <div className="col">
+                    <label className="form-label">Tags (comma separated)</label>
+                    <input
                       type="text"
+                      className="form-control"
                       placeholder="e.g. politics, sports, entertainment"
                       value={tags}
                       onChange={(e) => setTags(e.target.value)}
                     />
-                  </Form.Group>
-
-                  <Form.Group as={Col} controlId="publishedAt">
-                    <Form.Label>Published At</Form.Label>
-                    <Form.Control
+                  </div>
+                  <div className="col">
+                    <label className="form-label">Published At</label>
+                    <input
                       type="date"
+                      className="form-control"
                       value={publishedAt}
                       onChange={(e) => setPublishedAt(e.target.value)}
                     />
-                  </Form.Group>
-                </Row>
+                  </div>
+                </div>
 
-                <Form.Group className="mb-3" controlId="image">
-                  <Form.Label>Image <span className="text-danger">*</span></Form.Label>
-                  <Form.Control
+                <div className="mb-3">
+                  <label className="form-label">
+                    Image <span className="text-danger">*</span>
+                  </label>
+                  <input
                     type="file"
+                    className="form-control"
                     accept="image/*"
                     onChange={(e) => setImage(e.target.files[0])}
                     required
                   />
-                </Form.Group>
+                </div>
 
                 <div className="d-grid mt-3">
-                  <Button variant="primary" type="submit" disabled={loading}>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={loading}
+                  >
                     {loading ? "Submitting..." : "Submit"}
-                  </Button>
+                  </button>
                 </div>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
