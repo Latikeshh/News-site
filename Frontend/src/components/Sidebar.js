@@ -6,9 +6,8 @@ import axios from 'axios';
 const Sidebar = () => {
   const scrollRef = useRef(null);
   const [news, setNews] = useState([]);
-  const [displayNews, setDisplayNews] = useState([]);
 
-  // Fetch news from backend
+  // Fetch news
   useEffect(() => {
     let mounted = true;
     axios.get('http://localhost:8000/findnews')
@@ -16,76 +15,58 @@ const Sidebar = () => {
         if (!mounted) return;
         const items = res.data?.data || [];
         setNews(items);
-        setDisplayNews(items);
       })
       .catch(err => console.error('Sidebar fetch error:', err));
     return () => { mounted = false; };
   }, []);
 
-  // Auto scroll effect - runs after displayNews changes (and after duplication if needed)
+  // Auto-scroll logic (seamless loop)
   useEffect(() => {
-    if (!displayNews.length) return;
+    if (!news.length) return;
     const container = scrollRef.current;
     if (!container) return;
 
-    let intervalId = null;
-    let handleMouseEnter;
-    let handleMouseLeave;
+    // जर content कमी असेल तर scroll करू नको
+    if (container.scrollHeight <= container.clientHeight) return;
 
-    const timer = setTimeout(() => {
-      // If content is not tall enough to scroll, duplicate once (so we can loop smoothly)
-      // Only duplicate once (i.e. when displayNews length equals original news length)
-      if (
-        container.scrollHeight <= container.clientHeight &&
-        displayNews.length === news.length &&
-        news.length > 0
-      ) {
-        setDisplayNews(prev => [...prev]); // duplicate items once
-        return; // effect will re-run because displayNews changed
-      }
+    let isPaused = false;
+    const handleMouseEnter = () => { isPaused = true; };
+    const handleMouseLeave = () => { isPaused = false; };
 
-      let scrollAmount = 0;
-      let isPaused = false;
+    container.addEventListener('mouseenter', handleMouseEnter);
+    container.addEventListener('mouseleave', handleMouseLeave);
 
-      // If we've duplicated the list, singleHeight should be half the scrollHeight (original block)
-      const singleHeight = displayNews.length > news.length ? container.scrollHeight / 2 : container.scrollHeight;
+    const intervalId = setInterval(() => {
+      if (!isPaused) {
+        container.scrollTop += 1;
 
-      handleMouseEnter = () => { isPaused = true; };
-      handleMouseLeave = () => { isPaused = false; };
-
-      container.addEventListener('mouseenter', handleMouseEnter);
-      container.addEventListener('mouseleave', handleMouseLeave);
-
-      intervalId = setInterval(() => {
-        if (!isPaused && container) {
-          scrollAmount += 1;
-          if (scrollAmount >= singleHeight) {
-            scrollAmount = 0;
-          }
-          container.scrollTop = scrollAmount;
+        // जर पहिली list पूर्ण स्क्रोल झाली तर पहिल्या duplicate वर ने
+        if (container.scrollTop >= container.scrollHeight / 2) {
+          container.scrollTop = 0;
         }
-      }, 35);
-    }, 60); // small delay to allow layout to settle
+      }
+    }, 35);
 
     return () => {
-      clearTimeout(timer);
-      if (intervalId) clearInterval(intervalId);
-      if (handleMouseEnter) container.removeEventListener('mouseenter', handleMouseEnter);
-      if (handleMouseLeave) container.removeEventListener('mouseleave', handleMouseLeave);
+      clearInterval(intervalId);
+      container.removeEventListener('mouseenter', handleMouseEnter);
+      container.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [displayNews, news]);
+  }, [news]);
+
+  // duplicate list तयार seamless loop साठी
+  const doubledNews = [...news];
 
   return (
     <aside className="side-news">
       <div className="fixed-video">
         <video autoPlay loop muted playsInline>
           <source src={videoFile} type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
       </div>
 
       <div className="scrollable-news" ref={scrollRef}>
-        {displayNews.map((item, i) => (
+        {doubledNews.map((item, i) => (
           <div className="news-item" key={`${item._id || i}-${i}`}>
             <h5 className="news-title">📰 {item.title || 'Untitled'}</h5>
             <p className="news-date">

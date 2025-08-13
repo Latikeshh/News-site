@@ -1,25 +1,29 @@
-div.card1{
+/* Card Container */
+div.card1 { 
     border-left: 4px solid #ff4d4d !important;
     display: flex;
     gap: 1.2rem;
-    height: 150px   !important;
+    height: 180px !important;
     padding: 1.2rem !important;
     border-radius: 12px !important;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(8px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: fadeInUp 0.8s ease;
-    border-radius: 12px!important;
-    padding: 1rem!important;
+    padding: 1rem !important;
+    overflow: hidden; /* Prevent overflow issues */
 }
 
 .news-card1 {
     background-color: #0c0909;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 1.25rem;
-    /* matches rounded-4 */
+    color: #ffffff !important;
+    display: flex;
+    align-items: flex-start;
 }
 
+/* Hover Effect */
 .news-card1:hover {
     transform: translateY(-6px);
     box-shadow: 0 10px 24px rgba(13, 110, 253, 0.2);
@@ -28,7 +32,9 @@ div.card1{
 /* Image Wrapper */
 .news-img-wrapper {
     overflow: hidden;
-    aspect-ratio: 16 / 9;
+    height: 100px;
+    width: 150px;
+    flex-shrink: 0;
 }
 
 /* News Image */
@@ -38,6 +44,7 @@ div.card1{
     object-fit: cover;
     border-radius: 8px;
     margin-right: 1rem;
+    transition: transform 0.3s ease;
 }
 
 .news-card1:hover .news-image1 {
@@ -50,13 +57,23 @@ div.card1{
     padding: 6px 12px;
     border-radius: 0.75rem;
     background-color: #0d6efd;
+    color: #ffffff;
+}
+
+/* Text Container (prevents overlap) */
+.news-text-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0; /* Important for ellipsis */
 }
 
 /* Card Title */
 .news-card1 .card-title1 {
     font-size: 1.05rem;
     margin-bottom: 0.5rem;
-    color:white;
+    color: #ffffff !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -65,8 +82,20 @@ div.card1{
 /* Card Text */
 .news-card1 .card-text1 {
     font-size: 0.875rem;
-    color: rgba(201, 74, 74, 0.75) !important;
+    color: #ffffff !important;
     line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* limit lines */
+    -webkit-box-orient: vertical;
+}
+
+/* Date Text */
+.news-card1 .date1 {
+    font-size: 0.8rem;
+    color: #ffffff !important;
+    opacity: 0.85;
 }
 
 /* Read More Button */
@@ -74,13 +103,14 @@ div.card1{
     font-weight: 500;
     font-size: 0.85rem;
     border: 1px solid #0d6efd;
-    color: #0d6efd;
+    color: #ffffff;
     padding: 6px 16px;
     transition: all 0.3s ease;
+    background-color: transparent;
 }
 
 .news-card1 .btn:hover {
     background-color: #0d6efd;
-    color: white;
+    color: #ffffff;
     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
 }

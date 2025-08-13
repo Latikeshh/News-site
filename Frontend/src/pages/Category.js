@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import newsData from '../data/newsData';
 import NewsCard from '../components/NewsCard';
 import './Category.css';
 import Sidebar from '../components/Sidebar';
@@ -9,6 +10,15 @@ const Category = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+   const [newsData, setNews] = useState([]);
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+      axios.get('http://localhost:8000/findnews')
+        .then(res => setNews(res.data.data || []))
+        .catch(err => console.error(err));
+    }, []);
 
   const { category } = useParams();
   const formattedCategory = category?.toLowerCase();
