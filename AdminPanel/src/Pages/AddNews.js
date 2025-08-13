@@ -10,7 +10,7 @@ import axios from "axios";
 
 const AddNews = () => {
   const navigate = useNavigate();
-
+const baseUrl = "http://localhost:8000/registeration";
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [content, setContent] = useState("");

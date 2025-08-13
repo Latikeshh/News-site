@@ -1,9 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 import './Navbar.css';
 
 const Navbar = () => {
   const [selectedDate, setSelectedDate] = useState('');
+  const [categories, setCategories] = useState([]);
+
+  // Fetch categories from backend
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/category') // Backend URL for categories
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((err) => {
+        console.error('Error fetching categories:', err);
+      });
+  }, []);
 
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
@@ -19,10 +33,15 @@ const Navbar = () => {
 
       <nav className="nav-links">
         <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>Home</NavLink>
-        <NavLink to="/category/World" className={({ isActive }) => isActive ? "active-link" : ""}>World</NavLink>
-        <NavLink to="/category/politics" className={({ isActive }) => isActive ? "active-link" : ""}>Politics</NavLink>
-        <NavLink to="/category/business" className={({ isActive }) => isActive ? "active-link" : ""}>Business</NavLink>
-        <NavLink to="/category/bollywood" className={({ isActive }) => isActive ? "active-link" : ""}>Bollywood</NavLink>
+        {categories.map((cat) => (
+          <NavLink
+            key={cat._id}
+            to={`/category/${cat.name}`}
+            className={({ isActive }) => isActive ? "active-link" : ""}
+          >
+            {cat.name}
+          </NavLink>
+        ))}
         <NavLink to="/about" className={({ isActive }) => isActive ? "active-link" : ""}>About</NavLink>
         <NavLink to="/contact" className={({ isActive }) => isActive ? "active-link" : ""}>Contact</NavLink>
       </nav>
