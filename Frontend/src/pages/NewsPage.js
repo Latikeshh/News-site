@@ -44,7 +44,7 @@ const NewsPage = () => {
                       ? new Date(article.publishedAt).toLocaleDateString('en-GB')
                       : 'Unknown date'}
                   </p>
-                  <p className="news-snippet">{article.content || 'No content available'}</p>
+                  {/* <p className="news-snippet">{article.content || 'No content available'}</p> */}
                 </div>
               </div>
             );
