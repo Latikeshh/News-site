@@ -11,7 +11,6 @@ import SettingsPage from './components/SettingsPage';
 import InformationPage from './components/InformationPage';
 import Login from './components/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import View from './Pages/View';
 import NewsForm from './Pages/NewsForm';
 import Update from './Pages/Update';
 
