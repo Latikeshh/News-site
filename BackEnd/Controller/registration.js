@@ -1,20 +1,18 @@
 const registerModel = require('../Model/registration_model');
 
 const register = async (req, res) => {
-    const { email, password } = req.body;
+    const { name, email, password, role } = req.body;
     try {
         let user = await registerModel.findOne({ email });
         if (user) {
-            return res.status(400).json({ msg: "User already exists" });
+            return res.status(400).json({ msg: "Email already exists" });
         }
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
         user = new registerModel({
+            name,
             email,
-            password: hashedPassword,
+            password, // plain text (NOT secure)
+            role
         });
-
         await user.save();
         res.json({ msg: "User Registered Successfully", user });
     } catch (error) {
@@ -31,12 +29,12 @@ const login = async (req, res) => {
             return res.status(400).json({ msg: "Invalid email credentials" });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
+        // Plain text password check
+        if (password !== user.password) {
             return res.status(400).json({ msg: "Invalid password credentials" });
         }
 
-        res.json({ message: "Login successful" });
+        res.json({ message: "Login successful", user });
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Server Error");
@@ -45,12 +43,11 @@ const login = async (req, res) => {
 
 const getuser = async (req, res) => {
     try {
-        const data = await registerModel.find()
-        res.status(200).send({ data })
+        const data = await registerModel.find();
+        res.status(200).json(data); // return array directly
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
-    catch (err) {
-        res.status(400).send({ error: error.message })
-    }
-}
+};
 
 module.exports = { login, register, getuser };

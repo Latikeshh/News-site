@@ -63,7 +63,7 @@ const Dashboard = () => {
         <h2>Dashboard Overview</h2>
         <button
           className="add-news-btn"
-          onClick={() => navigate('/create-news')}
+          onClick={() => navigate('/addNews')}
         >
           + Add News
         </button>
