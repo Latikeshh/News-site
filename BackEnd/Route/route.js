@@ -10,6 +10,8 @@ route.post('/register-news', photoUpload,usercontrollars.adduser)
 
 route.get('/findnews', usercontrollars.getuser)
 
+route.get('/findCategory', usercontrollars.getCategory)
+
 route.put('/updatedata/:_id', photoUpload,usercontrollars.updateuser)
 
 route.delete('/deleteuser/:_id', usercontrollars.deleteuser)

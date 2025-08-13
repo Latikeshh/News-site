@@ -1,0 +1,24 @@
+/* update.css */
+.update-container {
+    margin-left: 220px; /* Matches your sidebar width */
+    padding: 20px;
+    max-width: 900px;
+}
+
+.update-form {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.update-form h2 {
+    margin-bottom: 20px;
+}
+
+.update-form input,
+.update-form textarea,
+.update-form button {
+    width: 100%;
+    margin-bottom: 15px;
+}

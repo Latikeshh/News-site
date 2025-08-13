@@ -1,37 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { Card,Container,Row,Col } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import Sumago from './Sumago.jpg'
 
-function Usestate(){
+function Usestate() {
     const [text, setText] = useState('red');
     // const [demo, setDemo] = useState('red');
     const [card, setCard] = useState({
-          title:'Sumago Infotech',
-          para:'Infotechs cloud-based software solutions for construction management, inspection, and bidding help owner-agencies maximize efficiency, accuracy, and collaboration on civil infrastructure projects',
-      });
-      const [page,setPage]=useState(
-      '1.Kalyani 2.Manasi 3.Devangi 4.Priti'
-      );
-     const [count,setCount] = useState(2)
-     useEffect(() => {
+        title: 'Sumago Infotech',
+        para: 'Infotechs cloud-based software solutions for construction management, inspection, and bidding help owner-agencies maximize efficiency, accuracy, and collaboration on civil infrastructure projects',
+    });
+    const [page, setPage] = useState(
+        '1. 2. 3. 4.'
+    );
+    const [count, setCount] = useState(2)
+    useEffect(() => {
         setTimeout(() => {
-             setCount((count) => count * 2 )
-         },100)
-     })
-    const [demo,setDemo]=useState('My Group Members')
-    const [first,setFirst]=useState( {title:'Sumago Infotech'})
+            setCount((count) => count * 2)
+        }, 100)
+    })
+    const [demo, setDemo] = useState('My Group Members')
+    const [first, setFirst] = useState({ title: 'Sumago Infotech' })
     return (
         <>
-             <h1>Count is - {count}</h1>
+            <h1>Count is - {count}</h1>
             <h1>{text}</h1>
             <h2>{demo}</h2>
             <button type="button" onClick={() => setDemo('Onclick Value')}>Click Here</button>
-             <h1>{card.title}</h1>
+            <h1>{card.title}</h1>
             <h4>{card.para}</h4>
 
             <h3>{page}</h3>
             <button type="button" onClick={() => setPage('1.Dia 2.Monishka 3.Tanishka 4.Mayuri')}>Click Here</button>
-              <Container>
+            <Container>
                 <Row>
                     <Col md={4}>
 
@@ -51,7 +51,7 @@ function Usestate(){
                 </Row>
             </Container>
             <br></br>
-             <Container>
+            <Container>
                 <Row>
                     <Col md={4}>
 
@@ -70,7 +70,7 @@ function Usestate(){
                     </Col>
                 </Row>
             </Container>
-            
+
 
         </>
     )

@@ -37,7 +37,7 @@ const ViewNews = () => {
 
   return (
     <Container>
-      <Row className="vh-100 d-flex justify-content-center align-items-center">
+      <Row className="vh-130 d-flex justify-content-center align-items-center">
         <Col md={10} lg={8} xs={12}>
           <Card className="shadow view-news-card">
             {newsData.image && (
@@ -50,18 +50,15 @@ const ViewNews = () => {
               </div>
             )}
             <Card.Body>
-              <h2 className="fw-bold mb-4 text-uppercase">View News</h2>
-
-              <p><strong>Title:</strong> {newsData.title}</p>
-              <p><strong>Slug:</strong> {newsData.slug}</p>
-              <p><strong>Content:</strong> {newsData.content}</p>
-              <p><strong>Author:</strong> {newsData.author}</p>
-              <p><strong>Category:</strong> {newsData.category}</p>
-              <p><strong>Tags:</strong> {newsData.tags}</p>
-              <p><strong>Published At:</strong> {newsData.publishedAt
+              <h2 className="fw-bold mb-4 text-uppercase">{newsData.title}</h2>
+              <p>Published At: {newsData.publishedAt
                 ? new Date(newsData.publishedAt).toLocaleDateString('en-GB')
                 : 'Not available'}
               </p>
+              <p>{newsData.content}</p>
+              <p> {newsData.author}</p>
+              <p> {newsData.category}</p>
+              <p>Tags: {newsData.tags}</p>
             </Card.Body>
           </Card>
         </Col>

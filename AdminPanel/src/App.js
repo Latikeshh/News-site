@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import TopNavbar from './components/Navbar';
-import Dashboard1 from './Pages/Dashboard1';
+import Dashboard from './components/Dashboard';
 import ArticlesPage from './components/ArticlesPage';
 import CategoriesPage from './components/CategoriesPage';
 import UsersPage from './components/UsersPage';
@@ -11,7 +11,6 @@ import SettingsPage from './components/SettingsPage';
 import InformationPage from './components/InformationPage';
 import Login from './components/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import View from './Pages/View';
 import NewsForm from './Pages/NewsForm';
 import Update from './Pages/Update';
 
@@ -58,7 +57,7 @@ function App() {
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard1 />
+              <Dashboard />
             </PrivateRoute>
           }
         />
@@ -68,7 +67,7 @@ function App() {
           path="/articles"
           element={
             <PrivateRoute>
-              <View />
+              <ArticlesPage />
             </PrivateRoute>
           }
         />

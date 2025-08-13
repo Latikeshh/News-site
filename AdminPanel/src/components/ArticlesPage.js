@@ -1,34 +1,40 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import Table from 'react-bootstrap/Table';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import "./ArticlesPage.css";
 
 const ArticlesPage = () => {
-  const [articles, setArticles] = useState([]);
+  const [userData, setUserData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    loadArticles();
+    showUsers();
   }, []);
 
-  const loadArticles = async () => {
-    try {
-      const res = await axios.get("http://localhost:8000/getNews");
-      setArticles(res.data.data || []);
-    } catch (err) {
-      console.error("Error fetching news:", err);
-    }
+  const showUsers = () => {
+    axios.get('http://localhost:8000/findnews')
+      .then(res => {
+        setUserData(res.data.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
-  const handleDelete = async (_id) => {
-    if (window.confirm("Are you sure you want to delete this article?")) {
-      try {
-        await axios.put(`http://localhost:8000/deleteNews/${_id}`);
-        loadArticles();
-      } catch (err) {
-        console.error("Delete failed:", err);
-      }
-    }
+  const deletedata = (id) => {
+    axios.delete(`http://localhost:8000/deleteuser/${id}`)
+      .then(res => {
+        console.log('User Deleted:', res.data);
+        alert('User Deleted');
+        showUsers();
+      })
+      .catch(error => {
+        console.error('Error Deleting User:', error);
+      });
   };
 
   return (
@@ -49,14 +55,14 @@ const ArticlesPage = () => {
           </tr>
         </thead>
         <tbody>
-          {articles.length === 0 ? (
+          {userData.length === 0 ? (
             <tr>
               <td colSpan="6" className="empty-msg">
                 No articles found
               </td>
             </tr>
           ) : (
-            articles.map((art, index) => (
+            userData.map((art, index) => (
               <tr key={art._id}>
                 <td>{index + 1}</td>
                 <td>{art.title}</td>
@@ -69,20 +75,16 @@ const ArticlesPage = () => {
                 </td>
                 <td>
                   <button
-                    className="btn-info"
-                    onClick={() => navigate(`/articles/${art._id}`)}
-                  >
-                    👁 View
-                  </button>
-                  <button
                     className="btn-warning"
-                    onClick={() => navigate(`/articles/${art._id}/edit`)}
+                   onClick={() => {
+                          navigate(`/update/${art._id}`)
+                        }}
                   >
                     ✏ Edit
                   </button>
                   <button
                     className="btn-danger"
-                    onClick={() => handleDelete(art._id)}
+                    onClick={() => deletedata(art._id)}
                   >
                     🗑 Delete
                   </button>

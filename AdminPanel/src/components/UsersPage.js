@@ -1,27 +1,39 @@
 // src/components/UsersPage.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Button, Container, Badge, Modal, Form } from 'react-bootstrap';
+import axios from 'axios';
+
+const baseUrl = "http://localhost:8000/registeration";
 
 const UsersPage = () => {
-  const [users, setUsers] = useState([
-    { id: 1, name: 'Admin User', email: 'admin@example.com', role: 'Admin' },
-    { id: 2, name: 'Editor One', email: 'editor@example.com', role: 'Editor' },
-    { id: 3, name: 'Admin User1', email: 'admin@example.com', role: 'Admin' },
-  ]);
-
+  const [users, setUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
-  const [formData, setFormData] = useState({ name: '', email: '', role: 'Editor' });
+  const [formData, setFormData] = useState({ name: '', email: '', password:'' ,role: 'Editor' });
+
+  // Fetch all users on mount
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get(`${baseUrl}/users`);
+      setUsers(res.data); // Assuming backend sends an array of users
+    } catch (err) {
+      console.error("Error fetching users:", err);
+    }
+  };
 
   const handleShowAddModal = () => {
     setEditingUser(null);
-    setFormData({ name: '', email: '', role: 'Editor' });
+    setFormData({ name: '', email: '', password: '', role: 'Editor' });
     setShowModal(true);
   };
 
   const handleShowEditModal = (user) => {
     setEditingUser(user);
-    setFormData({ name: user.name, email: user.email, role: user.role });
+    setFormData({ name: user.name, email: user.email, password: user.password, role: user.role });
     setShowModal(true);
   };
 
@@ -35,26 +47,30 @@ const UsersPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSaveUser = () => {
-    if (editingUser) {
-      setUsers((prevUsers) =>
-        prevUsers.map((u) =>
-          u.id === editingUser.id ? { ...u, ...formData } : u
-        )
-      );
-    } else {
-      const newUser = {
-        id: users.length + 1,
-        ...formData,
-      };
-      setUsers((prevUsers) => [...prevUsers, newUser]);
+  const handleSaveUser = async () => {
+    try {
+      if (editingUser) {
+        // Update existing user
+        await axios.put(`${baseUrl}/users/${editingUser._id}`, formData);
+      } else {
+        // Add new user
+        await axios.post(`${baseUrl}/register`, formData);
+      }
+      fetchUsers();
+      handleCloseModal();
+    } catch (err) {
+      console.error("Error saving user:", err);
     }
-    handleCloseModal();
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
-      setUsers((prevUsers) => prevUsers.filter((u) => u.id !== id));
+      try {
+        await axios.delete(`${baseUrl}/users/${id}`);
+        fetchUsers();
+      } catch (err) {
+        console.error("Error deleting user:", err);
+      }
     }
   };
 
@@ -72,12 +88,13 @@ const UsersPage = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Password</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr key={user.id}>
+            <tr key={user._id}>
               <td>{index + 1}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
@@ -86,6 +103,7 @@ const UsersPage = () => {
                   {user.role}
                 </Badge>
               </td>
+              <td>{user.password}</td>
               <td>
                 <Button
                   variant="warning"
@@ -98,7 +116,7 @@ const UsersPage = () => {
                 <Button
                   variant="danger"
                   size="sm"
-                  onClick={() => handleDelete(user.id)}
+                  onClick={() => handleDelete(user._id)}
                 >
                   Delete
                 </Button>
@@ -132,6 +150,16 @@ const UsersPage = () => {
                 placeholder="Enter email"
                 name="email"
                 value={formData.email}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter password"
+                name="email"
+                value={formData.password}
                 onChange={handleChange}
               />
             </Form.Group>

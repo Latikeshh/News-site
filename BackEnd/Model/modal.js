@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
     title: { type: String, required: true, maxlength: 200 },
-    slug: { type: String, unique: true, index: true },
+   slug: { type: String, required: true, unique: true },
     content: { type: String, required: true },
     author: { type: String, default: 'Anonymous' },
     category: { type: String, default: 'General', index: true },
