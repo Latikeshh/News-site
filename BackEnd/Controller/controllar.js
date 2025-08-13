@@ -34,6 +34,20 @@ const getuser = async (req, res) => {
     }
 }
 
+const getCategory = async (req, res) => {
+    try {
+        const categories = await usermodal.aggregate([
+            { $match: { isDeleted: false } },
+            { $group: { _id: "$category", count: { $sum: 1 } } },
+            { $sort: { _id: 1 } } // sort alphabetically
+        ]);
+        res.status(200).send(categories);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+}
+
 const updateuser = async (req, res) => {
     const { title, slug, content, author, category, tags, publishedAt, isDeleted, image } = req.body
 
@@ -98,4 +112,4 @@ const getdataOnebyid = async (req, res) => {
     }
 }
 
-module.exports = { adduser, getuser, updateuser, deleteuser, getdataOnebyid }
+module.exports = { adduser, getuser, updateuser, deleteuser, getdataOnebyid, getCategory }
