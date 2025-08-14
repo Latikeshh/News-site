@@ -23,7 +23,7 @@ const NewsPage = () => {
   };
 
   const handleViewMore = () => {
-    navigate('/world'); // world news page
+    navigate('/category/world'); // world news page
   };
 
   return (
