@@ -1,5 +1,5 @@
 .news-scroll-area {
-  padding: 20px;
+  padding: 20px !important;
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -56,7 +56,7 @@
 }
 
 /* Content Section */
-.news-card-content {
+.news-content {
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -67,11 +67,13 @@
 .news-title {
   font-size: 22px;
   font-weight: bold;
+  margin-top: 17px;
+  margin-left: 25px;
   color: #f4ebeb;
 }
 
 /* Description */
-.news-card-desc {
+.news-desc {
   font-size: 16px;
   color: #ccc;
   line-height: 1.6;
@@ -80,6 +82,7 @@
 /* Meta Info */
 .news-meta {
   font-size: 14px;
+  margin-left: 25px;
   color: #aaa;
 }
 
@@ -96,8 +99,61 @@
 }
 
 /* Empty Message */
-.dash-empty-message {
+.dash-message {
   text-align: center;
   color: #999;
   padding: 50px 0;
+}
+
+.news-row1 {
+    display: flex;
+    gap: 1.2rem;
+    height: 250px; /* थोडी जास्त उंची */
+    padding: 1.4rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    animation: fadeInUp 0.8s ease;
+    cursor: pointer;
+}
+
+/* Hover effect - glow + lift */
+.news-row1:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(255, 59, 59, 0.5); /* Red glow outline */
+    box-shadow: 0 8px 25px rgba(255, 59, 59, 0.4);
+}
+
+/* Optional subtle inner shine */
+.news-row1::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.06), transparent);
+    pointer-events: none;
+}
+
+/* Fade-in-up animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.news-thumbnail1 {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
 }

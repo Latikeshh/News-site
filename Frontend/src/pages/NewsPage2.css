@@ -1,0 +1,102 @@
+.news-scroll-area2 {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.section-heading2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff3b3b;
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.section-heading2::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff3b3b, transparent);
+}
+
+/* Grid Layout for Cards */
+.news-feed2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* News Card Style */
+.news-row2 {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  animation: fadeInUp 0.8s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Hover Effect */
+.news-row2:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(255, 59, 59, 0.5);
+  box-shadow: 0 8px 25px rgba(255, 59, 59, 0.4);
+}
+
+/* Image (Top) */
+.news-thumbnail2 {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* Content Below Image */
+.news-inline2 {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Title */
+.news-title2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Date */
+.news-meta2 {
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Empty Message */
+.dash-empty-message2 {
+  text-align: center;
+  color: #999;
+  padding: 50px 0;
+}

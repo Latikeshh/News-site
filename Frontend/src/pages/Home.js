@@ -4,6 +4,8 @@ import mainImage from '../components/img/cosmonaut-5142852.jpg';
 import mainImage1 from '../components/img/cosmonaut-5142852.jpg';
 import Sidebar from '../components/Sidebar';
 import NewsPage from './NewsPage';
+import NewsPage2 from './NewsPage2';
+
 
 const NewsGrid = () => {
   const scrollRef = useRef(null);
@@ -51,6 +53,10 @@ const NewsGrid = () => {
           <Sidebar />
         </div>
       </div>
+
+      <div className="main-content-scrolll">
+          <NewsPage2 />
+        </div>
     </>
   );
 };
