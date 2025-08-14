@@ -13,6 +13,7 @@ import Login from './components/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NewsForm from './Pages/NewsForm';
 import Update from './Pages/Update';
+import BreakingNews from './Pages/BreakingNews';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -68,6 +69,15 @@ function App() {
           element={
             <PrivateRoute>
               <ArticlesPage />
+            </PrivateRoute>
+          }
+        />
+         {/* Breaking News adding area */}
+         <Route
+          path="/breakingNews"
+          element={
+            <PrivateRoute>
+              <BreakingNews />
             </PrivateRoute>
           }
         />

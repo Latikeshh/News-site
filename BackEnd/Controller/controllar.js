@@ -33,7 +33,14 @@ const getuser = async (req, res) => {
         res.status(400).send({ error: err.message })
     }
 }
-
+const getAllUsersAdmin = async (req, res) => {
+    try {
+        const data = await usermodal.find(); // no filter
+        res.status(200).send({ data });
+    } catch (err) {
+        res.status(400).send({ error: err.message });
+    }
+};
 const getCategory = async (req, res) => {
     try {
         const categories = await usermodal.aggregate([
@@ -103,6 +110,25 @@ const deleteuser = async (req, res) => {
     }
 };
 
+// Recover soft-deleted user
+const recoverUser = async (req, res) => {
+    try {
+        const data = await usermodal.updateOne(
+            { _id: req.params._id },
+            { $set: { isDeleted: false } }
+        );
+
+        if (data.modifiedCount > 0) {
+            res.status(200).send({ message: "User recovered successfully" });
+        } else {
+            res.status(404).send({ message: "User not found or already active" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(400).send({ error: error.message });
+    }
+};
+
 const getdataOnebyid = async (req, res) => {
     try {
         const userData = await usermodal.findOne({ _id: req.params._id, isDeleted: false })
@@ -112,4 +138,4 @@ const getdataOnebyid = async (req, res) => {
     }
 }
 
-module.exports = { adduser, getuser, updateuser, deleteuser, getdataOnebyid, getCategory }
+module.exports = {recoverUser, adduser, getuser, updateuser, deleteuser, getdataOnebyid, getCategory, getAllUsersAdmin }

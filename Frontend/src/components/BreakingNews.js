@@ -1,23 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './BreakingNews.css';
 
 const BreakingNews = () => {
   const [visible, setVisible] = useState(true);
+  const [headlines, setHeadlines] = useState([]);
 
-  if (!visible) return null;
+  useEffect(() => {
+  fetchBreakingNews(); // initial load
+
+  const interval = setInterval(fetchBreakingNews, 2000); // every 5 sec
+  return () => clearInterval(interval); // cleanup
+}, []);
+
+  const fetchBreakingNews = async () => {
+    try {
+      const res = await axios.get('http://localhost:8000/headline/getbreaking');
+
+      // Check if backend sends array directly or inside .data
+      const newsArray = Array.isArray(res.data)
+        ? res.data
+        : Array.isArray(res.data.data)
+        ? res.data.data
+        : [];
+
+      setHeadlines(newsArray);
+    } catch (error) {
+      console.error('Error fetching breaking news', error);
+    }
+  };
+
+  if (!visible || headlines.length === 0) return null;
 
   return (
-    
     <div className="breaking-news-bar">
       <div className="breaking-label">
         <span className="dot"></span>
         <strong>Breaking:</strong>
       </div>
       <marquee scrollamount="6" className="breaking-text">
-        PM announces new education policy | Sensex crosses 70,000 mark | India defeats Australia in T20 | Chandrayaan-4 to launch in 2026 🚀 | Tech Expo 2025 opens in Mumbai
+        {headlines.map((item) => item.breaking).join(' | ')}
       </marquee>
     </div>
-    
   );
 };
 

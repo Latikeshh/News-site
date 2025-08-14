@@ -34,6 +34,10 @@ app.use('/registeration', registrationRoute);
 const categoryRoute = require('./Route/categoryRoutes');
 app.use('/', categoryRoute);
 
+// ✅ New category route
+const breakingRoute = require('./Route/breakRoute');
+app.use('/headline/', breakingRoute);
+
 app.listen(8000, () => {
   console.log("running on localhost 8000");
 })
