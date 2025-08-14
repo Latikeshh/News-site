@@ -21,6 +21,7 @@ const Dashboard = () => {
 
   const cardData = [
     { title: 'Total Articles', text: '0', type: 'articles' },
+    { title: 'BreakingNews', text: '8', type: 'categories' },
     { title: 'Categories', text: '8', type: 'categories' },
     { title: 'Information', text: 'About Site', type: 'information' },
     { title: 'Settings', text: 'Admin Settings', type: 'settings' },

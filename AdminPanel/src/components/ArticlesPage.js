@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import Table from 'react-bootstrap/Table';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "./ArticlesPage.css";
@@ -16,24 +12,36 @@ const ArticlesPage = () => {
   }, []);
 
   const showUsers = () => {
-    axios.get('http://localhost:8000/findnews')
+    axios.get('http://localhost:8000/adminnews')
       .then(res => {
         setUserData(res.data.data);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   };
 
+  // Soft delete (set isDeleted: true)
   const deletedata = (id) => {
-    axios.delete(`http://localhost:8000/deleteuser/${id}`)
+    axios.put(`http://localhost:8000/deleteuser/${id}`)
       .then(res => {
-        console.log('User Deleted:', res.data);
-        alert('User Deleted');
+        alert(res.data.message);
         showUsers();
       })
       .catch(error => {
         console.error('Error Deleting User:', error);
+      });
+  };
+
+  // Recover deleted item (set isDeleted: false)
+  const recoverUser = (id) => {
+    axios.put(`http://localhost:8000/recoveruser/${id}`)
+      .then(res => {
+        alert(res.data.message);
+        showUsers();
+      })
+      .catch(error => {
+        console.error('Error Recovering User:', error);
       });
   };
 
@@ -51,13 +59,14 @@ const ArticlesPage = () => {
             <th>Author</th>
             <th>Category</th>
             <th>Published</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {userData.length === 0 ? (
             <tr>
-              <td colSpan="6" className="empty-msg">
+              <td colSpan="7" className="empty-msg">
                 No articles found
               </td>
             </tr>
@@ -74,20 +83,35 @@ const ArticlesPage = () => {
                     : "—"}
                 </td>
                 <td>
+                  {art.isDeleted ? (
+                    <span style={{ color: "red" }}>Deleted</span>
+                  ) : (
+                    <span style={{ color: "green" }}>Not Deleted</span>
+                  )}
+                </td>
+                <td>
                   <button
                     className="btn-warning"
-                   onClick={() => {
-                          navigate(`/update/${art._id}`)
-                        }}
+                    onClick={() => navigate(`/update/${art._id}`)}
+                    disabled={art.isDeleted}
                   >
                     ✏ Edit
                   </button>
-                  <button
-                    className="btn-danger"
-                    onClick={() => deletedata(art._id)}
-                  >
-                    🗑 Delete
-                  </button>
+                  {art.isDeleted ? (
+                    <button
+                      className="btn-success"
+                      onClick={() => recoverUser(art._id)}
+                    >
+                      ♻ Recover
+                    </button>
+                  ) : (
+                    <button
+                      className="btn-danger"
+                      onClick={() => deletedata(art._id)}
+                    >
+                      🗑 Delete
+                    </button>
+                  )}
                 </td>
               </tr>
             ))

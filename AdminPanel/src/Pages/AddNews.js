@@ -139,7 +139,7 @@ const AddNews = () => {
                       onChange={(e) => setAuthor(e.target.value)}
                     />
                   </div>
-                  <div className="col">
+                  <div className="mb-3">
                     <label className="form-label">
                       Category <span className="text-danger">*</span>
                     </label>
@@ -147,16 +147,20 @@ const AddNews = () => {
                       className="form-select"
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
-                      required
-                    >
+                      required >
                       <option value="">Select category</option>
-                      {categoriesList.map((cat) => (
-                        <option key={cat._id} value={cat.name}>
-                          {cat.name}
-                        </option>
-                      ))}
+                      {categoriesList.length > 0 ? (
+                        categoriesList.map((cat) => (
+                          <option key={cat._id} value={cat.name}>
+                            {cat.name}
+                          </option>
+                        ))
+                      ) : (
+                        <option disabled>Loading categories...</option>
+                      )}
                     </select>
                   </div>
+
                 </div>
 
                 <div className="row mb-3">

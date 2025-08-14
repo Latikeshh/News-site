@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -20,13 +20,19 @@ const NewsForm = () => {
   const [publishedAt, setPublishedAt] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const [categoriesList, setCategoriesList] = useState([]);
   // Handle tags input separated by commas, convert to array
   const handleTagsChange = (e) => {
     const input = e.target.value;
     const tagsArray = input.split(",").map((tag) => tag.trim()).filter(tag => tag.length > 0);
     setTags(tagsArray);
   };
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/category")
+      .then((res) => setCategoriesList(res.data))
+      .catch((err) => console.error("Error fetching categories:", err));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -133,7 +139,7 @@ const NewsForm = () => {
                     />
                   </Form.Group>
 
-                  <Form.Group as={Col} controlId="Category" className="mb-3">
+                  {/* <Form.Group as={Col} controlId="Category" className="mb-3">
                     <Form.Label>Category</Form.Label>
                     <Form.Control
                       type="text"
@@ -141,7 +147,28 @@ const NewsForm = () => {
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                     />
-                  </Form.Group>
+                  </Form.Group> */}
+                   <div className="mb-3">
+                    <label className="form-label">
+                      Category <span className="text-danger">*</span>
+                    </label>
+                    <select
+                      className="form-select"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      required >
+                      <option value="">Select category</option>
+                      {categoriesList.length > 0 ? (
+                        categoriesList.map((cat) => (
+                          <option key={cat._id} value={cat.name}>
+                            {cat.name}
+                          </option>
+                        ))
+                      ) : (
+                        <option disabled>Loading categories...</option>
+                      )}
+                    </select>
+                  </div>
                 </Row>
 
                 <Form.Group className="mb-3" controlId="Tags">
