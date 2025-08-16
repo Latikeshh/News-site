@@ -28,10 +28,17 @@ const NewsForm = () => {
     setTags(tagsArray);
   };
   useEffect(() => {
+    // Fetch categories
     axios
       .get("http://localhost:8000/category")
       .then((res) => setCategoriesList(res.data))
       .catch((err) => console.error("Error fetching categories:", err));
+
+    // Set author from localStorage
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setAuthor(storedUsername);
+    }
   }, []);
 
   const handleSubmit = async (e) => {
@@ -127,28 +134,23 @@ const NewsForm = () => {
                     onChange={(e) => setContent(e.target.value)}
                   />
                 </Form.Group>
-
                 <Row>
                   <Form.Group as={Col} controlId="Author" className="mb-3">
                     <Form.Label>Author</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Author name (optional)"
+                      placeholder="Author name"
                       value={author}
-                      onChange={(e) => setAuthor(e.target.value)}
+                      disabled
+                      onClick={() => {
+                        const role = localStorage.getItem("role");
+                        if (role === "editor") {
+                          alert("You are an editor. Author name is auto-filled and cannot be changed.");
+                        }
+                      }}
                     />
                   </Form.Group>
-
-                  {/* <Form.Group as={Col} controlId="Category" className="mb-3">
-                    <Form.Label>Category</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Category (default: General)"
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                    />
-                  </Form.Group> */}
-                   <div className="mb-3">
+                  <div className="mb-3">
                     <label className="form-label">
                       Category <span className="text-danger">*</span>
                     </label>

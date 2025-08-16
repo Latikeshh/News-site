@@ -6,7 +6,7 @@ app.use(express.json())
 
 const mongoose = require("mongoose")
 mongoose.connect("mongodb://localhost:27017/News-site")
-  .then(() => console.log("connected 2 mongodb"))
+  .then(() => console.log("Connected 2 MongoDB"))
   .catch((err) => console.log(err))
 
 // server upload images
@@ -39,5 +39,5 @@ const breakingRoute = require('./Route/breakRoute');
 app.use('/headline/', breakingRoute);
 
 app.listen(8000, () => {
-  console.log("running on localhost 8000");
+  console.log("Running on localhost 8000");
 })

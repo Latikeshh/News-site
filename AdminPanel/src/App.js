@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 import Sidebar from './components/Sidebar';
 import TopNavbar from './components/Navbar';
 import Dashboard from './components/Dashboard';
@@ -10,10 +11,18 @@ import NotificationsPage from './components/NotificationsPage';
 import SettingsPage from './components/SettingsPage';
 import InformationPage from './components/InformationPage';
 import Login from './components/Login';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import NewsForm from './Pages/NewsForm';
 import Update from './Pages/Update';
 import BreakingNews from './Pages/BreakingNews';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const Layout = ({ children }) => (
+  <div className="main-layout">
+    <Sidebar />
+    <TopNavbar />
+    <div className="main-content">{children}</div>
+  </div>
+);
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,11 +34,14 @@ function App() {
     }
   }, []);
 
-  const handleLoginSuccess = () => {
-    localStorage.setItem('loggedIn', 'true');
-    setIsLoggedIn(true);
-  };
-
+const handleLoginSuccess = (user) => {
+  localStorage.setItem("loggedIn", "true");
+  localStorage.setItem("username", user.name);
+  localStorage.setItem("email", user.email);
+  localStorage.setItem("role", user.role);
+  setIsLoggedIn(true);
+};
+ 
   const handleLogout = () => {
     localStorage.removeItem('loggedIn');
     setIsLoggedIn(false);
@@ -41,110 +53,144 @@ function App() {
 
   return (
     <Router>
-      {isLoggedIn && <Sidebar onLogout={handleLogout} />}
-      {isLoggedIn && <TopNavbar onLogout={handleLogout} />}
-
       <Routes>
-        {/* Public login route */}
+        {/* Login Route */}
         <Route
           path="/login"
           element={
-            isLoggedIn ? <Navigate to="/dashboard" /> : <Login onLogin={handleLoginSuccess} />
+            isLoggedIn ? <Navigate to="/dashboard" /> : <Login setIsLoggedIn={setIsLoggedIn} />
           }
         />
 
-        {/* Dashboard */}
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
+        {/* Authenticated Routes */}
+        {isLoggedIn && (
+          <>
+            <Route
+              path="/"
+              element={
+                <Layout>
+                  <div className="text-center p-5">Welcome to the Home Page</div>
+                </Layout>
+              }
+            />
 
-        {/* Articles list */}
-        <Route
-          path="/articles"
-          element={
-            <PrivateRoute>
-              <ArticlesPage />
-            </PrivateRoute>
-          }
-        />
-         {/* Breaking News adding area */}
-         <Route
-          path="/breakingNews"
-          element={
-            <PrivateRoute>
-              <BreakingNews />
-            </PrivateRoute>
-          }
-        />
-        {/* Single article view/edit (from ArticlesPage) */}
-        <Route
-          path="/update/:_id"
-          element={
-            <PrivateRoute>
-              <Update />
-            </PrivateRoute>
-          }
-        />
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Layout>
+                    <Dashboard />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
 
-        {/* Add news */}
-        <Route
-          path="/addNews"
-          element={
-            <PrivateRoute>
-              <NewsForm />
-            </PrivateRoute>
-          }
-        />
+            <Route
+              path="/articles"
+              element={
+                <PrivateRoute>
+                  <Layout>
+                    <ArticlesPage />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
 
-        {/* Other pages */}
-        <Route
-          path="/categories"
-          element={
-            <PrivateRoute>
-              <CategoriesPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/users"
-          element={
-            <PrivateRoute>
-              <UsersPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/notifications"
-          element={
-            <PrivateRoute>
-              <NotificationsPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <PrivateRoute>
-              <SettingsPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/information"
-          element={
-            <PrivateRoute>
-              <InformationPage />
-            </PrivateRoute>
-          }
-        />
+            <Route
+              path="/breakingNews"
+              element={
+                <PrivateRoute>
+                  <Layout>
+                    <BreakingNews />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} />} />
+            <Route
+              path="/update/:_id"
+              element={
+                <PrivateRoute>
+                  <Layout>
+                    <Update />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/addNews"
+              element={
+                <PrivateRoute>
+                  <Layout>
+                    <NewsForm />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/categories"
+              element={
+                <PrivateRoute>
+                  <Layout>
+                    <CategoriesPage />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/users"
+              element={
+                <PrivateRoute>
+                  <Layout>
+                    <UsersPage />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/notifications"
+              element={
+                <PrivateRoute>
+                  <Layout>
+                    <NotificationsPage />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/settings"
+              element={
+                <PrivateRoute>
+                  <Layout>
+                    <SettingsPage />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/information"
+              element={
+                <PrivateRoute>
+                  <Layout>
+                    <InformationPage />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
+          </>
+        )}
+
+        {/* Catch-all Redirect */}
+        <Route
+          path="*"
+          element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} replace />}
+        />
       </Routes>
     </Router>
   );

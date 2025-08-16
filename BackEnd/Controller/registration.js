@@ -34,7 +34,15 @@ const login = async (req, res) => {
             return res.status(400).json({ msg: "Invalid password credentials" });
         }
 
-        res.json({ message: "Login successful", user });
+        res.json({
+            message: "Login successful",
+            user: {
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
+        });
+
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Server Error");

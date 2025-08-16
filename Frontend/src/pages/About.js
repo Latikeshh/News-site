@@ -3,6 +3,7 @@ import './About.css';
 
 
 export default function CharityLandingPage() {
+  
   return (
     <div className="landing-page">
       <div className="hero-section">

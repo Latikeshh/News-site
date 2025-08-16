@@ -1,50 +1,85 @@
-// src/components/Login.js
-import React, { useState } from 'react';
-import './AdminLogin.css'; // Reuse your existing CSS
+import React, { useState } from "react";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import { Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Login = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+const Login = ({ setIsLoggedIn }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  // Set valid credentials
-  const validEmail = 'admin@example.com';
-  const validPassword = 'admin123';
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email === validEmail && password === validPassword) {
-      localStorage.setItem('loggedIn', 'true'); // Store login state
-      onLogin();
-    } else {
-      setError('Invalid email or password');
+    if (!email || !password) return;
+    try {
+      const response = await axios.post("http://localhost:8000/registeration/login", {
+        email,
+        password,
+      });
+      const { user } = response.data;
+      // ✅ Store user data in localStorage
+      localStorage.setItem("loggedIn", "true");
+      localStorage.setItem("username", user.name); // name (full)
+      localStorage.setItem("email", user.email);   // email
+      localStorage.setItem("role", user.role);     // role (admin/editor/etc.)
+
+      setIsLoggedIn(user); // only if you change the function signature
+
+
+      navigate("/dashboard");
+    } catch (err) {
+      alert(err.response?.data?.msg || "Login failed");
     }
   };
 
   return (
-    <div className="admin-login-container">
-      <h2>Admin Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Username"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="admin-input"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="admin-input"
-          required
-        />
-        <button type="submit" className="admin-button">Login</button>
-        {error && <p className="error-message">{error}</p>}
-      </form>
-    </div>
+    <Container>
+      <Row className="vh-100 d-flex justify-content-center align-items-center">
+        <Col md={10} lg={8} xs={12}>
+          <div className="border border-3 border-primary"></div>
+          <Card className="shadow">
+            <Card.Body>
+              <div className="mb-3 mt-4">
+                <h2 className="fw-bold mb-2 text-uppercase">Sign In</h2>
+                <p className="mb-5">Please enter your details to join us!</p>
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group className="mb-3" controlId="formEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="formPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <div className="d-grid mb-2">
+                    <Button variant="primary" type="submit">
+                      Sign In
+                    </Button>
+                  </div>
+                </Form>
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
