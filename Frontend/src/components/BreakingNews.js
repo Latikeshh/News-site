@@ -9,7 +9,7 @@ const BreakingNews = () => {
   useEffect(() => {
   fetchBreakingNews(); // initial load
 
-  const interval = setInterval(fetchBreakingNews, 2000); // every 5 sec
+  const interval = setInterval(fetchBreakingNews, 2000); // every 2 sec
   return () => clearInterval(interval); // cleanup
 }, []);
 
