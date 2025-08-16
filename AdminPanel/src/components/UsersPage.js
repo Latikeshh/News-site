@@ -156,9 +156,9 @@ const UsersPage = () => {
             <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
                 placeholder="Enter password"
-                name="email"
+                name="password"
                 value={formData.password}
                 onChange={handleChange}
               />
