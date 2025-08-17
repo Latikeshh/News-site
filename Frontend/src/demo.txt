@@ -1,2 +1,153 @@
-ghvhgvjhgh
-hhggg
+I see a few potential issues in your code that might be causing the form fields not to work properly, specifically around the **Password** field and the **Button** not functioning as expected. Let's go through them one by one:
+
+### 1. **Password Input Field Issue**
+
+You're currently using `name="email"` for the password field, which is incorrect. The password input should have `name="password"`, not `name="email"`. This could be why the password field isn't updating when you try to type in it.
+
+### Fix:
+
+Change the `name="email"` in the password input to `name="password"`:
+
+```jsx
+<Form.Group className="mb-3">
+  <Form.Label>Password</Form.Label>
+  <Form.Control
+    type="password"
+    placeholder="Enter password"
+    name="password"   {/* Corrected here */}
+    value={formData.password}
+    onChange={handleChange}
+  />
+</Form.Group>
+```
+
+---
+
+### 2. **Button Not Working (Submit Issue)**
+
+The issue might be due to the **Button onClick** not properly triggering the `handleSaveUser` function, which is responsible for adding or updating users. Ensure that the button is inside the modal and is correctly linked to the save function.
+
+### 3. **Ensure Proper Button Type**
+
+Make sure that your submit button within the modal has the correct type to trigger the form submission (if that's how you're handling the submission). While it's not required to set `type="submit"` on a `<Button>`, it can be useful for triggering the form's `onSubmit` behavior.
+
+### Fix:
+
+Ensure that your save button has an `onClick` handler that directly triggers the `handleSaveUser` function:
+
+```jsx
+<Modal.Footer>
+  <Button variant="secondary" onClick={handleCloseModal}>
+    Cancel
+  </Button>
+  <Button variant="primary" onClick={handleSaveUser}>
+    {editingUser ? 'Update' : 'Add'}
+  </Button>
+</Modal.Footer>
+```
+
+---
+
+### 4. **Password Visibility Issue**
+
+If the issue is related to not being able to see the password you typed, change the `type="email"` to `type="password"`. The `type="email"` will mask the text, so switching it to `type="password"` will allow you to see the typed text.
+
+### Fix:
+
+```jsx
+<Form.Group className="mb-3">
+  <Form.Label>Password</Form.Label>
+  <Form.Control
+    type="password"  {/* Corrected here */}
+    placeholder="Enter password"
+    name="password"  {/* Corrected name here */}
+    value={formData.password}
+    onChange={handleChange}
+  />
+</Form.Group>
+```
+
+---
+
+### 5. **Check for Input Type Compatibility**
+
+Make sure all the inputs are correctly typed, especially for `email`, `name`, and `role`. You seem to have the proper setup, but ensure the correct state value is being updated properly.
+
+---
+
+### Final Changes in the Modal Section
+
+Here's the updated part of the form (focused on the password issue and correct button actions):
+
+```jsx
+<Modal.Body>
+  <Form>
+    <Form.Group className="mb-3">
+      <Form.Label>Name</Form.Label>
+      <Form.Control
+        type="text"
+        placeholder="Enter name"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+      />
+    </Form.Group>
+
+    <Form.Group className="mb-3">
+      <Form.Label>Email</Form.Label>
+      <Form.Control
+        type="email"
+        placeholder="Enter email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+    </Form.Group>
+
+    <Form.Group className="mb-3">
+      <Form.Label>Password</Form.Label>
+      <Form.Control
+        type="password"  {/* Corrected to password */}
+        placeholder="Enter password"
+        name="password"   {/* Corrected to password */}
+        value={formData.password}
+        onChange={handleChange}
+      />
+    </Form.Group>
+
+    <Form.Group>
+      <Form.Label>Role</Form.Label>
+      <Form.Select
+        name="role"
+        value={formData.role}
+        onChange={handleChange}
+      >
+        <option>Admin</option>
+        <option>Editor</option>
+      </Form.Select>
+    </Form.Group>
+  </Form>
+</Modal.Body>
+
+<Modal.Footer>
+  <Button variant="secondary" onClick={handleCloseModal}>
+    Cancel
+  </Button>
+  <Button variant="primary" onClick={handleSaveUser}>
+    {editingUser ? 'Update' : 'Add'}
+  </Button>
+</Modal.Footer>
+```
+
+---
+
+### Summary of Fixes:
+
+1. Correct the `name` field for the **Password** input field to `"password"`.
+2. Ensure the button in the modal triggers `handleSaveUser` correctly.
+3. Change `type="email"` to `type="password"` for the password field to display the correct input behavior.
+4. Ensure the form `onSubmit` works correctly by passing the right button actions.
+
+After making these changes, your **form fields should work** correctly, including the password field, and the **Save Button** should trigger the appropriate API request to add or update users.
+
+Let me know if there’s anything else you want to improve!
