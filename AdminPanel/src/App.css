@@ -1,44 +1,127 @@
-.App {
-  text-align: center;
+/* ===================== */
+/* 🌙 Permanent Dark Theme */
+/* ===================== */
+
+body {
+  background-color: #121212 !important;
+  color: #e4e4e4 !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main-layout,
+.main-content {
+  background-color: #1e1e1e !important;
+  color: #e4e4e4 !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Sidebar */
+.sidebar {
+  background-color: #181818 !important;
+  border-right: 1px solid #333 !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.sidebar a {
+  color: #e4e4e4 !important;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar a:hover {
+  background-color: #333 !important;
 }
 
-.clickable-card:hover {
-  transform: scale(1.02);
-  transition: transform 0.2s ease;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+/* Top Navbar */
+.navbar {
+  background-color: #181818 !important;
+  border-bottom: 1px solid #333 !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar .nav-link,
+.navbar-brand {
+  color: #e4e4e4 !important;
+}
+
+/* Cards / Containers */
+.card {
+  background-color: #222 !important;
+  border: 1px solid #333 !important;
+  color: #e4e4e4 !important;
+}
+
+.table {
+  background-color: #1e1e1e !important;
+  color: #e4e4e4 !important;
+}
+
+.table th,
+.table td {
+  border-color: #333 !important;
+}
+
+/* Inputs & Buttons */
+input,
+textarea,
+select {
+  background-color: #2a2a2a !important;
+  color: #e4e4e4 !important;
+  border: 1px solid #444 !important;
+}
+
+button {
+  background-color: #333 !important;
+  color: #e4e4e4 !important;
+  border: 1px solid #444 !important;
+}
+
+button:hover {
+  background-color: #444 !important;
+}
+
+/*external*/
+/* Fix white backgrounds in containers, rows, and sections */
+.container,
+.container-fluid,
+.row,
+.col,
+section,
+.content,
+.page-content {
+  background-color: #121212 !important;
+  color: #e4e4e4 !important;
+}
+
+/* Fix Bootstrap default bg-white utilities */
+.bg-white {
+  background-color: #121212 !important;
+}
+
+/* Tables with striping */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #1a1a1a !important;
+}
+
+/* Modals / Popups */
+.modal-content {
+  background-color: #1e1e1e !important;
+  color: #e4e4e4 !important;
+  border: 1px solid #333 !important;
+}
+
+/* Dropdowns */
+.dropdown-menu {
+  background-color: #1e1e1e !important;
+  color: #e4e4e4 !important;
+  border: 1px solid #333 !important;
+}
+
+.dropdown-item {
+  color: #e4e4e4 !important;
+}
+
+.dropdown-item:hover {
+  background-color: #333 !important;
+}
+
+/* Alerts */
+.alert {
+  background-color: #1e1e1e !important;
+  color: #e4e4e4 !important;
+  border: 1px solid #444 !important;
 }

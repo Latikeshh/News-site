@@ -49,6 +49,12 @@ const ArticlesPage = () => {
     <div className="articles-container">
       <div className="articles-header">
         <h2>Articles</h2>
+        <button
+          className="add-news-btn"
+          onClick={() => navigate('/addNews')}
+        >
+          + Add News
+        </button>
       </div>
 
       <table className="articles-table">

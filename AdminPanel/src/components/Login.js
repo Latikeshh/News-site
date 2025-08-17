@@ -8,7 +8,7 @@ import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -28,12 +28,11 @@ const Login = ({ setIsLoggedIn }) => {
       localStorage.setItem("email", user.email);   // email
       localStorage.setItem("role", user.role);     // role (admin/editor/etc.)
 
-      setIsLoggedIn(user); // only if you change the function signature
-
+      onLoginSuccess(user); // only if you change the function signature
 
       navigate("/dashboard");
     } catch (err) {
-      alert(err.response?.data?.msg || "Login failed");
+      alert(err.message);
     }
   };
 

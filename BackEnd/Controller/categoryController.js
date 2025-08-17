@@ -1,4 +1,5 @@
 const Category = require('../Model/categoryModel');
+const News = require('../Model/modal');
 
 // Get all categories (only non-deleted)
 exports.getCategories = async (req, res) => {
@@ -24,12 +25,31 @@ exports.addCategory = async (req, res) => {
   }
 };
 
-// Update category
+// Update category + update News category field
 exports.updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
-    const updated = await Category.findByIdAndUpdate(id, { name }, { new: true });
+
+    // find old category first
+    const oldCategory = await Category.findById(id);
+    if (!oldCategory) return res.status(404).json({ error: 'Category not found' });
+
+    // update category
+    const updated = await Category.findByIdAndUpdate(
+      id,
+      { name },
+      { new: true }
+    );
+
+    if (updated) {
+      // update all news that used old category name
+      await News.updateMany(
+        { category: oldCategory.name },
+        { $set: { category: name } }
+      );
+    }
+
     res.json(updated);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

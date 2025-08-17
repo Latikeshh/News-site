@@ -11,7 +11,6 @@ const UsersPage = () => {
   const [editingUser, setEditingUser] = useState(null);
   const [formData, setFormData] = useState({ name: '', email: '', password:'' ,role: 'Editor' });
 
-  // Fetch all users on mount
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -19,7 +18,7 @@ const UsersPage = () => {
   const fetchUsers = async () => {
     try {
       const res = await axios.get(`${baseUrl}/users`);
-      setUsers(res.data); // Assuming backend sends an array of users
+      setUsers(res.data);
     } catch (err) {
       console.error("Error fetching users:", err);
     }
@@ -50,10 +49,8 @@ const UsersPage = () => {
   const handleSaveUser = async () => {
     try {
       if (editingUser) {
-        // Update existing user
         await axios.put(`${baseUrl}/users/${editingUser._id}`, formData);
       } else {
-        // Add new user
         await axios.post(`${baseUrl}/register`, formData);
       }
       fetchUsers();
@@ -89,6 +86,7 @@ const UsersPage = () => {
             <th>Email</th>
             <th>Role</th>
             <th>Password</th>
+            <th>Status</th> {/* 👈 New column */}
             <th>Actions</th>
           </tr>
         </thead>
@@ -104,6 +102,13 @@ const UsersPage = () => {
                 </Badge>
               </td>
               <td>{user.password}</td>
+              <td>
+                {user.isDeleted ? (
+                  <Badge bg="danger">Deleted</Badge>
+                ) : (
+                  <Badge bg="success">Active</Badge>
+                )}
+              </td>
               <td>
                 <Button
                   variant="warning"
@@ -156,9 +161,9 @@ const UsersPage = () => {
             <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
                 placeholder="Enter password"
-                name="email"
+                name="password"
                 value={formData.password}
                 onChange={handleChange}
               />
