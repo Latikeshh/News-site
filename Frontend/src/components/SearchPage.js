@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SearchPage.css';
 
 const SearchPage = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const { search } = useLocation();
   const query = new URLSearchParams(search).get("q");
+  const handleClick = (id) => {
+    navigate(`/news/${id}`);
+  };
 
   useEffect(() => {
     if (query) {
@@ -34,7 +39,8 @@ const SearchPage = () => {
       ) : results.length > 0 ? (
         <div className="news-list">
           {results.map((news) => (
-            <div key={news._id} className="news-card">
+            <div key={news._id} className="news-card"
+              onClick={() => handleClick(news._id)}>
               {news.image && (
                 <img className="news-image" src={`http://localhost:8000/${news.image}`} alt={news.title} />
               )}

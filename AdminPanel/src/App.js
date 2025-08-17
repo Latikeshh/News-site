@@ -158,7 +158,6 @@ function App() {
                 </PrivateRoute>
               }
             />
-
             <Route
               path="/addNews"
               element={

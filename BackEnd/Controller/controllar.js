@@ -167,7 +167,8 @@ const searchNews = async (req, res) => {
             $or: [
                 { title: { $regex: q, $options: "i" } },     // case-insensitive title match
                 { tags: { $regex: q, $options: "i" } },      // search in tags
-                { category: { $regex: q, $options: "i" } }   // search in category
+                { category: { $regex: q, $options: "i" } },   // search in category
+                { author: { $regex: q, $options: "i" } } 
             ]
         }).sort({ publishedAt: -1 }); // latest first
 
@@ -199,6 +200,22 @@ const getNewsByDate = async (req, res) => {
     }
 };
 
+const getNewsByAuthor = async (req, res) => {
+    try {
+        const { author } = req.query; // author name passed as query param
+        if (!author) return res.status(400).send({ message: "Author is required" });
+
+        const data = await usermodal.find({
+            author: { $regex: author, $options: "i" }, // case-insensitive match
+            isDeleted: false
+        }).sort({ publishedAt: -1 }); // latest first
+
+        res.status(200).send({ data });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({ error: "Server Error" });
+    }
+};
 module.exports = {
     recoverUser,
     adduser,
@@ -210,5 +227,6 @@ module.exports = {
     getAllUsersAdmin,
     getNewsByCategory,
     getNewsByDate,
-    searchNews
+    searchNews,
+    getNewsByAuthor
 };
