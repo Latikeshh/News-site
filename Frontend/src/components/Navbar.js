@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Navbar.css';
 
 const Navbar = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [categories, setCategories] = useState([]);
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -15,19 +17,26 @@ const Navbar = () => {
   }, []);
 
   const handleDateChange = (e) => {
-    setSelectedDate(e.target.value);
-    console.log('Selected Date:', e.target.value);
+    const date = e.target.value;
+    setSelectedDate(date);
+    if (date) {
+      navigate(`/news/date/${date}`); // navigate to the new page
+    }
+  };
+
+  const handleSearch = () => {
+    if (search.trim()) {
+      navigate(`/search?q=${search}`);
+    }
   };
 
   return (
     <header className="header">
-      {/* Logo */}
       <div className="logo">
         <span role="img" aria-label="news">📰</span>
         <span className="logo-text">Talk Bharat</span>
       </div>
 
-      {/* Scrollable nav items in same line */}
       <nav className="nav-links category-scroll">
         <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>Home</NavLink>
         {categories.map((cat) => (
@@ -43,11 +52,16 @@ const Navbar = () => {
         <NavLink to="/contact" className={({ isActive }) => isActive ? "active-link" : ""}>Contact</NavLink>
       </nav>
 
-      {/* Right side tools */}
       <div className="header-right">
         <div className="search-bar">
-          <input type="text" placeholder="Search news..." />
-          <button>🔍</button>
+          <input
+            type="text"
+            placeholder="Search news..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+          />
+          <button onClick={handleSearch}>🔍</button>
         </div>
         <div className="date-picker">
           <input

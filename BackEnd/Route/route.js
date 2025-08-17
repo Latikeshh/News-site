@@ -24,4 +24,9 @@ route.get('/get/:_id', usercontrollars.getdataOnebyid)
 
 route.get('/news-by-category', usercontrollars.getNewsByCategory);
 
+route.get('/searchNews', usercontrollars.searchNews);
+
+// routes file
+route.get('/news-by-date', usercontrollars.getNewsByDate);
+
 module.exports = route

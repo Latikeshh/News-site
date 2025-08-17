@@ -12,6 +12,7 @@ import Help from './pages/Help';
 import World from './pages/World';
 import Journey from './pages/Journey';
 import Learn from './pages/Learn';
+import SearchPage from './components/SearchPage';
 
 const App = () => {
   return (
@@ -32,6 +33,14 @@ const App = () => {
             <Navbar />
             <BreakingNews />
             <Category />
+            <Footer />
+          </>
+        } />
+        <Route path="/search" element={
+          <>
+            <Navbar />
+            <BreakingNews />
+            <SearchPage />
             <Footer />
           </>
         } />

@@ -4,7 +4,7 @@ const registrSchema = new mongoose.Schema({
     name: String,
     email: { type: String, unique: true },
     password: String,
-    role: { type: String, default: "user" },
+    role: { type: String, default: "editor" },
     isDeleted: { type: Boolean, default: false } // <-- must exist
 });
 
