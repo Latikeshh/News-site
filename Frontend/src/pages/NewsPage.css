@@ -27,7 +27,7 @@
 /* Grid Layout for Cards */
 .news-feed {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* ✅ प्रत्येक row मध्ये 2 cards */
   gap: 20px;
 }
 
@@ -67,23 +67,24 @@
 .news-title {
   font-size: 22px;
   font-weight: bold;
-  margin-top: 17px;
-  margin-left: 25px;
-  color: #f4ebeb;
+  color: #fff;
+  margin-bottom: 8px;   /* ✅ Title खाली gap */
 }
+
 
 /* Description */
 .news-desc {
   font-size: 16px;
   color: #ccc;
   line-height: 1.6;
+  margin: 0;
 }
 
 /* Meta Info */
 .news-meta {
   font-size: 14px;
-  margin-left: 25px;
-  color: #aaa;
+  color: #ccc;
+  margin-top: 5px;      /* ✅ Meta वर gap */
 }
 
 /* Read More Link */
@@ -108,7 +109,8 @@
 .news-row1 {
     display: flex;
     gap: 1.2rem;
-    height: 250px; /* थोडी जास्त उंची */
+    align-items: center;   /* ✅ image + text center align */
+    height: auto;          /* ✅ fixed height काढला */
     padding: 1.4rem;
     border-radius: 16px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
@@ -118,6 +120,7 @@
     transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     animation: fadeInUp 0.8s ease;
     cursor: pointer;
+    position: relative;
 }
 
 /* Hover effect - glow + lift */
@@ -156,4 +159,5 @@
     object-fit: cover;
     border-radius: 8px;
     transition: transform 0.3s ease;
+    flex-shrink: 0; /* ✅ image shrink होणार नाही */
 }

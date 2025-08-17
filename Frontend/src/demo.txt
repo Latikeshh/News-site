@@ -141,6 +141,17 @@ Here's the updated part of the form (focused on the password issue and correct b
 
 ---
 
+<Modal.Footer>
+  <Button variant="secondary" onClick={handleCloseModal}>
+    Cancel
+  </Button>
+  <Button variant="primary" onClick={handleSaveUser}>
+    {editingUser ? 'Update' : 'Add'}
+  </Button>
+</Modal.Footer>
+```
+dfgjdgfhdhsghghxfgw
+
 ### Summary of Fixes:
 
 1. Correct the `name` field for the **Password** input field to `"password"`.

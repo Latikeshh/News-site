@@ -53,6 +53,7 @@ const ViewNews = () => {
       <div className="view-news-card">
         {newsData.image && (
           <div className="view-news-image-wrapper">
+            <h2 className="view-news-title">{newsData.title}</h2>
             <img
               src={`http://localhost:8000/${newsData.image}`}
               alt="News"
@@ -61,16 +62,15 @@ const ViewNews = () => {
           </div>
         )}
         <div className="view-news-body">
-          <h2 className="view-news-title">{newsData.title}</h2>
-          <p className="view-news-meta">
+          {/* <p className="view-news-meta">
             📅 {newsData.publishedAt
               ? new Date(newsData.publishedAt).toLocaleDateString('en-GB')
               : 'Not available'}
-          </p>
+          </p> */}
           <p className="view-news-content">{newsData.content}</p>
-          <p className="view-news-author">✍️ {newsData.author}</p>
+          {/* <p className="view-news-author">✍️ {newsData.author}</p>
           <p className="view-news-category">📂 {newsData.category}</p>
-          <p className="view-news-tags">🏷️ {newsData.tags}</p>
+          <p className="view-news-tags">🏷️ {newsData.tags}</p> */}
         </div>
       </div>
 
