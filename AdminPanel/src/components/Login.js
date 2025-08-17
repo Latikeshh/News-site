@@ -1,84 +1,66 @@
+// Login.js
 import React, { useState } from "react";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./AdminLogin.css"; // ✅ your CSS
 
 const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !password) return;
+    setError("");
+    if (!email || !password) {
+      setError("Both fields are required!");
+      return;
+    }
     try {
       const response = await axios.post("http://localhost:8000/registeration/login", {
         email,
         password,
       });
       const { user } = response.data;
+
       // ✅ Store user data in localStorage
       localStorage.setItem("loggedIn", "true");
-      localStorage.setItem("username", user.name); // name (full)
-      localStorage.setItem("email", user.email);   // email
-      localStorage.setItem("role", user.role);     // role (admin/editor/etc.)
+      localStorage.setItem("username", user.name);
+      localStorage.setItem("email", user.email);
+      localStorage.setItem("role", user.role);
 
-      onLoginSuccess(user); // only if you change the function signature
+      if (onLoginSuccess) onLoginSuccess(user);
 
       navigate("/dashboard");
     } catch (err) {
-      alert(err.message);
+      setError("Invalid credentials. Please try again.");
     }
   };
 
   return (
-    <Container>
-      <Row className="vh-100 d-flex justify-content-center align-items-center">
-        <Col md={10} lg={8} xs={12}>
-          <div className="border border-3 border-primary"></div>
-          <Card className="shadow">
-            <Card.Body>
-              <div className="mb-3 mt-4">
-                <h2 className="fw-bold mb-2 text-uppercase">Sign In</h2>
-                <p className="mb-5">Please enter your details to join us!</p>
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group className="mb-3" controlId="formEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="Enter email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </Form.Group>
+    <div className="admin-login-container">
+      <h2>Admin Sign In</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value.toLowerCase())}
+        />
 
-                  <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </Form.Group>
+        <input
+          type="password"
+          placeholder="Enter password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-                  <div className="d-grid mb-2">
-                    <Button variant="primary" type="submit">
-                      Sign In
-                    </Button>
-                  </div>
-                </Form>
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+        <button type="submit">Sign In</button>
+      </form>
+
+      {error && <p className="error-message">{error}</p>}
+    </div>
   );
 };
 

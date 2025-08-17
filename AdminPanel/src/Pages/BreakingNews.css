@@ -1,8 +1,157 @@
-.main-container {
-  margin-left: 220px;
+/* Container */
+.breakingnews-container {
+  max-width: 900px;
+  margin: 30px auto;
+  margin-left: 240px; /* ✅ pushes it away from left sidebar */
   padding: 20px;
+  background: #1e1e1e;
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
 }
 
-.table td, .table th {
-  vertical-align: middle;
+/* Title */
+.breakingnews-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #f5f5f5;
+}
+
+/* Add Box */
+.breakingnews-addbox {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.breakingnews-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 14px;
+  background: #2c2c2c;
+  color: #fff;
+}
+
+.breakingnews-input:focus {
+  outline: none;
+  border: 1px solid #007bff;
+}
+
+/* Buttons */
+.breakingnews-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: 0.3s ease;
+}
+
+.breakingnews-btn:hover {
+  opacity: 0.85;
+}
+
+.breakingnews-btn-add {
+  background: #007bff;
+  color: #fff;
+}
+
+.breakingnews-btn-edit {
+  background: #ffc107;
+  color: #000;
+}
+
+.breakingnews-btn-save {
+  background: #28a745;
+  color: #fff;
+}
+
+.breakingnews-btn-delete {
+  background: #dc3545;
+  color: #fff;
+}
+
+.breakingnews-btn-recover {
+  background: #17a2b8;
+  color: #fff;
+}
+
+.breakingnews-btn-cancel {
+  background: #6c757d;
+  color: #fff;
+}
+
+/* Table */
+.breakingnews-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #2b2b2b;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.breakingnews-table th,
+.breakingnews-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #444;
+  font-size: 14px;
+}
+
+.breakingnews-table th {
+  background: #333;
+  color: #f0f0f0;
+  font-weight: bold;
+}
+
+.breakingnews-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Input inside table */
+.breakingnews-input-edit {
+  width: 90%;
+  padding: 6px 8px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background: #1c1c1c;
+  color: #fff;
+}
+
+.breakingnews-input-edit:focus {
+  outline: none;
+  border: 1px solid #28a745;
+}
+
+/* Status Badges */
+.breakingnews-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.breakingnews-badge-green {
+  background: #28a745;
+  color: #fff;
+}
+
+.breakingnews-badge-red {
+  background: #dc3545;
+  color: #fff;
+}
+
+/* No data row */
+.breakingnews-nodata {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #aaa;
 }

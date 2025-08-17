@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import "./Update.css"; // Dark theme
+import "./Update.css"; // new glassy dark theme
 
 const Update = () => {
   const { _id } = useParams();
@@ -95,166 +95,125 @@ const Update = () => {
   };
 
   return (
-    <div className="container u-update">
-      <div className="row vh-100 d-flex justify-content-center align-items-center">
-        <div className="col-md-10 col-lg-8 col-12">
-          <div className="card shadow border-0">
-            <div className="card-body">
-              <h2 className="fw-bold mb-4">Update News</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="Title" className="form-label">
-                    Title
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="Title"
-                    placeholder="Enter news title"
-                    value={title}
-                    required
-                    maxLength={200}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </div>
+    <div className="update-container">
+      <div className="update-card">
+        <h2 className="update-title">Update News</h2>
+        <form onSubmit={handleSubmit} className="update-form">
+          <div className="update-field">
+            <label>Title</label>
+            <input
+              type="text"
+              placeholder="Enter news title"
+              value={title}
+              required
+              maxLength={200}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
 
-                <div className="mb-3">
-                  <label htmlFor="Slug" className="form-label">
-                    Slug
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="Slug"
-                    placeholder="Enter slug (unique)"
-                    value={slug}
-                    onChange={(e) => setSlug(e.target.value)}
-                  />
-                </div>
+          <div className="update-field">
+            <label>Slug</label>
+            <input
+              type="text"
+              placeholder="Enter slug (unique)"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+            />
+          </div>
 
-                <div className="mb-3">
-                  <label htmlFor="Content" className="form-label">
-                    Content
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="Content"
-                    rows="5"
-                    placeholder="Enter news content"
-                    value={content}
-                    required
-                    onChange={(e) => setContent(e.target.value)}
-                  />
-                </div>
+          <div className="update-field">
+            <label>Content</label>
+            <textarea
+              rows="5"
+              placeholder="Enter news content"
+              value={content}
+              required
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </div>
 
-                <div className="row">
-                  <div className="col mb-3">
-                    <label className="form-label">
-                      Author
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="Author"
-                      placeholder="Author name"
-                      value={author}
-                      disabled
-                      onClick={() => {
-                        const role = localStorage.getItem("role");
-                        if (role === "editor") {
-                          alert(
-                            "You are an editor. Author name is auto-filled and cannot be changed."
-                          );
-                        }
-                      }}
-                    />
-                  </div>
+          <div className="update-row">
+            <div className="update-field">
+              <label>Author</label>
+              <input
+                type="text"
+                value={author}
+                disabled
+                onClick={() => {
+                  const role = localStorage.getItem("role");
+                  if (role === "editor") {
+                    alert(
+                      "You are an editor. Author name is auto-filled and cannot be changed."
+                    );
+                  }
+                }}
+              />
+            </div>
 
-                  <div className="col mb-3">
-                    <label className="form-label">
-                      Category <span className="text-danger">*</span>
-                    </label>
-                    <select
-                      className="form-select"
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                      required
-                    >
-                      <option value="">Select category</option>
-                      {categoriesList.length > 0 ? (
-                        categoriesList.map((cat) => (
-                          <option key={cat._id} value={cat.name}>
-                            {cat.name}
-                          </option>
-                        ))
-                      ) : (
-                        <option disabled>Loading categories...</option>
-                      )}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor="Tags" className="form-label">
-                    Tags (comma separated)
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="Tags"
-                    placeholder="e.g. politics,world,tech"
-                    value={tags.join(", ")}
-                    onChange={handleTagsChange}
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor="PublishedAt" className="form-label">
-                    Publish Date
-                  </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    id="PublishedAt"
-                    value={publishedAt}
-                    onChange={(e) => setPublishedAt(e.target.value)}
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <label htmlFor="Image" className="form-label">
-                    Image
-                  </label>
-                  <input
-                    type="file"
-                    className="form-control"
-                    id="Image"
-                    accept="image/*"
-                    onChange={(e) => setImage(e.target.files[0])}
-                  />
-                  {image && typeof image === "string" && (
-                    <div className="mt-2">
-                      <img
-                        src={`http://localhost:8000/${image}`}
-                        alt="Preview"
-                        width="120"
-                        className="border rounded"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn btn-success"
-                  disabled={loading}
-                >
-                  {loading ? "Updating..." : "Update News"}
-                </button>
-              </form>
+            <div className="update-field">
+              <label>
+                Category <span className="required">*</span>
+              </label>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              >
+                <option value="">Select category</option>
+                {categoriesList.length > 0 ? (
+                  categoriesList.map((cat) => (
+                    <option key={cat._id} value={cat.name}>
+                      {cat.name}
+                    </option>
+                  ))
+                ) : (
+                  <option disabled>Loading categories...</option>
+                )}
+              </select>
             </div>
           </div>
-        </div>
+
+          <div className="update-field">
+            <label>Tags (comma separated)</label>
+            <input
+              type="text"
+              placeholder="e.g. politics,world,tech"
+              value={tags.join(", ")}
+              onChange={handleTagsChange}
+            />
+          </div>
+
+          <div className="update-field">
+            <label>Publish Date</label>
+            <input
+              type="date"
+              value={publishedAt}
+              onChange={(e) => setPublishedAt(e.target.value)}
+            />
+          </div>
+
+          <div className="update-field">
+            <label>Image</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+            {image && typeof image === "string" && (
+              <div className="update-preview">
+                <img
+                  src={`http://localhost:8000/${image}`}
+                  alt="Preview"
+                  width="120"
+                />
+              </div>
+            )}
+          </div>
+
+          <button type="submit" className="update-btn" disabled={loading}>
+            {loading ? "Updating..." : "Update News"}
+          </button>
+        </form>
       </div>
     </div>
   );

@@ -33,21 +33,21 @@ function App() {
   useEffect(() => {
     const loggedIn = localStorage.getItem("loggedIn");
     const storedRole = localStorage.getItem("role");
-
-    if (loggedIn === "true") {
+    if (loggedIn === "true" && storedRole) {
       setIsLoggedIn(true);
-      setRole(storedRole);
+      setRole(storedRole.toLowerCase()); // ✅ safe
     }
   }, []);
 
+
   const handleLoginSuccess = (user) => {
+    const normalizedRole = user.role.toLowerCase(); // ✅ always lowercase
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem("username", user.name);
     localStorage.setItem("email", user.email);
-    localStorage.setItem("role", user.role);
-
+    localStorage.setItem("role", normalizedRole);
     setIsLoggedIn(true);
-    setRole(user.role);
+    setRole(normalizedRole); // ✅ lowercase state
   };
 
   const handleLogout = () => {
@@ -63,7 +63,6 @@ function App() {
 
   const PrivateRoute = ({ children, allowedRoles }) => {
     if (!isLoggedIn) return <Navigate to="/login" />;
-
     if (allowedRoles && !allowedRoles.includes(role)) {
       return (
         <Layout onLogout={handleLogout}>
@@ -73,7 +72,6 @@ function App() {
         </Layout>
       );
     }
-
     return children;
   };
 
@@ -148,16 +146,7 @@ function App() {
               }
             />
             {/*/contacted*/}
-            <Route
-              path="/contacted"
-              element={
-                <PrivateRoute allowedRoles={["admin"]}>
-                  <Layout onLogout={handleLogout}>
-                    <ContactPage />
-                  </Layout>
-                </PrivateRoute>
-              }
-            />
+
             <Route
               path="/addNews"
               element={
@@ -179,11 +168,21 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="/contacted"
+              element={
+                <PrivateRoute allowedRoles={["admin"]}>   {/* ✅ lowercase */}
+                  <Layout onLogout={handleLogout}>
+                    <ContactPage />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
 
             <Route
               path="/users"
               element={
-                <PrivateRoute allowedRoles={["admin"]}>
+                <PrivateRoute allowedRoles={["admin"]}>   {/* ✅ lowercase */}
                   <Layout onLogout={handleLogout}>
                     <UsersPage />
                   </Layout>

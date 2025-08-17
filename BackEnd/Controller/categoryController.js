@@ -41,7 +41,6 @@ exports.updateCategory = async (req, res) => {
       { name },
       { new: true }
     );
-
     if (updated) {
       // update all news that used old category name
       await News.updateMany(
@@ -49,7 +48,6 @@ exports.updateCategory = async (req, res) => {
         { $set: { category: name } }
       );
     }
-
     res.json(updated);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -62,6 +60,32 @@ exports.deleteCategory = async (req, res) => {
     const { id } = req.params;
     await Category.findByIdAndUpdate(id, { isDeleted: true });
     res.json({ message: 'Category soft deleted' });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+// ✅ Get categories (both active + deleted) for Admin
+exports.getCategoriesForAdmin = async (req, res) => {
+  try {
+    // Fetch all categories, include both deleted and active
+    const categories = await Category.find().sort({ createdAt: -1 });
+    res.json(categories);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// ✅ Restore category
+exports.restoreCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const restored = await Category.findByIdAndUpdate(
+      id,
+      { isDeleted: false },
+      { new: true }
+    );
+    if (!restored) return res.status(404).json({ error: 'Category not found' });
+    res.json({ message: 'Category restored', category: restored });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
