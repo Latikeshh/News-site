@@ -26,6 +26,8 @@ route.get('/news-by-category', usercontrollars.getNewsByCategory);
 
 route.get('/searchNews', usercontrollars.searchNews);
 
+route.get('/authornews', usercontrollars.getNewsByAuthor);
+
 // routes file
 route.get('/news-by-date', usercontrollars.getNewsByDate);
 
