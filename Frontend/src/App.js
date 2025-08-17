@@ -13,6 +13,7 @@ import World from './pages/World';
 import Journey from './pages/Journey';
 import Learn from './pages/Learn';
 import SearchPage from './components/SearchPage';
+import DateNews from './components/DateNews';
 
 const App = () => {
   return (
@@ -41,6 +42,15 @@ const App = () => {
             <Navbar />
             <BreakingNews />
             <SearchPage />
+            <Footer />
+          </>
+        } />
+
+        <Route path="/news/date/:date" element={
+          <>
+            <Navbar />
+            <BreakingNews />
+            <DateNews />
             <Footer />
           </>
         } />
@@ -106,6 +116,7 @@ const App = () => {
             <Footer />
           </>
         } />
+        
       </Routes>
     </Router>
 
