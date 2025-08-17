@@ -230,3 +230,4 @@ module.exports = {
     searchNews,
     getNewsByAuthor
 };
+/*hiii */
