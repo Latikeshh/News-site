@@ -20,7 +20,7 @@ const Sidebar = () => {
     return () => { mounted = false; };
   }, []);
 
-  // Auto-scroll logic (seamless loop)
+  // Auto-scroll logic (continuous loop)
   useEffect(() => {
     if (!news.length) return;
     const container = scrollRef.current;
@@ -40,7 +40,7 @@ const Sidebar = () => {
       if (!isPaused) {
         container.scrollTop += 1;
 
-        // जर पहिली list पूर्ण स्क्रोल झाली तर पहिल्या duplicate वर ने
+        // जर पहिली list पूर्ण झाली तर परत 0 वर ने
         if (container.scrollTop >= container.scrollHeight / 2) {
           container.scrollTop = 0;
         }
@@ -54,8 +54,8 @@ const Sidebar = () => {
     };
   }, [news]);
 
-  // duplicate list तयार seamless loop साठी
-  const doubledNews = [...news];
+  // इथे list दोनदा render करतो seamless loop साठी
+  const doubledNews = [...news, ...news];
 
   return (
     <aside className="side-news">
