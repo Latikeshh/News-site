@@ -10,8 +10,6 @@ const Dashboard = () => {
       articles: '/articles',
       categories: '/categories',
       users: '/users',
-      media: '/media',
-      comments: '/comments',
       notifications: '/notifications',
       information: '/information',
       settings: '/settings'
@@ -23,6 +21,7 @@ const Dashboard = () => {
     { title: 'Total Articles', text: '0', type: 'articles' },
     { title: 'BreakingNews', text: '8', type: 'categories' },
     { title: 'Categories', text: '8', type: 'categories' },
+    { title: 'Contacted', text: 'Complaints', type: 'Contact forms' },
     { title: 'Information', text: 'About Site', type: 'information' },
     { title: 'Settings', text: 'Admin Settings', type: 'settings' },
   ];

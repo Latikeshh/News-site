@@ -38,6 +38,10 @@ app.use('/', categoryRoute);
 const breakingRoute = require('./Route/breakRoute');
 app.use('/headline/', breakingRoute);
 
+// ✅ New contact route
+const contactRoute = require('./Route/contactRoutes');
+app.use('/', contactRoute);
+
 app.listen(8000, () => {
   console.log("Running on localhost 8000");
 })

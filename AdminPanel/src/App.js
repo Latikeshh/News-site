@@ -14,7 +14,7 @@ import Login from "./components/Login";
 import NewsForm from "./Pages/NewsForm";
 import Update from "./Pages/Update";
 import BreakingNews from "./Pages/BreakingNews";
-
+import ContactPage from "./components/ContactPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // ✅ Layout now properly accepts `onLogout`
@@ -68,7 +68,7 @@ function App() {
       return (
         <Layout onLogout={handleLogout}>
           <div className="text-center p-5 text-danger">
-            🚫 Access Denied: You don’t have permission to view this page.
+            🚫 Access Denied: You don't have permission to view this page.
           </div>
         </Layout>
       );
@@ -143,6 +143,17 @@ function App() {
                 <PrivateRoute>
                   <Layout onLogout={handleLogout}>
                     <Update />
+                  </Layout>
+                </PrivateRoute>
+              }
+            />
+            {/*/contacted*/}
+            <Route
+              path="/contacted"
+              element={
+                <PrivateRoute allowedRoles={["admin"]}>
+                  <Layout onLogout={handleLogout}>
+                    <ContactPage />
                   </Layout>
                 </PrivateRoute>
               }

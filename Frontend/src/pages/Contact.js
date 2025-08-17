@@ -1,8 +1,33 @@
-import React from 'react';
-import './Contact.css'
-
+import React, { useState } from 'react';
+import './Contact.css';
+import axios from 'axios';
 
 const ContactPage = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    address: '',
+    message: ''
+  });
+  const [responseMsg, setResponseMsg] = useState('');
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('http://localhost:8000/storecontact', formData);
+      setResponseMsg(res.data.message);
+      setFormData({ name: '', email: '', address: '', message: '' }); // reset form
+    } catch (err) {
+      setResponseMsg(err.response?.data?.message || 'Error submitting form');
+    }
+  };
+
   return (
     <div className="contact-container">
       <div className="contact-left">
@@ -22,15 +47,44 @@ const ContactPage = () => {
       </div>
 
       <div className="contact-right">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-group">
-            <input type="email" placeholder="Enter your email address" required />
-            <input type="text" placeholder="Enter your name" required />
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email address"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
           </div>
-          <input type="text" placeholder="Enter your address" required />
-          <textarea placeholder="Enter your message" rows="4" required></textarea>
+          <input
+            type="text"
+            name="address"
+            placeholder="Enter your short address"
+            value={formData.address}
+            onChange={handleChange}
+            required
+          />
+          <textarea
+            name="message"
+            placeholder="Enter your message"
+            rows="4"
+            value={formData.message}
+            onChange={handleChange}
+            required
+          ></textarea>
           <button type="submit">SUBMIT</button>
         </form>
+        {responseMsg && <p className="response-msg">{responseMsg}</p>}
       </div>
     </div>
   );
