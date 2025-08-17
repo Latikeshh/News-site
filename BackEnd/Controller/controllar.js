@@ -138,4 +138,21 @@ const getdataOnebyid = async (req, res) => {
     }
 }
 
-module.exports = {recoverUser, adduser, getuser, updateuser, deleteuser, getdataOnebyid, getCategory, getAllUsersAdmin }
+const getNewsByCategory = async (req, res) => {
+    try {
+        const { category } = req.query; // category passed as query param
+        if (!category) {
+            return res.status(400).send({ message: "Category is required" });
+        }
+
+        const data = await usermodal.find({ category, isDeleted: false })
+            .sort({ publishedAt: -1 }); // latest first
+
+        res.status(200).send(data);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({ error: "Server Error" });
+    }
+};
+
+module.exports = {recoverUser, adduser, getuser, updateuser, deleteuser, getdataOnebyid, getCategory, getAllUsersAdmin, getNewsByCategory }

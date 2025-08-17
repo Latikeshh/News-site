@@ -22,4 +22,6 @@ route.put('/recoveruser/:_id', usercontrollars.recoverUser)
 
 route.get('/get/:_id', usercontrollars.getdataOnebyid)
 
+route.get('/news-by-category', usercontrollars.getNewsByCategory);
+
 module.exports = route
