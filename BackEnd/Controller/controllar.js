@@ -154,5 +154,79 @@ const getNewsByCategory = async (req, res) => {
         res.status(500).send({ error: "Server Error" });
     }
 };
+const searchNews = async (req, res) => {
+    try {
+        const { q } = req.query; // search keyword from frontend
 
-module.exports = {recoverUser, adduser, getuser, updateuser, deleteuser, getdataOnebyid, getCategory, getAllUsersAdmin, getNewsByCategory }
+        if (!q) {
+            return res.status(400).send({ message: "Search query is required" });
+        }
+
+        const data = await usermodal.find({
+            isDeleted: false,
+            $or: [
+                { title: { $regex: q, $options: "i" } },     // case-insensitive title match
+                { tags: { $regex: q, $options: "i" } },      // search in tags
+                { category: { $regex: q, $options: "i" } },   // search in category
+                { author: { $regex: q, $options: "i" } } 
+            ]
+        }).sort({ publishedAt: -1 }); // latest first
+
+        res.status(200).send({ data });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({ error: "Server Error" });
+    }
+};// inside your controllar.js
+
+const getNewsByDate = async (req, res) => {
+    try {
+        const { date } = req.query; // expected format: YYYY-MM-DD
+        if (!date) return res.status(400).send({ message: "Date is required" });
+
+        const start = new Date(date);
+        const end = new Date(date);
+        end.setHours(23, 59, 59, 999); // end of the selected day
+
+        const data = await usermodal.find({
+            publishedAt: { $gte: start, $lte: end },
+            isDeleted: false
+        }).sort({ publishedAt: -1 }); // latest first
+
+        res.status(200).send({ data });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({ error: "Server Error" });
+    }
+};
+
+const getNewsByAuthor = async (req, res) => {
+    try {
+        const { author } = req.query; // author name passed as query param
+        if (!author) return res.status(400).send({ message: "Author is required" });
+
+        const data = await usermodal.find({
+            author: { $regex: author, $options: "i" }, // case-insensitive match
+            isDeleted: false
+        }).sort({ publishedAt: -1 }); // latest first
+
+        res.status(200).send({ data });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({ error: "Server Error" });
+    }
+};
+module.exports = {
+    recoverUser,
+    adduser,
+    getuser,
+    updateuser,
+    deleteuser,
+    getdataOnebyid,
+    getCategory,
+    getAllUsersAdmin,
+    getNewsByCategory,
+    getNewsByDate,
+    searchNews,
+    getNewsByAuthor
+};

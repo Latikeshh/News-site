@@ -1,0 +1,30 @@
+.contact-admin-container {
+    margin-left: 220px; /* shift to accommodate sidebar */
+    width: calc(100% - 220px); /* full width minus sidebar */
+    min-height: 100vh; /* fill the vertical space */
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.contact-admin-title {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.contact-admin-loading {
+    color: #ffffff;
+}
+
+.contact-admin-table th,
+.contact-admin-table td {
+    vertical-align: middle;
+}
+
+.contact-admin-badge {
+    font-size: 0.9rem;
+    padding: 0.5em 0.75em;
+}

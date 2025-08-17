@@ -6,20 +6,34 @@ import "./ArticlesPage.css";
 const ArticlesPage = () => {
   const [userData, setUserData] = useState([]);
   const navigate = useNavigate();
+  const rawRole = localStorage.getItem("role")?.trim().toLowerCase();
 
   useEffect(() => {
     showUsers();
   }, []);
 
-  const showUsers = () => {
-    axios.get('http://localhost:8000/adminnews')
-      .then(res => {
-        setUserData(res.data.data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  };
+const showUsers = () => {
+  const role = rawRole?.trim().toLowerCase();
+  let url = '';
+  if (role === "editor") {
+    const authorName = localStorage.getItem("username"); // assuming your editor name is saved here
+    url = `http://localhost:8000/authornews?author=${encodeURIComponent(authorName)}`;
+  } else if (role === "admin") {
+    url = 'http://localhost:8000/adminnews';
+  } else {
+    console.warn("Unknown role, cannot fetch news");
+    return;
+  }
+
+  axios.get(url)
+    .then(res => {
+      console.log("API response:", res.data); // debug
+      setUserData(res.data.data || res.data); 
+    })
+    .catch(err => {
+      console.error(err);
+    });
+};
 
   // Soft delete (set isDeleted: true)
   const deletedata = (id) => {

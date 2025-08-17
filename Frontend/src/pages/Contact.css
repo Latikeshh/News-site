@@ -7,8 +7,8 @@ body {
 .contact-container {
   display: flex;
   height: 100vh;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-              url('https://images.unsplash.com/photo-1556742031-c6961e8560b0') no-repeat center center/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('https://images.unsplash.com/photo-1556742031-c6961e8560b0') no-repeat center center/cover;
   color: white;
   padding: 40px;
   gap: 40px;
@@ -58,7 +58,8 @@ form {
   flex: 1;
 }
 
-input, textarea {
+input,
+textarea {
   padding: 12px;
   border: none;
   border-radius: 5px;
@@ -86,12 +87,17 @@ button {
 button:hover {
   background-color: #e69e00;
 }
+
 .contact-container {
   display: flex;
-  height: 100vh;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-              url('https://images.unsplash.com/photo-1556742031-c6961e8560b0') no-repeat center center/cover;
+  flex-wrap: wrap;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('https://images.unsplash.com/photo-1556742031-c6961e8560b0') no-repeat center center/cover;
   color: white;
   padding: 40px;
   gap: 40px;
+  justify-content: center;
+  /* center horizontally if container is smaller */
+  align-items: flex-start;
+  /* align top to avoid huge vertical spacing */
 }
