@@ -73,7 +73,6 @@ const Dashboard = () => {
       contacted: '/contacted',
       notifications: '/notifications',
       information: '/information',
-      settings: '/settings'
     };
     if (routes[type]) navigate(routes[type]);
   };
@@ -84,7 +83,6 @@ const Dashboard = () => {
     { title: 'Categories', text: totalCategory, type: 'categories' },
     { title: 'Complaints', text: totalContact, type: 'contacted' },
     { title: 'Information', text: 'About Site', type: 'information' },
-    { title: 'Settings', text: 'Admin Settings', type: 'settings' },
   ];
 
   return (
