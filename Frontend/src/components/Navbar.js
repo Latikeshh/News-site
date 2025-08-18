@@ -34,7 +34,7 @@ const Navbar = () => {
     <header className="header">
       <div className="logo">
         <span role="img" aria-label="news">📰</span>
-        <span className="logo-text">Talk Bharat</span>
+        <span className="logo-text">TalkBharat</span>
       </div>
 
       <nav className="nav-links category-scroll">

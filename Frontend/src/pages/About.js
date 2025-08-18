@@ -12,7 +12,7 @@ export default function CharityLandingPage() {
 
           <h1>Let's build a Smarter<br />Nation together</h1>
           <p>
-          At [Your Website Name], we believe in the power of unbiased, timely, and impactful journalism.
+          At Talk Bharat, we believe in the power of unbiased, timely, and impactful journalism.
 Our mission is to bring you the latest updates from across the globe, covering everything from politics and entertainment to science and social issues — in a way that informs, inspires, and empowers.
 
           </p>

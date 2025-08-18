@@ -24,15 +24,15 @@ const DateNews = () => {
     if (loading) return <p>Loading news...</p>;
 
     return (
-        <div className="date-news-container1">
+        <div className="date-news-container22">
             <h2>News for {date}</h2>
             {newsList.length === 0 && <p>No news found for this date.</p>}
-            <div className="news-grid1">
+            <div className="news-grid22">
                 {newsList.map(news => (
-                    <div key={news._id} className="news-card1">
+                    <div key={news._id} className="news-card22">
                         <h3>{news.title}</h3>
                         <p>{news.content.substring(0, 150)}...</p>
-                        <p className="news-date1">{new Date(news.createdAt).toLocaleString()}</p>
+                        <p className="news-date22">{new Date(news.createdAt).toLocaleString()}</p>
                     </div>
                 ))}
             </div>

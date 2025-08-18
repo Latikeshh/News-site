@@ -1,4 +1,4 @@
-.date-news-container1 {
+.date-news-container22 {
   padding: 20px;
   color: #fff;
   background-color: #121212; /* dark theme */
@@ -9,13 +9,13 @@ h2 {
   color: #ffd700;
 }
 
-.news-grid1 {
+.news-grid22 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 15px;
 }
 
-.news-card1 {
+.news-card22 {
   background-color: #1e1e1e;
   padding: 15px;
   border-radius: 10px;
@@ -23,11 +23,11 @@ h2 {
   transition: transform 0.2s;
 }
 
-.news-card1:hover {
+.news-card22:hover {
   transform: translateY(-5px);
 }
 
-.news-date1 {
+.news-date22 {
   font-size: 0.8rem;
   color: #bbb;
   margin-top: 10px;

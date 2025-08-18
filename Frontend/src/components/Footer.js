@@ -6,13 +6,6 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-col">
-        <h4>Featured</h4>
-        <p>Senate Approves $9 Billion In Cuts</p>
-        <p>Trump Diagnosed With Chronic Venous Insufficiency</p>
-        <p>2025 NBA Free Agency</p>
-      </div>
-
-      <div className="footer-col">
         <h4>Follow Us On</h4>
         <p><a href="https://www.youtube.com/@newshubnz" target="_blank" rel="noopener noreferrer">YouTube</a></p>
         <p><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></p>
@@ -24,7 +17,6 @@ const Footer = () => {
         <h4>Company</h4>
          <p><Link to="/about">About Us</Link></p>
         <p><Link to='/contact'>Contact Us</Link></p>
-        <p>Join Team</p>
         <p><Link to='/help'>Help</Link></p>
       </div>
 
