@@ -9,7 +9,6 @@ import Category from './pages/Category';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Help from './pages/Help';
-import World from './pages/World';
 import Journey from './pages/Journey';
 import Learn from './pages/Learn';
 import SearchPage from './components/SearchPage';
@@ -104,15 +103,6 @@ const App = () => {
             <Navbar />
             <BreakingNews />
             <Help />
-            <Footer />
-          </>
-        } />
-
-        <Route path="/World" element={
-          <>
-            <Navbar />
-            <BreakingNews />
-            <World />
             <Footer />
           </>
         } />

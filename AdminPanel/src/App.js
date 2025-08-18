@@ -200,7 +200,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-
+{/* 
             <Route
               path="/settings"
               element={
@@ -210,7 +210,7 @@ function App() {
                   </Layout>
                 </PrivateRoute>
               }
-            />
+            /> */}
 
             <Route
               path="/information"

@@ -7,10 +7,8 @@ exports.createBreaking = async (req, res) => {
     if (!breaking) {
       return res.status(400).json({ message: 'Breaking news text is required' });
     }
-
     const newBreaking = new BreakingNews({ breaking });
     await newBreaking.save();
-
     res.status(201).json({
       message: 'Breaking news created successfully',
       data: newBreaking
@@ -100,6 +98,15 @@ exports.recoverBreaking = async (req, res) => {
       return res.status(404).json({ message: 'Breaking news not found' });
     }
     res.status(200).json({ message: 'Breaking news recovered', data: updatedBreaking });
+  } catch (err) {
+    res.status(500).json({ message: 'Server Error', error: err.message });
+  }
+};
+//total breaking news without deleted 
+exports.getTotalBreakingActive = async (req, res) => {
+  try {
+    const total = await BreakingNews.countDocuments({ isDeleted: false });
+    res.status(200).json({ total });
   } catch (err) {
     res.status(500).json({ message: 'Server Error', error: err.message });
   }

@@ -1,6 +1,7 @@
 const usermodal = require('../Model/modal')
+const News = require('../Model/modal');
 
-const adduser = async (req, res) => {
+const addNews = async (req, res) => {
     const { title, slug, content, author, category, tags, publishedAt, isDeleted, image } = req.body
 
     try {
@@ -24,7 +25,7 @@ const adduser = async (req, res) => {
     }
 }
 
-const getuser = async (req, res) => {
+const getNews = async (req, res) => {
     try {
         const data = await usermodal.find({ isDeleted: false }) // exclude deleted
         res.status(200).send({ data })
@@ -33,7 +34,7 @@ const getuser = async (req, res) => {
         res.status(400).send({ error: err.message })
     }
 }
-const getAllUsersAdmin = async (req, res) => {
+const getAllNewsAdmin = async (req, res) => {
     try {
         const data = await usermodal.find(); // no filter
         res.status(200).send({ data });
@@ -55,7 +56,7 @@ const getCategory = async (req, res) => {
     }
 }
 
-const updateuser = async (req, res) => {
+const updateNews = async (req, res) => {
     const { title, slug, content, author, category, tags, publishedAt, isDeleted, image } = req.body
 
     const updateData = {
@@ -92,7 +93,7 @@ const updateuser = async (req, res) => {
     }
 };
 
-const deleteuser = async (req, res) => {
+const deleteNews = async (req, res) => {
     try {
         const data = await usermodal.updateOne(
             { _id: req.params._id },
@@ -215,16 +216,45 @@ const getNewsByAuthor = async (req, res) => {
         console.error(err.message);
         res.status(500).send({ error: "Server Error" });
     }
+}
+
+// For Admin → Get total news count (excluding soft-deleted)
+const getTotalNewsCountAdmin = async (req, res) => {
+  try {
+    const totalNews = await News.countDocuments({ isDeleted: false }); // exclude deleted
+    return res.json({ total: totalNews });
+  } catch (error) {
+    console.error("Error in getTotalNewsCountAdmin:", error);
+    return res.status(500).json({ message: "Error fetching total news count for admin" });
+  }
 };
+
+// For Author → Get total news count (only their news, excluding soft-deleted)
+const getTotalNewsCountAuthor = async (req, res) => {
+  try {
+    const { author } = req.query; // pass ?author=xyz from frontend
+    if (!author) {
+      return res.status(400).json({ error: "Author is required" });
+    }
+    const totalNews = await News.countDocuments({ author: author, isDeleted: false });
+    return res.json({ total: totalNews });
+  } catch (error) {
+    console.error("Error in getTotalNewsCountAuthor:", error);
+    return res.status(500).json({ message: "Error fetching total news count for author" });
+  }
+};
+
 module.exports = {
+    getTotalNewsCountAuthor,
+    getTotalNewsCountAdmin,
     recoverUser,
-    adduser,
-    getuser,
-    updateuser,
-    deleteuser,
+    addNews,
+    getNews,
+    updateNews,
+    deleteNews,
     getdataOnebyid,
     getCategory,
-    getAllUsersAdmin,
+    getAllNewsAdmin,
     getNewsByCategory,
     getNewsByDate,
     searchNews,

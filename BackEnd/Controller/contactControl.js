@@ -68,3 +68,15 @@ exports.permanentDeleteContact = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+// Get total number of non-soft-deleted contacts
+exports.getTotalContacts = async (req, res) => {
+    try {
+        const total = await Contact.countDocuments({ isDeleted: false }); // count only active
+        res.status(200).json({ total });
+    } catch (err) {
+        console.error("Error in getTotalContacts:", err);
+        res.status(500).json({ message: "Error fetching total contacts", error: err.message });
+    }
+};
+

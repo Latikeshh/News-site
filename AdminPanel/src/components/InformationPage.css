@@ -1,0 +1,77 @@
+/* src/components/InformationPage.css */
+
+/* Container */
+.info-page-container {
+  margin-left: 220px;
+  padding: 1rem;
+  min-height: 100vh;
+  background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Title and text */
+.info-page-title {
+  color: #ff4c4c;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-page-text {
+  color: #ccc;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Cards */
+.info-page-card {
+  background: rgba(25, 25, 25, 0.75); /* slightly more transparent */
+  backdrop-filter: blur(12px);        /* higher glassy blur */
+  border-radius: 15px;                /* a bit more rounded */
+  border: 1px solid rgba(255, 76, 76, 0.4);
+  transition: all 0.4s ease;
+}
+
+.info-page-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(255, 76, 76, 0.25); /* subtle red glow */
+}
+
+.info-page-card-body {
+  padding: 1.25rem;
+}
+
+/* Card Titles */
+.info-page-card-title {
+  color: #ff4c4c;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Card Text */
+.info-page-card-text {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.info-page-card-text ul {
+  padding-left: 1.2rem;
+}
+
+.info-page-card-text li {
+  margin-bottom: 0.5rem;
+}
+
+/* Make responsive layout consistent */
+@media (max-width: 768px) {
+  .info-page-title {
+    font-size: 1.75rem;
+  }
+  .info-page-card-title {
+    font-size: 1.1rem;
+  }
+  .info-page-card-text {
+    font-size: 0.9rem;
+  }
+}

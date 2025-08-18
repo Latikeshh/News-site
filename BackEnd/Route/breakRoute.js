@@ -19,5 +19,7 @@ router.put('/breaking/softdelete/:id', breakingController.softDeleteBreaking);
 
 // Recover breaking news
 router.put('/breaking/recover/:id', breakingController.recoverBreaking);
+//count show 
+router.get('/breakingcount', breakingController.getTotalBreakingActive);
 
 module.exports = router;

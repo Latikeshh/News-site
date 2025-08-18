@@ -8,5 +8,5 @@ router.get('/admincontacts', contactCtrl.getAllContactsAdmin);// Admin: actions
 router.delete('/softdelete/:id', contactCtrl.softDeleteContact);   // Soft delete
 router.patch('/restore/:id', contactCtrl.restoreContact);          // Restore
 router.delete('/delete/:id', contactCtrl.permanentDeleteContact);  // Permanent delete
-
+router.get('/contactstotal', contactCtrl.getTotalContacts); // get all total no of complaints
 module.exports = router;

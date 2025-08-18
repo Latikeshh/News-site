@@ -1,0 +1,57 @@
+/* src/components/Sidebar.css */
+
+.sidebar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  padding: 1.5rem 1rem;
+  background: rgba(20, 20, 20, 0.85); /* dark glass */
+  backdrop-filter: blur(10px); /* glassy effect */
+  box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.sidebar-title {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  color: #ff4d4f; /* subtle red touch */
+  text-shadow: 0 0 5px rgba(255,77,79,0.5);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.6rem 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 77, 79, 0.2); /* subtle red hover */
+  color: #ff4d4f;
+  text-shadow: 0 0 5px rgba(255,77,79,0.5);
+}
+
+.sidebar-link.active {
+  background: rgba(255, 77, 79, 0.3);
+  color: #ff4d4f;
+  font-weight: bold;
+}
+/* src/components/Sidebar.css */
+.sidebar-link.active {
+  background: #121212; /* matches root background */
+  color: #ff4d4f;      /* keeps red text highlight */
+  font-weight: bold;
+}

@@ -30,11 +30,9 @@ exports.updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
-
     // find old category first
     const oldCategory = await Category.findById(id);
     if (!oldCategory) return res.status(404).json({ error: 'Category not found' });
-
     // update category
     const updated = await Category.findByIdAndUpdate(
       id,
@@ -86,6 +84,16 @@ exports.restoreCategory = async (req, res) => {
     );
     if (!restored) return res.status(404).json({ error: 'Category not found' });
     res.json({ message: 'Category restored', category: restored });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// ✅ Get count of non-deleted categories
+exports.getTotalActiveCategories = async (req, res) => {
+  try {
+    const total = await Category.countDocuments({ isDeleted: false });
+    res.json({ totalActiveCategories: total });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
