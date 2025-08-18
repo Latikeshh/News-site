@@ -20,4 +20,6 @@ router.get('/admin/categories', categoryController.getCategoriesForAdmin);
 // ✅ Restore soft deleted category
 router.post('/restorecategory/:id', categoryController.restoreCategory);
 
+router.get('/categoriescount', categoryController.getTotalActiveCategories);
+
 module.exports = router;

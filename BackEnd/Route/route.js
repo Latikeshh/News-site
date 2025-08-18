@@ -27,8 +27,12 @@ route.get('/news-by-category', usercontrollars.getNewsByCategory);
 route.get('/searchNews', usercontrollars.searchNews);
 
 route.get('/authornews', usercontrollars.getNewsByAuthor);
+// Admin route: get total news count (all)
+route.get('/totalnewsadmin', usercontrollars.getTotalNewsCountAdmin);
 
-// routes file
+// Author route: get total news count (by author, including deleted)
+route.get('/totalnewsauthor', usercontrollars.getTotalNewsCountAuthor);
+
 route.get('/news-by-date', usercontrollars.getNewsByDate);
 
 module.exports = route

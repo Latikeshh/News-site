@@ -90,3 +90,13 @@ exports.restoreCategory = async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
+
+// ✅ Get count of non-deleted categories
+exports.getTotalActiveCategories = async (req, res) => {
+  try {
+    const total = await Category.countDocuments({ isDeleted: false });
+    res.json({ totalActiveCategories: total });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
