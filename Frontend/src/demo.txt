@@ -13,7 +13,7 @@ Change the `name="email"` in the password input to `name="password"`:
   <Form.Label>Password</Form.Label>
   <Form.Control
     type="password"
-    placeholder="Enter password"
+    placeholder="Enter passwvhxcvhvnhsvdord"
     name="password"   {/* Corrected here */}
     value={formData.password}
     onChange={handleChange}

@@ -31,25 +31,25 @@ const SearchPage = () => {
   }, [query]);
 
   return (
-    <div className="search-page">
-      <h2 className="results-title">Search Results for "{query}"</h2>
+    <div className="search-page11">
+      <h2 className="results-title11">Search Results for "{query}"</h2>
 
       {loading ? (
-        <p className="loading">Loading...</p>
+        <p className="loading11">Loading...</p>
       ) : results.length > 0 ? (
-        <div className="news-list">
+        <div className="news-list11">
           {results.map((news) => (
-            <div key={news._id} className="news-card"
+            <div key={news._id} className="news-card11"
               onClick={() => handleClick(news._id)}>
               {news.image && (
-                <img className="news-image" src={`http://localhost:8000/${news.image}`} alt={news.title} />
+                <img className="news-image11" src={`http://localhost:8000/${news.image}`} alt={news.title} />
               )}
-              <div className="news-info">
-                <h3 className="news-title">
+              <div className="news-info11">
+                <h3 className="news-title11">
                   <Link to={`/news/${news._id}`}>{news.title}</Link>
                 </h3>
-                <p className="news-snippet">{news.content.substring(0, 180)}...</p>
-                <div className="news-meta">
+                <p className="news-snippet11">{news.content.substring(0, 180)}...</p>
+                <div className="news-meta11">
                   <span>🏷 {news.category}</span>
                   <span>✍ {news.author}</span>
                   {news.publishedAt && (
@@ -61,7 +61,7 @@ const SearchPage = () => {
           ))}
         </div>
       ) : (
-        <p className="no-results">No results found.</p>
+        <p className="no-results11">No results found.</p>
       )}
     </div>
   );
