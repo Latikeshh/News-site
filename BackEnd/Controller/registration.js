@@ -1,4 +1,5 @@
 const registerModel = require('../Model/registration_model');
+const News = require('../Model/modal'); // your news model
 
 const register = async (req, res) => {
     const { name, email, password, role } = req.body;
@@ -76,24 +77,34 @@ const deleteUser = async (req, res) => {
     }
 };
 
-// ✅ Update user
+// Update user + update name in News posts
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
         const { name, email, password, role } = req.body;
-        const user = await registerModel.findByIdAndUpdate(
+
+        // 1️⃣ Find old user first
+        const oldUser = await registerModel.findById(id);
+        if (!oldUser) return res.status(404).json({ msg: "User not found" });
+
+        // 2️⃣ Update user fields
+        const updatedUser = await registerModel.findByIdAndUpdate(
             id,
             { name, email, password, role },
             { new: true, runValidators: true }
         );
-        if (!user) {
-            return res.status(404).json({ msg: "User not found" });
-        }
-        res.json({ msg: "User updated successfully", user });
+        // 3️⃣ Update all news posts where this user is the author
+        await News.updateMany(
+            { authorEmail: oldUser.email }, // assuming you link news to user by email
+            { $set: { authorName: name } }
+        );
+        res.json({ msg: "User and related news updated successfully", user: updatedUser });
     } catch (error) {
+        console.error(error.message);
         res.status(500).json({ error: error.message });
     }
 };
+
 // ✅ Recover soft-deleted user
 const recoverUser = async (req, res) => {
     try {

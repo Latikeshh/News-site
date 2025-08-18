@@ -30,11 +30,9 @@ exports.updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
-
     // find old category first
     const oldCategory = await Category.findById(id);
     if (!oldCategory) return res.status(404).json({ error: 'Category not found' });
-
     // update category
     const updated = await Category.findByIdAndUpdate(
       id,
