@@ -10,6 +10,7 @@ const Dashboard = () => {
   const [totalArticles, setTotalArticles] = useState(0);
   const [totalBreaking, setTotalBreaking] = useState(0);
   const [totalCategory, setTotalCategory] = useState(0);
+  const [totalContact, setTotalContact] = useState(0); // added state for complaints
 
   useEffect(() => {
     const role = localStorage.getItem("role"); // admin / author
@@ -29,27 +30,37 @@ const Dashboard = () => {
       }
     };
 
-    fetchTotal();
     const categoryTotal = async () => {
       try {
         const res = await axios.get(`${baseURL}/categoriescount`);
         setTotalCategory(res.data.totalActiveCategories);
       } catch (err) {
-        console.error("Error fetching total news:", err);
+        console.error("Error fetching total categories:", err);
       }
     };
 
-    categoryTotal();
     const breakingTotal = async () => {
       try {
         const res = await axios.get(`${baseURL}/headline/breakingcount`);
         setTotalBreaking(res.data.total);
       } catch (err) {
-        console.error("Error fetching total news:", err);
+        console.error("Error fetching total breaking news:", err);
       }
     };
 
+    const contactTotal = async () => {
+      try {
+        const res = await axios.get(`${baseURL}/contactstotal`); // fetch total non-soft-deleted contacts
+        setTotalContact(res.data.total);
+      } catch (err) {
+        console.error("Error fetching total contacts:", err);
+      }
+    };
+
+    fetchTotal();
+    categoryTotal();
     breakingTotal();
+    contactTotal();
 
   }, []);
 
@@ -71,7 +82,7 @@ const Dashboard = () => {
     { title: 'Total Articles', text: totalArticles, type: 'articles' },
     { title: 'BreakingNews', text: totalBreaking, type: 'breakingNews' },
     { title: 'Categories', text: totalCategory, type: 'categories' },
-    { title: 'Complaints', text: 'Complaints', type: 'contacted' },
+    { title: 'Complaints', text: totalContact, type: 'contacted' },
     { title: 'Information', text: 'About Site', type: 'information' },
     { title: 'Settings', text: 'Admin Settings', type: 'settings' },
   ];

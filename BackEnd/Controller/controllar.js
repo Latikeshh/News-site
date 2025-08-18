@@ -1,7 +1,7 @@
 const usermodal = require('../Model/modal')
 const News = require('../Model/modal');
 
-const adduser = async (req, res) => {
+const addNews = async (req, res) => {
     const { title, slug, content, author, category, tags, publishedAt, isDeleted, image } = req.body
 
     try {
@@ -25,7 +25,7 @@ const adduser = async (req, res) => {
     }
 }
 
-const getuser = async (req, res) => {
+const getNews = async (req, res) => {
     try {
         const data = await usermodal.find({ isDeleted: false }) // exclude deleted
         res.status(200).send({ data })
@@ -34,7 +34,7 @@ const getuser = async (req, res) => {
         res.status(400).send({ error: err.message })
     }
 }
-const getAllUsersAdmin = async (req, res) => {
+const getAllNewsAdmin = async (req, res) => {
     try {
         const data = await usermodal.find(); // no filter
         res.status(200).send({ data });
@@ -56,7 +56,7 @@ const getCategory = async (req, res) => {
     }
 }
 
-const updateuser = async (req, res) => {
+const updateNews = async (req, res) => {
     const { title, slug, content, author, category, tags, publishedAt, isDeleted, image } = req.body
 
     const updateData = {
@@ -93,7 +93,7 @@ const updateuser = async (req, res) => {
     }
 };
 
-const deleteuser = async (req, res) => {
+const deleteNews = async (req, res) => {
     try {
         const data = await usermodal.updateOne(
             { _id: req.params._id },
@@ -248,13 +248,13 @@ module.exports = {
     getTotalNewsCountAuthor,
     getTotalNewsCountAdmin,
     recoverUser,
-    adduser,
-    getuser,
-    updateuser,
-    deleteuser,
+    addNews,
+    getNews,
+    updateNews,
+    deleteNews,
     getdataOnebyid,
     getCategory,
-    getAllUsersAdmin,
+    getAllNewsAdmin,
     getNewsByCategory,
     getNewsByDate,
     searchNews,

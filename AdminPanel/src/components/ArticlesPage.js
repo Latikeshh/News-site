@@ -37,7 +37,7 @@ const showUsers = () => {
 
   // Soft delete (set isDeleted: true)
   const deletedata = (id) => {
-    axios.put(`http://localhost:8000/deleteuser/${id}`)
+    axios.put(`http://localhost:8000/deleteNews/${id}`)
       .then(res => {
         alert(res.data.message);
         showUsers();
