@@ -81,21 +81,38 @@ const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
         const { name, email, password, role } = req.body;
-
         const user = await registerModel.findByIdAndUpdate(
             id,
             { name, email, password, role },
             { new: true, runValidators: true }
+        );
+        if (!user) {
+            return res.status(404).json({ msg: "User not found" });
+        }
+        res.json({ msg: "User updated successfully", user });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+// ✅ Recover soft-deleted user
+const recoverUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const user = await registerModel.findByIdAndUpdate(
+            id,
+            { isDeleted: false },
+            { new: true }
         );
 
         if (!user) {
             return res.status(404).json({ msg: "User not found" });
         }
 
-        res.json({ msg: "User updated successfully", user });
+        res.json({ msg: "User recovered successfully", user });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
-module.exports = { login, register, getuser, deleteUser, updateUser };
+module.exports = { login, register, getuser, deleteUser, updateUser, recoverUser };

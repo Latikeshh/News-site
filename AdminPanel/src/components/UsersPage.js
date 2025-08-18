@@ -1,15 +1,15 @@
 // src/components/UsersPage.js
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Container, Badge, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
+import './UsersPage.css';
 
-const baseUrl = "http://localhost:8000/registeration";
+const baseUrl = "http://localhost:8000/registeration"; // ✅ keep as is
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
-  const [formData, setFormData] = useState({ name: '', email: '', password:'' ,role: 'Editor' });
+  const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'Editor' });
 
   useEffect(() => {
     fetchUsers();
@@ -17,7 +17,7 @@ const UsersPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/users`);
+      const res = await axios.get(`${baseUrl}/getusers`);
       setUsers(res.data);
     } catch (err) {
       console.error("Error fetching users:", err);
@@ -43,13 +43,13 @@ const UsersPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSaveUser = async () => {
     try {
       if (editingUser) {
-        await axios.put(`${baseUrl}/users/${editingUser._id}`, formData);
+        await axios.put(`${baseUrl}/update/${editingUser._id}`, formData);
       } else {
         await axios.post(`${baseUrl}/register`, formData);
       }
@@ -63,7 +63,7 @@ const UsersPage = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        await axios.delete(`${baseUrl}/users/${id}`);
+        await axios.put(`${baseUrl}/users/${id}`);
         fetchUsers();
       } catch (err) {
         console.error("Error deleting user:", err);
@@ -71,14 +71,23 @@ const UsersPage = () => {
     }
   };
 
+  const handleRecover = async (id) => {
+    try {
+      await axios.put(`${baseUrl}/recover/${id}`);
+      fetchUsers();
+    } catch (err) {
+      console.error("Error recovering user:", err);
+    }
+  };
+
   return (
-    <Container style={{ marginLeft: '220px', padding: '1rem' }}>
-      <div className="d-flex justify-content-between align-items-center mb-3">
+    <div className="users-page-container">
+      <div className="users-page-header">
         <h3>Users</h3>
-        <Button variant="primary" onClick={handleShowAddModal}>Add User</Button>
+        <button className="btn btn-primary users-page-btn" onClick={handleShowAddModal}>Add User</button>
       </div>
 
-      <Table striped bordered hover>
+      <table className="users-page-table table table-striped table-hover">
         <thead>
           <tr>
             <th>#</th>
@@ -86,7 +95,7 @@ const UsersPage = () => {
             <th>Email</th>
             <th>Role</th>
             <th>Password</th>
-            <th>Status</th> {/* 👈 New column */}
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -97,100 +106,110 @@ const UsersPage = () => {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
-                <Badge bg={user.role === 'Admin' ? 'danger' : 'secondary'}>
-                  {user.role}
-                </Badge>
+                <span className={`users-page-badge ${user.role.toLowerCase()}`}>{user.role}</span>
               </td>
               <td>{user.password}</td>
               <td>
-                {user.isDeleted ? (
-                  <Badge bg="danger">Deleted</Badge>
-                ) : (
-                  <Badge bg="success">Active</Badge>
-                )}
+                <span className={`users-page-badge ${user.isDeleted ? 'deactive' : 'active'}`}>
+                  {user.isDeleted ? 'Deactive' : 'Active'}
+                </span>
               </td>
               <td>
-                <Button
-                  variant="warning"
-                  size="sm"
-                  className="me-2"
+                <button
+                  className="btn btn-warning btn-sm me-2 users-page-btn"
                   onClick={() => handleShowEditModal(user)}
+                  disabled={user.isDeleted}
                 >
                   Edit
-                </Button>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={() => handleDelete(user._id)}
-                >
-                  Delete
-                </Button>
+                </button>
+                {user.isDeleted ? (
+                  <button
+                    className="btn btn-success btn-sm users-page-btn"
+                    onClick={() => handleRecover(user._id)}
+                  >
+                    Recover
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-danger btn-sm users-page-btn"
+                    onClick={() => handleDelete(user._id)}
+                  >
+                    Delete
+                  </button>
+                )}
               </td>
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
 
-      {/* Add/Edit Modal */}
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>{editingUser ? 'Edit User' : 'Add User'}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Role</Form.Label>
-              <Form.Select
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-              >
-                <option>Admin</option>
-                <option>Editor</option>
-              </Form.Select>
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={handleSaveUser}>
-            {editingUser ? 'Update' : 'Add'}
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Container>
+      {showModal && (
+        <div className="users-page-modal modal fade show d-block" tabIndex="-1">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">{editingUser ? 'Edit User' : 'Add User'}</h5>
+                <button type="button" className="btn-close btn-close-white" onClick={handleCloseModal}></button>
+              </div>
+              <div className="modal-body">
+                <form>
+                  <div className="mb-3">
+                    <label className="form-label">Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Email</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Password</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Role</label>
+                    <select
+                      className="form-select"
+                      name="role"
+                      value={formData.role}
+                      onChange={handleChange}
+                    >
+                      <option>Admin</option>
+                      <option>Editor</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button className="btn btn-secondary users-page-btn" onClick={handleCloseModal}>Cancel</button>
+                <button className="btn btn-primary users-page-btn" onClick={handleSaveUser}>
+                  {editingUser ? 'Update' : 'Add'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showModal && <div className="users-page-modal-backdrop"></div>}
+    </div>
   );
 };
 
