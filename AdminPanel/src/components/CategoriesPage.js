@@ -1,20 +1,9 @@
 // src/components/CategoriesPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
-  Table,
-  Container,
-  Button,
-  Form,
-  Row,
-  Col,
-  Modal,
-  Card,
-  Spinner,
-  Alert
-} from 'react-bootstrap';
+import './CategoriesPage.css'; // External dark glassy theme
 
-const API_BASE = "http://localhost:8000"; // change if backend URL differs
+const API_BASE = "http://localhost:8000"; // Do not change
 
 const CategoriesPage = () => {
   const [categories, setCategories] = useState([]);
@@ -28,7 +17,7 @@ const CategoriesPage = () => {
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE}/category`);
+      const res = await axios.get(`${API_BASE}/admin/categories`);
       setCategories(res.data);
     } catch (err) {
       console.error("Error fetching categories:", err);
@@ -43,7 +32,7 @@ const CategoriesPage = () => {
   const handleAddCategory = async () => {
     if (newCategory.trim() === '') return;
     try {
-      await axios.post(`${API_BASE}/addcategory`, { name: newCategory, isDeleted: false });
+      await axios.post(`${API_BASE}/addcategory`, { name: newCategory });
       setNewCategory('');
       setSuccessMsg('Category added successfully');
       fetchCategories();
@@ -60,6 +49,15 @@ const CategoriesPage = () => {
       fetchCategories();
     } catch (err) {
       console.error("Error deleting category:", err);
+    }
+  };
+
+  const handleRecover = async (id) => {
+    try {
+      await axios.post(`${API_BASE}/restorecategory/${id}`);
+      fetchCategories();
+    } catch (err) {
+      console.error("Error recovering category:", err);
     }
   };
 
@@ -81,39 +79,43 @@ const CategoriesPage = () => {
   };
 
   return (
-    <Container style={{ marginLeft: '220px', padding: '1rem' }}>
-      <h3 className="mb-4">Categories</h3>
+    <div className="categories-container">
+      <h3 className="mb-4 text-white">Categories</h3>
 
       {successMsg && (
-        <Alert variant="success">{successMsg}</Alert>
+        <div className="alert alert-success">{successMsg}</div>
       )}
 
-      <Card className="shadow-sm mb-4 bg-light">
-        <Card.Body>
-          <Row className="align-items-center mb-3">
-            <Col md={6}>
-              <Form.Control
+      <div className="card glass-card mb-4">
+        <div className="card-body">
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <input
                 type="text"
+                className="form-control"
                 placeholder="Enter new category name"
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
               />
-            </Col>
-            <Col md={3}>
-              <Button variant="primary" onClick={handleAddCategory}>
+            </div>
+            <div className="col-md-3">
+              <button className="btn btn-primary w-100" onClick={handleAddCategory}>
                 Add Category
-              </Button>
-            </Col>
-          </Row>
+              </button>
+            </div>
+          </div>
 
           {loading ? (
-            <Spinner animation="border" />
+            <div className="text-center">
+              <div className="spinner-border text-light" role="status"></div>
+            </div>
           ) : (
-            <Table striped bordered hover responsive className="bg-white">
-              <thead className="table-primary">
+            <table className="table table-dark table-hover table-bordered">
+              <thead>
                 <tr>
                   <th>#</th>
                   <th>Category Name</th>
+                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -124,58 +126,80 @@ const CategoriesPage = () => {
                       <td>{index + 1}</td>
                       <td>{cat.name}</td>
                       <td>
-                        <Button
-                          variant="warning"
-                          size="sm"
-                          className="me-2"
-                          onClick={() => handleEditClick(cat)}
-                        >
-                          Edit
-                        </Button>
-                        <Button
-                          variant="danger"
-                          size="sm"
-                          onClick={() => handleSoftDelete(cat._id)}
-                        >
-                          Delete
-                        </Button>
+                        {cat.isDeleted ? (
+                          <span className="badge bg-danger">Deleted</span>
+                        ) : (
+                          <span className="badge bg-success">Active</span>
+                        )}
+                      </td>
+                      <td>
+                        {!cat.isDeleted ? (
+                          <>
+                            <button
+                              className="btn btn-warning btn-sm me-2"
+                              onClick={() => handleEditClick(cat)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="btn btn-danger btn-sm"
+                              onClick={() => handleSoftDelete(cat._id)}
+                            >
+                              Delete
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            className="btn btn-success btn-sm"
+                            onClick={() => handleRecover(cat._id)}
+                          >
+                            Recover
+                          </button>
+                        )}
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="3" className="text-center">
-                      No categories found
-                    </td>
+                    <td colSpan="4" className="text-center">No categories found</td>
                   </tr>
                 )}
               </tbody>
-            </Table>
+            </table>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
 
-      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-        <Modal.Header closeButton className="bg-info text-white">
-          <Modal.Title>Edit Category</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Control
-            type="text"
-            value={editName}
-            onChange={(e) => setEditName(e.target.value)}
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowEditModal(false)}>
-            Cancel
-          </Button>
-          <Button variant="success" onClick={handleUpdateCategory}>
-            Update
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Container>
+      {/* Edit Modal */}
+      {showEditModal && (
+        <div className="modal fade show d-block" tabIndex="-1">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content glass-card">
+              <div className="modal-header bg-info text-white">
+                <h5 className="modal-title">Edit Category</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setShowEditModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
+                />
+              </div>
+              <div className="modal-footer">
+                <button className="btn btn-secondary" onClick={() => setShowEditModal(false)}>Cancel</button>
+                <button className="btn btn-success" onClick={handleUpdateCategory}>Update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

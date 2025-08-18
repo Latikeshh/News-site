@@ -69,26 +69,26 @@ export default function BreakingNews() {
   };
 
   return (
-    <div className="main-container">
-      <h2 className="mt-4">Breaking News Management</h2>
+    <div className="breakingnews-container">
+      <h2 className="breakingnews-title">Breaking News Management</h2>
 
       {/* Add new breaking */}
-      <div className="d-flex my-3">
+      <div className="breakingnews-addbox">
         <input
           type="text"
-          className="form-control me-2"
+          className="breakingnews-input"
           placeholder="Enter new breaking news"
           value={newBreaking}
           onChange={(e) => setNewBreaking(e.target.value)}
         />
-        <button className="btn btn-primary" onClick={handleAdd}>
+        <button className="breakingnews-btn breakingnews-btn-add" onClick={handleAdd}>
           Add
         </button>
       </div>
 
       {/* Breaking news table */}
-      <table className="table table-bordered table-hover">
-        <thead className="table-dark">
+      <table className="breakingnews-table">
+        <thead>
           <tr>
             <th>Sr. No</th>
             <th>Breaking News</th>
@@ -105,7 +105,7 @@ export default function BreakingNews() {
                   {editId === item._id ? (
                     <input
                       type="text"
-                      className="form-control"
+                      className="breakingnews-input-edit"
                       value={editText}
                       onChange={(e) => setEditText(e.target.value)}
                     />
@@ -115,22 +115,22 @@ export default function BreakingNews() {
                 </td>
                 <td>
                   {item.isDeleted ? (
-                    <span className="badge bg-danger">Deleted</span>
+                    <span className="breakingnews-badge breakingnews-badge-red">Deleted</span>
                   ) : (
-                    <span className="badge bg-success">Active</span>
+                    <span className="breakingnews-badge breakingnews-badge-green">Active</span>
                   )}
                 </td>
                 <td>
                   {editId === item._id ? (
                     <button
-                      className="btn btn-sm btn-success me-2"
+                      className="breakingnews-btn breakingnews-btn-save"
                       onClick={() => handleEdit(item._id)}
                     >
                       Save
                     </button>
                   ) : (
                     <button
-                      className="btn btn-sm btn-warning me-2"
+                      className="breakingnews-btn breakingnews-btn-edit"
                       onClick={() => {
                         setEditId(item._id);
                         setEditText(item.breaking);
@@ -142,14 +142,14 @@ export default function BreakingNews() {
 
                   {!item.isDeleted ? (
                     <button
-                      className="btn btn-sm btn-danger me-2"
+                      className="breakingnews-btn breakingnews-btn-delete"
                       onClick={() => handleSoftDelete(item._id)}
                     >
                       Delete
                     </button>
                   ) : (
                     <button
-                      className="btn btn-sm btn-secondary me-2"
+                      className="breakingnews-btn breakingnews-btn-recover"
                       onClick={() => handleRecover(item._id)}
                     >
                       Recover
@@ -158,7 +158,7 @@ export default function BreakingNews() {
 
                   {editId === item._id && (
                     <button
-                      className="btn btn-sm btn-secondary"
+                      className="breakingnews-btn breakingnews-btn-cancel"
                       onClick={() => setEditId(null)}
                     >
                       Cancel
@@ -169,7 +169,7 @@ export default function BreakingNews() {
             ))
           ) : (
             <tr>
-              <td colSpan="4" className="text-center">
+              <td colSpan="4" className="breakingnews-nodata">
                 No breaking news found
               </td>
             </tr>

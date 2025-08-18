@@ -1,0 +1,132 @@
+/* CategoriesPage.css */
+
+/* Page background */
+.categories-container {
+  min-height: 100vh;
+  margin-left: 220px;   /* shift for sidebar */
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(25, 25, 25, 0.9));
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+}
+
+/* Force all child sections (cards/divs) to stay white-text on glass effect */
+.categories-container .glass-card,
+.categories-container .card,
+.categories-container .section,
+.categories-container .content-box {
+  background: rgba(30, 30, 30, 0.9) !important;
+  color: #fff !important;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 0, 0, 0.4);
+}
+
+/* Glassy card hover */
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(255, 0, 0, 0.3);
+}
+
+/* Buttons */
+.btn {
+  border-radius: 10px !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+  background: rgba(255, 0, 0, 0.9);
+  border: none;
+}
+.btn-primary:hover {
+  background: rgba(255, 50, 50, 1);
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+}
+
+.btn-danger {
+  background: rgba(180, 0, 0, 0.9);
+  border: none;
+}
+.btn-danger:hover {
+  background: rgba(255, 0, 0, 0.95);
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+}
+
+.btn-success {
+  background: rgba(0, 150, 50, 0.9);
+  border: none;
+}
+.btn-success:hover {
+  background: rgba(0, 200, 70, 1);
+  box-shadow: 0 0 12px rgba(0, 200, 70, 0.6);
+}
+
+.btn-warning {
+  background: rgba(255, 165, 0, 0.9);
+  border: none;
+}
+.btn-warning:hover {
+  background: rgba(255, 180, 50, 1);
+  box-shadow: 0 0 12px rgba(255, 180, 50, 0.6);
+}
+
+/* Inputs */
+.form-control {
+  background: rgba(20, 20, 20, 0.7);
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  color: #fff;
+  border-radius: 10px;
+}
+.form-control:focus {
+  background: rgba(30, 30, 30, 0.85);
+  color: #fff;
+  border-color: rgba(255, 0, 0, 0.8);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+/* Table */
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.table thead {
+  background: rgba(255, 0, 0, 0.8);
+  color: #fff;
+}
+.table tbody tr {
+  background: rgba(25, 25, 25, 0.8);
+  transition: background 0.2s;
+}
+.table tbody tr:hover {
+  background: rgba(50, 0, 0, 0.8);
+}
+
+/* Badge */
+.badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+.badge.bg-success {
+  background: rgba(0, 200, 70, 0.85) !important;
+}
+.badge.bg-danger {
+  background: rgba(200, 0, 0, 0.85) !important;
+}
+
+/* Modal */
+.modal-content {
+  background: rgba(30, 30, 30, 0.9);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  box-shadow: 0 8px 25px rgba(255, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+}
+.modal-header {
+  border-bottom: 1px solid rgba(255, 0, 0, 0.4);
+}
+.modal-footer {
+  border-top: 1px solid rgba(255, 0, 0, 0.4);
+}

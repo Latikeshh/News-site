@@ -1,0 +1,47 @@
+/* Dark glassy theme with red highlights */
+.nf-newsform {
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(10px);
+  min-height: 100vh;
+  padding: 20px;
+  color: #f5f5f5;
+  font-family: "Segoe UI", sans-serif;
+  margin-left: 220px;
+}
+
+.nf-card {
+  background: rgba(25, 25, 25, 0.9);
+  border-radius: 12px;
+  color: #fff;
+}
+
+.nf-card .form-control,
+.nf-card .form-select {
+  background: rgba(40, 40, 40, 0.9);
+  border: 1px solid #444;
+  color: #fff;
+}
+
+.nf-card .form-control:focus,
+.nf-card .form-select:focus {
+  border-color: #ff4d4d;
+  box-shadow: 0 0 8px rgba(255, 77, 77, 0.5);
+}
+
+.nf-card label {
+  font-weight: 600;
+  color: #ff4d4d;
+}
+
+.nf-card .btn-danger {
+  background: linear-gradient(90deg, #ff1a1a, #cc0000);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.nf-card .btn-danger:hover {
+  background: linear-gradient(90deg, #e60000, #990000);
+  transform: translateY(-1px);
+}

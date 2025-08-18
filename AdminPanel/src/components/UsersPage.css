@@ -1,0 +1,150 @@
+/* UsersPage.css - Dark Glassy Theme with Red Highlights */
+
+.users-container {
+  margin-left: 220px;
+  padding: 20px;
+  min-height: 100vh;
+  background: rgba(15, 15, 15, 0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  color: #f5f5f5;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Header */
+.users-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.users-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Table */
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(25, 25, 25, 0.8);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.users-table th,
+.users-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.users-table th {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff4d4d;
+  font-weight: 600;
+}
+
+.users-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Inputs */
+.users-input,
+.users-select {
+  background: rgba(30, 30, 30, 0.9);
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: #fff;
+  width: 100%;
+}
+
+.users-input:focus,
+.users-select:focus {
+  outline: none;
+  border-color: #ff3333;
+  box-shadow: 0 0 6px rgba(255, 0, 0, 0.6);
+}
+
+/* Buttons */
+.users-btn {
+  padding: 6px 12px;
+  margin: 2px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.users-btn-primary {
+  background: #ff3333;
+  color: #fff;
+}
+
+.users-btn-primary:hover {
+  background: #e62e2e;
+}
+
+.users-btn-warning {
+  background: #ffcc00;
+  color: #111;
+}
+
+.users-btn-warning:hover {
+  background: #e6b800;
+}
+
+.users-btn-danger {
+  background: #cc0000;
+  color: #fff;
+}
+
+.users-btn-danger:hover {
+  background: #b30000;
+}
+
+.users-btn-save {
+  background: #28a745;
+  color: #fff;
+}
+
+.users-btn-save:hover {
+  background: #218838;
+}
+
+.users-btn-cancel {
+  background: #6c757d;
+  color: #fff;
+}
+
+.users-btn-cancel:hover {
+  background: #5a6268;
+}
+
+/* Badges */
+.users-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge-success {
+  background: #28a745;
+  color: #fff;
+}
+
+.badge-danger {
+  background: #dc3545;
+  color: #fff;
+}
+
+.badge-secondary {
+  background: #6c757d;
+  color: #fff;
+}
