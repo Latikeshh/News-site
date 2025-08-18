@@ -1,74 +1,72 @@
+// src/components/InformationPage.js
 import React from 'react';
-import { Card, Container, Row, Col } from 'react-bootstrap';
+import './InformationPage.css';
 
 const InformationPage = () => (
-  <div style={{ marginLeft: '220px', padding: '1rem' }}>
-    <h2 className="mb-4">About the System</h2>
-    <p>This dashboard helps manage content, users, and media for a news publishing platform.</p>
+  <div className="info-page-container">
+    <h2 className="info-page-title mb-4">About the System</h2>
+    <p className="info-page-text">
+      This dashboard helps manage content, users, and media for a news publishing platform.
+    </p>
 
-    <Row>
-      <Col md={6}>
-        <Card className="mb-4 shadow-sm">
-          <Card.Body>
-            <Card.Title>📄 System Overview</Card.Title>
-            <Card.Text>
+    {/* Top Row */}
+    <div className="row info-page-top-row">
+      <div className="col-md-6">
+        <div className="info-page-card mb-4">
+          <div className="info-page-card-body">
+            <h5 className="info-page-card-title">🛠 Technologies Used</h5>
+            <ul className="info-page-card-text">
+              <li>React.js (Frontend)</li>
+              <li>Vanilla Bootstrap (UI)</li>
+              <li>React Router DOM (Navigation)</li>
+              <li>Optional Backend: Node.js / Express.js / Firebase</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="col-md-6">
+        <div className="info-page-card mb-4">
+          <div className="info-page-card-body">
+            <h5 className="info-page-card-title">📆 System Features</h5>
+            <ul className="info-page-card-text">
+              <li>Dashboard Overview</li>
+              <li>Article & Category Management</li>
+              <li>Media Uploads</li>
+              <li>Settings & User Roles</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom Row */}
+    <div className="row info-page-bottom-row">
+      <div className="col-md-6">
+        <div className="info-page-card mb-4">
+          <div className="info-page-card-body">
+            <h5 className="info-page-card-title">🔒 User Roles</h5>
+            <ul className="info-page-card-text">
+              <li><strong>Admin:</strong> Full access to all pages</li>
+              <li><strong>Editor:</strong> Can manage their articles</li>
+              <li><strong>Viewer:</strong> Read-only access (optional)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="col-md-6">
+        <div className="info-page-card mb-4">
+          <div className="info-page-card-body">
+            <h5 className="info-page-card-title">📄 System Overview</h5>
+            <p className="info-page-card-text">
               This News Management System is designed for admins and editors to manage articles, categories,
               user accounts, and uploaded media files in a centralized way.
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Col>
-
-      <Col md={6}>
-        <Card className="mb-4 shadow-sm">
-          <Card.Body>
-            <Card.Title>🛠 Technologies Used</Card.Title>
-            <Card.Text>
-              <ul>
-                <li>React.js (Frontend)</li>
-                <li>React Bootstrap (UI)</li>
-                <li>React Router DOM (Navigation)</li>
-                <li>Optional Backend: Node.js / Express.js / Firebase</li>
-              </ul>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Col>
-    </Row>
-
-    <Row>
-      <Col md={6}>
-        <Card className="mb-4 shadow-sm">
-          <Card.Body>
-            <Card.Title>🔒 User Roles</Card.Title>
-            <Card.Text>
-              <ul>
-                <li><strong>Admin:</strong> Full access to all pages</li>
-                <li><strong>Editor:</strong> Can manage articles and comments</li>
-                <li><strong>Viewer:</strong> Read-only access (optional)</li>
-              </ul>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Col>
-
-      <Col md={6}>
-        <Card className="mb-4 shadow-sm">
-          <Card.Body>
-            <Card.Title>📆 System Features</Card.Title>
-            <Card.Text>
-              <ul>
-                <li>Dashboard Overview</li>
-                <li>Article & Category Management</li>
-                <li>User Comments Moderation</li>
-                <li>Media Uploads & Notifications</li>
-                <li>Settings & User Roles</li>
-              </ul>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Col>
-    </Row>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 );
 
