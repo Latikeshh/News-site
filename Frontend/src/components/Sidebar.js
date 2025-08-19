@@ -1,11 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import videoFile from './vid/News_intro.mp4';
+import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import axios from 'axios';
 
 const Sidebar = () => {
   const scrollRef = useRef(null);
   const [news, setNews] = useState([]);
+  const navigate = useNavigate();
+    const handleClick = (id) => {
+    navigate(`/news/${id}`);
+  };
 
   // Fetch news
   useEffect(() => {
@@ -67,7 +72,7 @@ const Sidebar = () => {
 
       <div className="scrollable-news" ref={scrollRef}>
         {doubledNews.map((item, i) => (
-          <div className="news-item" key={`${item._id || i}-${i}`}>
+          <div className="news-item" key={`${item._id || i}-${i}`}  onClick={() => handleClick(item._id)}>
             <h5 className="news-title">📰 {item.title || 'Untitled'}</h5>
             <p className="news-date">
               📅 {item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('en-GB') : ''}

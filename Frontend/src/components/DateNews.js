@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './DateNews.css'; // custom styling
 
@@ -7,7 +8,10 @@ const DateNews = () => {
     const { date } = useParams();
     const [newsList, setNewsList] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const navigate = useNavigate();
+ const handleClick = (id) => {
+    navigate(`/news/${id}`);
+  };
     useEffect(() => {
         axios
             .get(`http://localhost:8000/news-by-date?date=${date}`)
@@ -29,10 +33,17 @@ const DateNews = () => {
             {newsList.length === 0 && <p>No news found for this date.</p>}
             <div className="news-grid22">
                 {newsList.map(news => (
-                    <div key={news._id} className="news-card22">
+                    <div key={news._id} className="news-card22"onClick={() => handleClick(news._id)}>
+                        {/* ✅ Image */}
+                        {news.image && (
+                           <img className="news-img22" src={`http://localhost:8000/${news.image}`} alt={news.title} />
+                        )}
+                        
                         <h3>{news.title}</h3>
                         <p>{news.content.substring(0, 150)}...</p>
-                        <p className="news-date22">{new Date(news.createdAt).toLocaleString()}</p>
+                        <p className="news-date22">
+                            {new Date(news.createdAt).toLocaleString()}
+                        </p>
                     </div>
                 ))}
             </div>
